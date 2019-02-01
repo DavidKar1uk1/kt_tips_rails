@@ -1,0 +1,2 @@
+class KtTip < ApplicationRecord
+end

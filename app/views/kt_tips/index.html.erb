@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Kt Tips</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Topic</th>
+      <th>Content</th>
+      <th>Written on</th>
+      <th>Likes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kt_tips.each do |kt_tip| %>
+      <tr>
+        <td><%= kt_tip.topic %></td>
+        <td><%= kt_tip.content %></td>
+        <td><%= kt_tip.written_on %></td>
+        <td><%= kt_tip.likes %></td>
+        <td><%= link_to 'Show', kt_tip %></td>
+        <td><%= link_to 'Edit', edit_kt_tip_path(kt_tip) %></td>
+        <td><%= link_to 'Destroy', kt_tip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Kt Tip', new_kt_tip_path %>

@@ -1,0 +1,2 @@
+module KtTipsHelper
+end
