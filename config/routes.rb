@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   resources :kt_tips
+  root "kt_tips#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # Route for receiving the JSON response and params
-  post '/parse', to: 'todo#receive'
+  post '/parse', to: 'kt_tips#receive'
   # Route for the Webhook Subscription
-  post '/subscription', to: 'todo#subscribe'
+  get '/subscription', to: 'kt_tips#subscription', as: "subscription"
+  post '/subscription', to: 'kt_tips#subscribe'
 end

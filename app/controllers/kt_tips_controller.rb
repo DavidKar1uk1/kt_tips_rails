@@ -1,5 +1,31 @@
 class KtTipsController < ApplicationController
+  attr_accessor :k2_subscription
   before_action :set_kt_tip, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token, :only => [:receive, :subscribe]
+
+  # POST /parse
+  def receive
+    k2_test = K2ConnectRuby::K2Client.new(ENV["K2_SECRET_KEY"])
+    k2_test.parse_request(request)
+    k2_truth_value = K2ConnectRuby::K2Authorize.new.authenticate?(k2_test.hash_body, k2_test.api_secret_key, k2_test.k2_signature)
+    k2_components = K2ConnectRuby::K2SplitRequest.new(k2_truth_value)
+    k2_components.judge_truth(k2_test.hash_body)
+  end
+
+  # POST /subscription
+  def subscribe
+    @k2_subscription = K2ConnectRuby::K2Subscribe.new("#{params[:subscription]}")
+    if @k2_subscription.token_request
+      @k2_subscription.webhook_subscribe
+      k1_test = K2ConnectRuby::K2Client.new(ENV["K2_SECRET_KEY"])
+      k1_test.parse_request(request)
+      render 'kt_tips/show_subscription'
+    end
+  end
+
+  # POST /subscription
+  def subscription
+  end
 
   # GET /kt_tips
   # GET /kt_tips.json
@@ -71,20 +97,5 @@ class KtTipsController < ApplicationController
     def kt_tip_params
       params.require(:kt_tip).permit(:topic, :content, :written_on, :likes)
     end
-
-  # POST /parse
-  def receive
-    k2_test = K2ConnectRuby::K2Client.new(ENV["K2_SECRET_KEY"])
-    k2_test.parse_request(request)
-    k2_truth_value = K2ConnectRuby::K2Authorize.new.authenticate?(k2_test.hash_body, k2_test.api_secret_key, k2_test.k2_signature)
-    k2_components = K2ConnectRuby::K2SplitRequest.new(k2_truth_value)
-    k2_components.judge_truth(k2_test.hash_body)
-    puts k2_components.first_name
-  end
-
-  # POST /subscribe
-  def subscribe
-
-  end
 
 end

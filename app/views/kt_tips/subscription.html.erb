@@ -1,0 +1,18 @@
+<h1 class="za_head">Subscription</h1>
+
+<div class="ze_form">
+  <%= form_tag("/subscription", method: :post) do %>
+    <%= label_tag(:subscription, "Select your Subscription service from the Following:") %>
+    <%= select_tag(:subscription,
+                   options_for_select([
+                                          ['Subscription Type', { 'selected' => 'true' }, { 'disabled' => 'disabled' }],
+                                          ['Transaction Received', 'transaction_received'],
+                                          ['Transaction Reversed', 'transaction_reversed'],
+                                          ['Settlement Transfer', 'settlement_transfer'],
+                                          ['Customer Created', 'customer_created'],
+                                      ])
+        ) %>
+    <%= submit_tag("SUBMIT") %>
+  <% end %>
+</div>
+

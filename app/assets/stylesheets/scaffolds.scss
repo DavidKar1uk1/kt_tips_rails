@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Thasadith');
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+
 body {
   background-color: #fff;
   color: #333;
   margin: 33px;
-  font-family: verdana, arial, helvetica, sans-serif;
+  font-family: verdana, arial, helvetica, Thasadith, sans-serif;
   font-size: 13px;
   line-height: 18px;
 }
@@ -81,4 +84,40 @@ div {
 
 label {
   display: block;
+}
+
+.za_head {
+  font-family: Thasadith, sans-serif;
+}
+
+.ze_form {
+  font-family: 'Comfortaa', cursive;
+}
+
+.ze_form select{
+  border: none;
+  height: 40px;
+  width: 200px;
+  margin: 10px;
+  padding: 10px;
+  font-weight: bold;
+  position: relative;
+  background-color: #C5C5C5;
+  font-family: Thasadith, sans-serif;
+}
+
+.ze_form input[type=submit]{
+  border: none;
+  height: 40px;
+  width: 200px;
+  margin: 10px;
+  padding: 10px;
+  font-weight: bold;
+  position: relative;
+  background-color: #C5C5C5;
+  font-family: Thasadith, sans-serif;
+}
+.ze_form input[type=submit]:hover{
+  cursor: pointer;
+  background-color: #FDE003;
 }
