@@ -15,16 +15,27 @@ class KtTipsController < ApplicationController
   # POST /subscription
   def subscribe
     @k2_subscription = K2ConnectRuby::K2Subscribe.new("#{params[:subscription]}")
-    if @k2_subscription.token_request
+    if @k2_subscription.token_request(ENV["CLIENT_ID"], ENV["CLIENT_SECRET"])
       @k2_subscription.webhook_subscribe
-      k1_test = K2ConnectRuby::K2Client.new(ENV["K2_SECRET_KEY"])
-      k1_test.parse_request(request)
-      render 'kt_tips/show_subscription'
+      @k1_test_token = K2ConnectRuby::K2Client.new(ENV["K2_SECRET_KEY"])
+      render 'kt_tips/show_subscription', :object => { :k2_subscription => @k2_subscription , :k1_test_token => @k1_test_token }
     end
   end
 
-  # POST /subscription
+  # GET /subscription
   def subscription
+  end
+
+  # POST /stk_push
+  def stk_push
+    @k2_stk = K2ConnectRuby::K2Stk.new
+    if @k2_stk.receive_payments("#{params[:first_name]}", "#{params[:last_name]}", "#{params[:phone]}", "#{params[:email]}", "#{params[:value]}")
+      render 'kt_tips/show_stk'
+    end
+  end
+
+  # GET /stk_push
+  def stk
   end
 
   # GET /kt_tips

@@ -7,4 +7,7 @@ Rails.application.routes.draw do
   # Route for the Webhook Subscription
   get '/subscription', to: 'kt_tips#subscription', as: "subscription"
   post '/subscription', to: 'kt_tips#subscribe'
+  # Route for the STK Push
+  get '/stk_push', to: 'kt_tips#stk', as: "stk"
+  post '/stk_push', to: 'kt_tips#stk_push'
 end

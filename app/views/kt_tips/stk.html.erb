@@ -1,0 +1,18 @@
+<h1 class="za_head">STK</h1>
+
+<div class="ze_form">
+<%= form_tag("/stk_push", method: :post) do %>
+    <%= label_tag(:first_name, "Enter Your First Name.") %>
+    <%= text_field_tag(:first_name) %>
+    <%= label_tag(:last_name, "Enter Your Last Name.") %>
+    <%= text_field_tag(:last_name) %>
+    <%= label_tag(:phone, "Enter Your Phone Number.") %>
+    <%= text_field_tag(:phone) %>
+    <%= label_tag(:email, "Enter Your Email Address.") %>
+    <%= text_field_tag(:email) %>
+    <%= label_tag(:value, "Enter Amount.") %>
+    <%= text_field_tag(:value) %>
+    <br>
+    <%= submit_tag("SUBMIT") %>
+<% end %>
+</div>

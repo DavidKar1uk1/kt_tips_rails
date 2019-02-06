@@ -6,9 +6,9 @@
     <%= select_tag(:subscription,
                    options_for_select([
                                           ['Subscription Type', { 'selected' => 'true' }, { 'disabled' => 'disabled' }],
-                                          ['Transaction Received', 'transaction_received'],
-                                          ['Transaction Reversed', 'transaction_reversed'],
-                                          ['Settlement Transfer', 'settlement_transfer'],
+                                          ['Transaction Received', 'buygoods_transaction_received'],
+                                          ['Transaction Reversed', 'buygoods_transaction_reversed'],
+                                          ['Settlement Transfer', 'settlement_transfer_completed'],
                                           ['Customer Created', 'customer_created'],
                                       ])
         ) %>
