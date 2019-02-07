@@ -10,4 +10,10 @@ Rails.application.routes.draw do
   # Route for the STK Push
   get '/stk_push', to: 'kt_tips#stk', as: "stk"
   post '/stk_push', to: 'kt_tips#stk_push'
+  # Route for the Transfers
+  get '/transfers', to: 'kt_tips#transfers', as: "transfers"
+  post '/transfers', to: 'kt_tips#transfers_process'
+  # Route for the PAY
+  get '/pay', to: 'kt_tips#pay', as: "pay"
+  post '/pay', to: 'kt_tips#pay_process'
 end

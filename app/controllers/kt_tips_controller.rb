@@ -38,6 +38,24 @@ class KtTipsController < ApplicationController
   def stk
   end
 
+  # POST /pay
+  def pay_process
+
+  end
+
+  # GET /pay
+  def pay
+  end
+
+  # POST /transfers
+  def transfers_process
+
+  end
+
+  # GET /transfers
+  def transfers
+  end
+
   # GET /kt_tips
   # GET /kt_tips.json
   def index

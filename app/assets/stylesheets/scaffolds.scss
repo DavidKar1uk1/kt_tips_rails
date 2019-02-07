@@ -1,8 +1,15 @@
+//Stylesheets
+@import url(kt_tips.scss);
+
+//Fonts
 @import url('https://fonts.googleapis.com/css?family=Thasadith');
 @import url('https://fonts.googleapis.com/css?family=Comfortaa');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+@import url('https://fonts.googleapis.com/css?family=Laila');
+
 
 body {
-  background-color: #fff;
+  background-color: #EDEDED;
   color: #333;
   margin: 33px;
   font-family: verdana, arial, helvetica, Thasadith, sans-serif;
@@ -23,15 +30,27 @@ pre {
 }
 
 a {
-  color: #000;
+  color: #ffffff;
+  margin: 1px;
+  font-size: 15px;
+  transition: 0.35s;
+  text-decoration: none;
+  background-color: #111111;
+  font-family: 'PT Sans', sans-serif;
 
-  &:visited {
-    color: #666;
+  &:link, &:visited {
+    padding: 14px 25px;
+    text-align: center;
+    display: inline-block;
   }
 
   &:hover {
-    color: #fff;
-    background-color: #000;
+    color: #000000;
+    background-color: #A5C9FF;
+  }
+
+  &:active {
+    color: #000000;
   }
 }
 
@@ -86,11 +105,93 @@ label {
   display: block;
 }
 
+//Custom CSS
+//Index Table
+.ze_table {
+  margin: 0;
+
+  td {
+    padding: 10px;
+  }
+}
+
+.ze_content {
+  width: 100%;
+  height: auto;
+  margin: 0%;
+  padding: 1%;
+}
+
+.ze_links {
+  margin: 10px;
+  font-size: 15px;
+  text-decoration: none;
+  font-family: Laila, serif;
+
+  &:link, &:visited{
+    padding: 14px 25px;
+    text-align: center;
+    display: inline-block;
+  }
+}
+
+
 .za_head {
   font-family: Thasadith, sans-serif;
 }
 
+//PAY
+.ze_tab {
+  width: auto;
+  overflow: hidden;
+  border: 1px solid #111111;
+  background-color: #111111;
+
+  button {
+    float: left;
+    width: 25%;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 17px;
+    transition: 0.3s;
+    padding: 14px 16px;
+    background-color: inherit;
+  }
+
+  button:hover {
+    background-color: #A5C9FF;
+  }
+
+  button.active {
+    background-color: #A5FFC9;
+  }
+
+}
+
+.ze_tab_content {
+  display: none;
+  border: 1px solid #111111;
+  border-top: none;
+  padding: 6px 12px;
+  animation: fadeEffect 1s;
+  -webkit-animation: fadeEffect 1s;
+}
+
+@-webkit-keyframes fadeEffect {
+  to {opacity: 1;}
+  from {opacity: 0;}
+}
+
+@keyframes fadeEffect {
+  to {opacity: 1;}
+  from {opacity: 0;}
+}
+
 .ze_form {
+  margin: 20px;
+  padding: 10px;
   font-family: 'Comfortaa', cursive;
 }
 
@@ -110,7 +211,11 @@ label {
   border: none;
   height: 40px;
   width: 200px;
-  margin: 10px;
+  transition: 0.3s;
+  //Margin
+  margin-top: 10px;
+  margin-left: 0px;
+  //Padding
   padding: 10px;
   font-weight: bold;
   position: relative;
@@ -119,5 +224,32 @@ label {
 }
 .ze_form input[type=submit]:hover{
   cursor: pointer;
-  background-color: #FDE003;
+  background-color: #A5C9FF;
+}
+
+//The Div for Name Details
+.ze_form form .names_div {
+  margin-bottom: 20px;
+}
+.ze_form form .last_name_div {
+  margin-top: -39px;
+  margin-left: 250px;
+}
+
+//The Div for Account Details
+.ze_form form .account_div {
+  margin-bottom: 20px;
+}
+.ze_form form .acc_no_div {
+  margin-top: -39px;
+  margin-left: 250px;
+}
+
+//The Div for Bank Details
+.ze_form form .bank_div {
+  margin-bottom: 20px;
+}
+.ze_form form .branch_id_div {
+  margin-top: -39px;
+  margin-left: 250px;
 }

@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<h1 class="za_head">Kt Tips</h1>
-
-<table>
-  <thead>
+<h1 class="za_head">Kt Tips</h1><hr>
+<div class="ze_table">
+  <table>
+    <thead>
     <tr>
       <th>Topic</th>
       <th>Content</th>
@@ -11,9 +11,9 @@
       <th>Likes</th>
       <th colspan="3"></th>
     </tr>
-  </thead>
+    </thead>
 
-  <tbody>
+    <tbody>
     <% @kt_tips.each do |kt_tip| %>
       <tr>
         <td><%= kt_tip.topic %></td>
@@ -25,11 +25,14 @@
         <td><%= link_to 'Destroy', kt_tip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
 
-<br>
+<br><hr>
 
-<%= link_to 'New Kt Tip', new_kt_tip_path %>
-<%= link_to 'Subscription', subscription_path %>
-<%= link_to 'STK Push', stk_path %>
+<%= link_to 'New Kt Tip', new_kt_tip_path, { :class => 'ze_links' } %>
+<%= link_to 'Subscription', subscription_path, { :class => 'ze_links' } %>
+<%= link_to 'STK Push', stk_path, { :class => 'ze_links' } %>
+<%= link_to 'Transfers', transfers_path, { :class => 'ze_links' } %>
+<%= link_to 'PAY', pay_path, { :class => 'ze_links' } %>
