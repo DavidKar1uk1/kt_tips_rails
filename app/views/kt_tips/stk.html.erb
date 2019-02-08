@@ -1,18 +1,66 @@
 <h1 class="za_head">STK</h1>
 
-<div class="ze_form">
-<%= form_tag("/stk_push", method: :post) do %>
-    <%= label_tag(:first_name, "Enter Your First Name.") %>
-    <%= text_field_tag(:first_name) %>
-    <%= label_tag(:last_name, "Enter Your Last Name.") %>
-    <%= text_field_tag(:last_name) %>
-    <%= label_tag(:phone, "Enter Your Phone Number.") %>
-    <%= text_field_tag(:phone) %>
-    <%= label_tag(:email, "Enter Your Email Address.") %>
-    <%= text_field_tag(:email) %>
-    <%= label_tag(:value, "Enter Amount.") %>
-    <%= text_field_tag(:value) %>
-    <br>
-    <%= submit_tag("SUBMIT") %>
-<% end %>
+<div class="ze_content">
+  <!--  TABS-->
+  <div class="ze_tab_stk">
+    <button class="ze_tab_links" onclick="selectPayType(event, 'receive_stk')">RECEIVE STK PAYMENTS</button>
+    <button class="ze_tab_links" onclick="selectPayType(event, 'query_stk')">QUERY STK PAYMENTS</button>
+  </div>
+  <!--  RECEIVE STK PAYMENTS-->
+  <div class="ze_tab_content" id="receive_stk">
+    <div class="ze_form">
+      <%= form_tag("/stk_push", method: :post) do %>
+        <%= hidden_field_tag(:decision, 'receive_stk') %>
+        <%= hidden_field_tag(:pay_type, 'mobile_wallet') %>
+        <div class="ze_common_div">
+          <div class="ze_common_top_div">
+            <%= label_tag(:first_name, "First Name:") %>
+            <%= text_field_tag(:first_name) %>
+          </div>
+          <div class="ze_common_bottom_div">
+            <%= label_tag(:last_name, "Last Name:") %>
+            <%= text_field_tag(:last_name) %>
+          </div>
+        </div>
+        <%= label_tag(:phone, "Phone Number:") %>
+        <%= text_field_tag(:phone) %><br><br>
+        <%= label_tag(:email, "Email Address:") %>
+        <%= text_field_tag(:email) %><br><br>
+        <div class="currency_div">
+          <div class="currency_select_div">
+            <%= select_tag(:currency,
+                           options_for_select([
+                                                  ['CURRENCY', { 'selected' => 'true' }, { 'disabled' => 'disabled' }],
+                                                  ['Kenyan Shilling', 'KES'],
+                                                  ['Ugandan Shilling', 'USH'],
+                                                  ['Tanzanian Shilling', 'TSH'],
+                                              ])
+                ) %>
+          </div>
+          <div class="amount_div">
+            <%= label_tag(:value, "Amount:") %>
+            <%= text_field_tag(:value) %>
+          </div>
+        </div>
+        <br>
+        <%= submit_tag("SUBMIT") %>
+      <% end %>
+    </div>
+  </div>
+  <!--  QUERY / RETRIEVE STK PAYMENTS-->
+  <div class="ze_tab_content" id="query_stk">
+    <div class="ze_form">
+      <%= form_tag("/stk_push", method: :post) do %>
+        <%= hidden_field_tag(:decision, 'query_stk') %>
+        <div class="query_div">
+          <div class="query_id_div">
+            <%= label_tag(:stk_id, "STK Payment Request ID:") %>
+            <%= text_field_tag(:stk_id) %>
+          </div>
+        </div>
+        <br>
+        <%= submit_tag("SUBMIT") %>
+      <% end %>
+    </div>
+  </div>
 </div>

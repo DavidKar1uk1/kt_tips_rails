@@ -18,7 +18,7 @@ class KtTipsController < ApplicationController
     if @k2_subscription.token_request(ENV["CLIENT_ID"], ENV["CLIENT_SECRET"])
       @k2_subscription.webhook_subscribe
       @k1_test_token = K2ConnectRuby::K2Client.new(ENV["K2_SECRET_KEY"])
-      render 'kt_tips/show_subscription', :object => { :k2_subscription => @k2_subscription , :k1_test_token => @k1_test_token }
+      render 'kt_tips/shows/show_subscription', :object => { :k2_subscription => @k2_subscription , :k1_test_token => @k1_test_token }
     end
   end
 
@@ -29,9 +29,15 @@ class KtTipsController < ApplicationController
   # POST /stk_push
   def stk_push
     @k2_stk = K2ConnectRuby::K2Stk.new
-    if @k2_stk.receive_payments("#{params[:first_name]}", "#{params[:last_name]}", "#{params[:phone]}", "#{params[:email]}", "#{params[:value]}")
-      render 'kt_tips/show_stk'
+    case params[:decision]
+    when "receive_stk"
+      @k2_stk.mpesa_receive_payments("#{params[:first_name]}", "#{params[:last_name]}", "#{params[:phone]}", "#{params[:email]}", "#{params[:currency]}", "#{params[:value]}")
+    when "query_stk"
+      @k2_stk.mpesa_query_payments(params[:stk_id])
+    else
+      puts "No Other STK Option"
     end
+    render 'kt_tips/shows/show_stk'
   end
 
   # GET /stk_push
@@ -40,7 +46,18 @@ class KtTipsController < ApplicationController
 
   # POST /pay
   def pay_process
-
+    @k2_pay = K2ConnectRuby::K2Pay.new
+    case params[:decision]
+    when "pay_recipients_form"
+      @k2_pay.pay_recipients(params)
+    when "query_pay_form"
+      @k2_pay.query_pay(params[:payment_id])
+    when "create_pay_form"
+      @k2_pay.pay_create(params)
+    else
+      puts "No Other Pay Option."
+    end
+    render 'kt_tips/shows/show_pay'
   end
 
   # GET /pay
@@ -49,7 +66,18 @@ class KtTipsController < ApplicationController
 
   # POST /transfers
   def transfers_process
-
+    @k2_transfers = K2ConnectRuby::K2Transfer.new
+    case params[:decision]
+    when "verify_account_form"
+      @k2_transfers.settlement_account("#{params[:acc_name]}", "#{params[:bank_id]}", "#{params[:bank_branch_id]}", "#{params[:acc_no]}")
+    when "create_transfer_form"
+      @k2_transfers.transfer_funds("#{params[:target]}", "#{params[:currency]}", "#{params[:value]}")
+    when "query_transfer_form"
+      @k2_transfers.query_transfer("#{params[:transfer_id]}")
+    else
+      puts "No Other Transfer Option."
+    end
+    render 'kt_tips/shows/show_transfers'
   end
 
   # GET /transfers

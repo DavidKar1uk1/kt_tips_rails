@@ -170,6 +170,67 @@ label {
 
 }
 
+// STK
+//PAY
+.ze_tab_stk {
+  width: auto;
+  overflow: hidden;
+  border: 1px solid #111111;
+  background-color: #111111;
+
+  button {
+    float: left;
+    width: 50%;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 17px;
+    transition: 0.3s;
+    padding: 14px 16px;
+    background-color: inherit;
+  }
+
+  button:hover {
+    background-color: #A5C9FF;
+  }
+
+  button.active {
+    background-color: #A5FFC9;
+  }
+
+}
+
+// TRANSFER
+.ze_tab_transfer {
+  width: auto;
+  overflow: hidden;
+  border: 1px solid #111111;
+  background-color: #111111;
+
+  button {
+    float: left;
+    width: 33.33333%;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 17px;
+    transition: 0.3s;
+    padding: 14px 16px;
+    background-color: inherit;
+  }
+
+  button:hover {
+    background-color: #A5C9FF;
+  }
+
+  button.active {
+    background-color: #A5FFC9;
+  }
+
+}
+
 .ze_tab_content {
   display: none;
   border: 1px solid #111111;
@@ -193,63 +254,119 @@ label {
   margin: 20px;
   padding: 10px;
   font-family: 'Comfortaa', cursive;
+
+  select{
+    border: none;
+    height: 40px;
+    width: 200px;
+    margin: 10px;
+    padding: 10px;
+    font-weight: bold;
+    position: relative;
+    background-color: #C5C5C5;
+    font-family: Thasadith, sans-serif;
+  }
+
+  input[type=submit]{
+    border: none;
+    height: 40px;
+    width: 200px;
+    transition: 0.3s;
+    //Margin
+    margin-top: 10px;
+    margin-left: 0px;
+    //Padding
+    padding: 10px;
+    font-weight: bold;
+    position: relative;
+    background-color: #C5C5C5;
+    font-family: Thasadith, sans-serif;
+  }
+  input[type=submit]:hover{
+    cursor: pointer;
+    background-color: #A5C9FF;
+  }
+  input[type=text]{
+    border: none;
+    height: 25px;
+    width: 200px;
+  }
+
+  // Form Common Design
+  // Common Div for side by side details
+  form .ze_common_div {
+    margin-top: -20px;
+    margin-bottom: 15px;
+  }
+  form .ze_common_div label {
+    margin-top: 17px;
+    //margin-bottom: 5px;
+  }
+  form .ze_common_bottom_div {
+    margin-top: -62px;
+    margin-left: 250px;
+  }
+
+  //The Div for Create with Currency and Amount Details
+  form .currency_div {
+    margin-left: -10px;
+    margin-bottom: 30px;
+  }
+  form .amount_div {
+    margin-top: -65px;
+    margin-left: 260px;
+  }
+
+  //Transfer Form
+  // Checkbox Slider
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+
+    // Checkbox
+    input[type=checkbox] {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    input[type=checkbox]:checked + .slider {
+      background-color: #2196F3;
+    }
+    input[type=checkbox]:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+    input[type=checkbox]:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+  }
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
 }
 
-.ze_form select{
-  border: none;
-  height: 40px;
-  width: 200px;
-  margin: 10px;
-  padding: 10px;
-  font-weight: bold;
-  position: relative;
-  background-color: #C5C5C5;
-  font-family: Thasadith, sans-serif;
-}
 
-.ze_form input[type=submit]{
-  border: none;
-  height: 40px;
-  width: 200px;
-  transition: 0.3s;
-  //Margin
-  margin-top: 10px;
-  margin-left: 0px;
-  //Padding
-  padding: 10px;
-  font-weight: bold;
-  position: relative;
-  background-color: #C5C5C5;
-  font-family: Thasadith, sans-serif;
-}
-.ze_form input[type=submit]:hover{
-  cursor: pointer;
-  background-color: #A5C9FF;
-}
-
-//The Div for Name Details
-.ze_form form .names_div {
-  margin-bottom: 20px;
-}
-.ze_form form .last_name_div {
-  margin-top: -39px;
-  margin-left: 250px;
-}
-
-//The Div for Account Details
-.ze_form form .account_div {
-  margin-bottom: 20px;
-}
-.ze_form form .acc_no_div {
-  margin-top: -39px;
-  margin-left: 250px;
-}
-
-//The Div for Bank Details
-.ze_form form .bank_div {
-  margin-bottom: 20px;
-}
-.ze_form form .branch_id_div {
-  margin-top: -39px;
-  margin-left: 250px;
-}

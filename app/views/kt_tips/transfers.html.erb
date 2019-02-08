@@ -1,18 +1,100 @@
 <h1 class="za_head">TRANSFERS</h1>
 
-<div class="ze_form">
-  <%= form_tag("/transfers", method: :post) do %>
-    <%= label_tag(:first_name, "Enter Your First Name.") %>
-    <%= text_field_tag(:first_name) %>
-    <%= label_tag(:last_name, "Enter Your Last Name.") %>
-    <%= text_field_tag(:last_name) %>
-    <%= label_tag(:phone, "Enter Your Phone Number.") %>
-    <%= text_field_tag(:phone) %>
-    <%= label_tag(:email, "Enter Your Email Address.") %>
-    <%= text_field_tag(:email) %>
-    <%= label_tag(:value, "Enter Amount.") %>
-    <%= text_field_tag(:value) %>
-    <br>
-    <%= submit_tag("SUBMIT") %>
-  <% end %>
+<div class="ze_content">
+  <!--  TABS-->
+  <div class="ze_tab_transfer">
+    <button class="ze_tab_links" onclick="selectPayType(event, 'verify_account')">VERIFY</button>
+    <button class="ze_tab_links" onclick="selectPayType(event, 'create_transfer')">CREATE</button>
+    <button class="ze_tab_links" onclick="selectPayType(event, 'query_transfer')">QUERY TRANSFER</button>
+<!--    <button class="ze_tab_links" onclick="selectPayType(event, 'create_pay')">CREATE PAY</button>-->
+  </div>
+  <!--  VERIFY SETTLEMENT ACCOUNT-->
+  <div class="ze_tab_content" id="verify_account">
+    <div class="ze_form">
+      <%= form_tag("/transfers", method: :post) do %>
+        <%= hidden_field_tag(:decision, 'verify_account_form') %>
+        <strong><%= label_tag(:acc, "Account Details:") %></strong>
+        <div class="ze_common_div">
+          <div class="ze_common_top_div">
+            <%= label_tag(:acc_name, "Account Name:") %>
+            <%= text_field_tag(:acc_name) %>
+          </div>
+          <div class="ze_common_bottom_div">
+            <%= label_tag(:acc_no, "Account Number:") %>
+            <%= text_field_tag(:acc_no) %>
+          </div>
+        </div>
+
+        <strong><%= label_tag(:bank, "Bank Details:") %></strong>
+        <div class="ze_common_div">
+          <div class="ze_common_top_div">
+            <%= label_tag(:bank_id, "Bank Reference Number:") %>
+            <%= text_field_tag(:bank_id) %>
+          </div>
+          <div class="ze_common_bottom_div">
+            <%= label_tag(:bank_branch_id, "Bank Branch Reference Number:") %>
+            <%= text_field_tag(:bank_branch_id) %>
+          </div>
+        </div>
+        <br>
+        <%= submit_tag("SUBMIT") %>
+      <% end %>
+    </div>
+  </div>
+  <!--CREATE TRANSFER, either Blind or Targeted-->
+  <div class="ze_tab_content" id="create_transfer">
+    <div class="ze_form">
+      <%= form_tag("/transfers", method: :post) do %>
+        <%= hidden_field_tag(:decision, 'create_transfer_form') %>
+        <div class="currency_div">
+          <div class="currency_select_div">
+            <%= select_tag(:currency,
+                           options_for_select([
+                                                  ['CURRENCY', { 'selected' => 'true' }, { 'disabled' => 'disabled' }],
+                                                  ['Kenyan Shilling', 'KES'],
+                                                  ['Ugandan Shilling', 'USH'],
+                                                  ['Tanzanian Shilling', 'TSH'],
+                                              ])
+                ) %>
+          </div>
+          <div class="amount_div">
+            <%= label_tag(:value, "Amount:") %>
+            <%= text_field_tag(:value) %>
+          </div>
+        </div>
+        <strong><%= label_tag(:acc, "Destination Details:") %></strong>
+        <div class="ze_common_div">
+          <div class="ze_common_top_div">
+            <%= label_tag(:destination, "Specified Destination?") %>
+            <label class="switch" onclick="check_checkbox()">
+              <%= check_box_tag(:destination) %>
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div id="target_destination" class="ze_common_bottom_div" style="display: none">
+            <%= label_tag(:target, "Target Destination:") %>
+            <%= text_field_tag(:target) %>
+          </div>
+        </div>
+        <br>
+        <%= submit_tag("SUBMIT") %>
+      <% end %>
+    </div>
+  </div>
+  <!--  QUERY TRANSFER-->
+  <div class="ze_tab_content" id="query_transfer">
+    <div class="ze_form">
+      <%= form_tag("/transfers", method: :post) do %>
+        <%= hidden_field_tag(:decision, 'query_transfer_form') %>
+        <div class="query_div">
+          <div class="query_id_div">
+            <%= label_tag(:transfer_id, "Transfer Reference ID:") %>
+            <%= text_field_tag(:transfer_id) %>
+          </div>
+        </div>
+        <br>
+        <%= submit_tag("SUBMIT") %>
+      <% end %>
+    </div>
+  </div>
 </div>

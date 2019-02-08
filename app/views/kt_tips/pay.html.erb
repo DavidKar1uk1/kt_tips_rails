@@ -5,28 +5,30 @@
   <div class="ze_tab">
     <button class="ze_tab_links" onclick="selectPayType(event, 'mobile_wallet')">M-PESA</button>
     <button class="ze_tab_links" onclick="selectPayType(event, 'bank_account')">BANK</button>
+    <button class="ze_tab_links" onclick="selectPayType(event, 'query_pay')">QUERY PAY</button>
     <button class="ze_tab_links" onclick="selectPayType(event, 'create_pay')">CREATE PAY</button>
-    <button class="ze_tab_links" onclick="selectPayType(event, 'query_pay')">QUERY</button>
   </div>
   <!--  M-PESA-->
   <div class="ze_tab_content" id="mobile_wallet">
     <div class="ze_form">
       <%= form_tag("/pay", method: :post) do %>
-        <div class="names_div">
-          <div class="first_name_div">
-            <%= label_tag(:first_name, "Enter Your First Name.") %>
+        <%= hidden_field_tag(:decision, 'pay_recipients_form') %>
+        <%= hidden_field_tag(:pay_type, 'mobile_wallet') %>
+        <div class="ze_common_div">
+          <div class="ze_common_top_div">
+            <%= label_tag(:first_name, "First Name:") %>
             <%= text_field_tag(:first_name) %>
           </div>
-          <div class="last_name_div">
-            <%= label_tag(:last_name, "Enter Your Last Name.") %>
+          <div class="ze_common_bottom_div">
+            <%= label_tag(:last_name, "Last Name:") %>
             <%= text_field_tag(:last_name) %>
           </div>
         </div>
-        <%= label_tag(:phone, "Enter Your Phone Number.") %>
+        <%= label_tag(:phone, "Phone Number:") %>
         <%= text_field_tag(:phone) %><br><br>
-        <%= label_tag(:email, "Enter Your Email Address.") %>
+        <%= label_tag(:email, "Email Address:") %>
         <%= text_field_tag(:email) %><br><br>
-        <%= label_tag(:network, "Enter The Network Operator.") %>
+        <%= label_tag(:network, "Network Operator:") %>
         <%= text_field_tag(:network) %>
         <br>
         <%= submit_tag("SUBMIT") %>
@@ -37,115 +39,89 @@
   <div class="ze_tab_content" id="bank_account">
     <div class="ze_form">
       <%= form_tag("/pay", method: :post) do %>
-        <div class="names_div">
-          <div class="first_name_div">
-            <%= label_tag(:first_name, "Enter Your First Name.") %>
+        <%= hidden_field_tag(:decision, 'pay_recipients_form') %>
+        <%= hidden_field_tag(:pay_type, 'bank_account') %>
+        <div class="ze_common_div">
+          <div class="ze_common_top_div">
+            <%= label_tag(:first_name, "First Name:") %>
             <%= text_field_tag(:first_name) %>
           </div>
-          <div class="last_name_div">
-            <%= label_tag(:last_name, "Enter Your Last Name.") %>
+          <div class="ze_common_bottom_div">
+            <%= label_tag(:last_name, "Last Name:") %>
             <%= text_field_tag(:last_name) %>
           </div>
         </div>
 
         <strong><%= label_tag(:acc, "Account Details:") %></strong>
-        <div class="account_div">
-          <div class="acc_name_div">
-            <%= label_tag(:acc_name, "Enter Your Bank Account Name.") %>
+        <div class="ze_common_div">
+          <div class="ze_common_top_div">
+            <%= label_tag(:acc_name, "Bank Account Name:") %>
             <%= text_field_tag(:acc_name) %>
           </div>
-          <div class="acc_no_div">
-            <%= label_tag(:acc_no, "Enter Your Bank Account Number.") %>
+          <div class="ze_common_bottom_div">
+            <%= label_tag(:acc_no, "Bank Account Number:") %>
             <%= text_field_tag(:acc_no) %>
           </div>
         </div>
 
         <strong><%= label_tag(:bank, "Bank Details:") %></strong>
-        <div class="bank_div">
-          <div class="bank_id_div">
-            <%= label_tag(:bank_id, "Bank ID Number.") %>
+        <div class="ze_common_div">
+          <div class="ze_common_top_div">
+            <%= label_tag(:bank_id, "Bank ID Number:") %>
             <%= text_field_tag(:bank_id) %>
           </div>
-          <div class="branch_id_div">
-            <%= label_tag(:bank_branch_id, "Bank Branch ID Number.") %>
+          <div class="ze_common_bottom_div">
+            <%= label_tag(:bank_branch_id, "Bank Branch ID Number:") %>
             <%= text_field_tag(:bank_branch_id) %>
           </div>
         </div>
 
-        <%= label_tag(:phone, "Enter Your Phone Number.") %>
+        <%= label_tag(:phone, "Phone Number:") %>
         <%= text_field_tag(:phone) %><br><br>
-        <%= label_tag(:email, "Enter Your Email Address.") %>
-        <%= text_field_tag(:email) %><br><br>
-        <%= label_tag(:value, "Enter Amount.") %>
-        <%= text_field_tag(:value) %>
+        <%= label_tag(:email, "Email Address:") %>
+        <%= text_field_tag(:email) %>
         <br>
         <%= submit_tag("SUBMIT") %>
       <% end %>
     </div>
   </div>
-  <!--  CREATE PAY-->
-  <div class="ze_tab_content" id="create_pay">
-    <div class="ze_form">
-      <%= form_tag("/pay", method: :post) do %>
-        <%= select_tag(:currency,
-                       options_for_select([
-                                              ['Currency', { 'selected' => 'true' }, { 'disabled' => 'disabled' }],
-                                              ['Kenyan Shilling', 'KES'],
-                                              ['Ugandan Shilling', 'USH'],
-                                              ['US Dollar', 'USD'],
-                                              ['European Euro', 'EUR'],
-                                          ])
-            ) %>
-        <br>
-        <%= submit_tag("SUBMIT") %>
-      <% end %>
-    </div>
-  </div>
-  <!--QUERY PAY-->
+  <!--  QUERY PAY-->
   <div class="ze_tab_content" id="query_pay">
     <div class="ze_form">
       <%= form_tag("/pay", method: :post) do %>
-        <div class="names_div">
-          <div class="first_name_div">
-            <%= label_tag(:first_name, "Enter Your First Name.") %>
-            <%= text_field_tag(:first_name) %>
-          </div>
-          <div class="last_name_div">
-            <%= label_tag(:last_name, "Enter Your Last Name.") %>
-            <%= text_field_tag(:last_name) %>
+        <%= hidden_field_tag(:decision, 'query_pay_form') %>
+        <div class="query_div">
+          <div class="query_id_div">
+            <%= label_tag(:payment_id, "Payment Reference ID:") %>
+            <%= text_field_tag(:payment_id) %>
           </div>
         </div>
-
-        <strong><%= label_tag(:acc, "Account Details:") %></strong>
-        <div class="account_div">
-          <div class="acc_name_div">
-            <%= label_tag(:acc_name, "Enter Your Bank Account Name.") %>
-            <%= text_field_tag(:acc_name) %>
+        <br>
+        <%= submit_tag("SUBMIT") %>
+      <% end %>
+    </div>
+  </div>
+  <!--CREATE PAY-->
+  <div class="ze_tab_content" id="create_pay">
+    <div class="ze_form">
+      <%= form_tag("/pay", method: :post) do %>
+        <%= hidden_field_tag(:decision, 'create_pay_form') %>
+        <div class="currency_div">
+          <div class="currency_select_div">
+            <%= select_tag(:currency,
+                           options_for_select([
+                                                  ['CURRENCY', { 'selected' => 'true' }, { 'disabled' => 'disabled' }],
+                                                  ['Kenyan Shilling', 'KES'],
+                                                  ['Ugandan Shilling', 'USH'],
+                                                  ['Tanzanian Shilling', 'TSH'],
+                                              ])
+                ) %>
           </div>
-          <div class="acc_no_div">
-            <%= label_tag(:acc_no, "Enter Your Bank Account Number.") %>
-            <%= text_field_tag(:acc_no) %>
+          <div class="amount_div">
+            <%= label_tag(:value, "Amount:") %>
+            <%= text_field_tag(:value) %>
           </div>
         </div>
-
-        <strong><%= label_tag(:bank, "Bank Details:") %></strong>
-        <div class="bank_div">
-          <div class="bank_id_div">
-            <%= label_tag(:bank_id, "Bank ID Number.") %>
-            <%= text_field_tag(:bank_id) %>
-          </div>
-          <div class="branch_id_div">
-            <%= label_tag(:bank_branch_id, "Bank Branch ID Number.") %>
-            <%= text_field_tag(:bank_branch_id) %>
-          </div>
-        </div>
-
-        <%= label_tag(:phone, "Enter Your Phone Number.") %>
-        <%= text_field_tag(:phone) %><br><br>
-        <%= label_tag(:email, "Enter Your Email Address.") %>
-        <%= text_field_tag(:email) %><br><br>
-        <%= label_tag(:value, "Enter Amount.") %>
-        <%= text_field_tag(:value) %>
         <br>
         <%= submit_tag("SUBMIT") %>
       <% end %>

@@ -1,10 +1,10 @@
 GIT
   remote: https://github.com/DavidKar1uk1/k2-connect-ruby.git
-  revision: 051b53cd9b820cb63eac76b1fbc31387106f560b
+  revision: 4b7ff72bc26ae463362a7711fae904d45d078b4e
   branch: k2-connect-ruby
   submodules: true
   specs:
-    k2-connect-ruby (0.9.13)
+    k2-connect-ruby (0.9.19)
 
 GEM
   remote: https://rubygems.org/
@@ -209,7 +209,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)
-  k2-connect-ruby (~> 0.9.13)!
+  k2-connect-ruby (~> 0.9.19)!
   listen (>= 3.0.5, < 3.2)
   pg
   puma (~> 3.11)

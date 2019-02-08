@@ -1,6 +1,14 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+@check_checkbox = ->
+  x = document.getElementById('target_destination')
+  a = document.getElementById('destination')
+  if a.checked == true
+    x.style.display = 'block'
+  else
+    x.style.display = 'none'
+  return
 
 @selectPayType = (evt, id) ->
   zetabcontent = document.getElementsByClassName('ze_tab_content')
