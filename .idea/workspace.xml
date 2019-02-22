@@ -7,6 +7,12 @@
       <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/kt_tips_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/kt_tips_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/kt_tips/pay.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/kt_tips/pay.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/kt_tips/stk.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/kt_tips/stk.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/kt_tips/subscription.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/kt_tips/subscription.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/kt_tips/transfers.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/kt_tips/transfers.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/beauty_secrets.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/beauty_secrets.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -26,8 +32,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Gemfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-17">
-              <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+            <state>
+              <caret line="32" column="58" selection-start-line="32" selection-start-column="58" selection-end-line="32" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -35,8 +41,26 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/kt_tips_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="12" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="115">
+              <caret line="44" column="44" lean-forward="true" selection-start-line="44" selection-start-column="44" selection-end-line="44" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/kt_tips/stk.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="207">
+              <caret line="21" column="41" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/kt_tips/subscription.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="14" column="61" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -83,11 +107,8 @@
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/app/views/kt_tips/subs.html.erb" />
         <option value="$PROJECT_DIR$/app/views/kt_tips/here.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/kt_tips/subscription.html.erb" />
         <option value="$PROJECT_DIR$/app/views/kt_tips/show_subscription.html.erb" />
-        <option value="$PROJECT_DIR$/config/beauty_secrets.yml" />
         <option value="$PROJECT_DIR$/app/views/kt_tips/show_stk.html.erb" />
-        <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/config/environments/production.rb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/kt_tips.scss" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/cable.js" />
@@ -97,11 +118,15 @@
         <option value="$PROJECT_DIR$/app/views/kt_tips/shows/show_transfers.html.erb" />
         <option value="$PROJECT_DIR$/app/views/kt_tips/shows/show_pay.html.erb" />
         <option value="$PROJECT_DIR$/app/views/kt_tips/shows/show_stk.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/kt_tips/pay.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/kt_tips/transfers.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/scaffolds.scss" />
-        <option value="$PROJECT_DIR$/app/views/kt_tips/stk.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/kt_tips/_form.html.erb" />
+        <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/Gemfile" />
+        <option value="$PROJECT_DIR$/config/beauty_secrets.yml" />
+        <option value="$PROJECT_DIR$/app/views/kt_tips/stk.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/kt_tips/pay.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/kt_tips/subscription.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/kt_tips/transfers.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/kt_tips_controller.rb" />
       </list>
     </option>
@@ -117,6 +142,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="RailsProjectView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -128,19 +155,6 @@
               <item name="kt_tips_rails" type="b2602c69:ProjectViewProjectNode" />
               <item name="kt_tips_rails" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="kt_tips_rails" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kt_tips_rails" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="kt_tips_rails" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kt_tips_rails" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="stylesheets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="kt_tips_rails" type="b2602c69:ProjectViewProjectNode" />
@@ -159,23 +173,21 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="RailsProjectView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../k2-connect-ruby" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/views/kt_tips/shows" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/config" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/views/kt_tips/shows" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -325,18 +337,49 @@
       <workItem from="1549877381854" duration="1287000" />
       <workItem from="1549878671188" duration="828000" />
       <workItem from="1549879501424" duration="363000" />
-      <workItem from="1549879865524" duration="3123000" />
+      <workItem from="1549879865524" duration="3208000" />
+      <workItem from="1549889648755" duration="383000" />
+      <workItem from="1549954374980" duration="2290000" />
+      <workItem from="1549960022592" duration="825000" />
+      <workItem from="1549960849914" duration="189000" />
+      <workItem from="1549961040424" duration="627000" />
+      <workItem from="1549961670016" duration="206000" />
+      <workItem from="1549961876993" duration="468000" />
+      <workItem from="1549962346628" duration="442000" />
+      <workItem from="1549962790644" duration="796000" />
+      <workItem from="1549963588947" duration="89000" />
+      <workItem from="1549963679277" duration="757000" />
+      <workItem from="1549964437818" duration="691000" />
+      <workItem from="1549965130332" duration="846000" />
+      <workItem from="1549965977954" duration="1402000" />
+      <workItem from="1549969124050" duration="478000" />
+      <workItem from="1549969603824" duration="3610000" />
+      <workItem from="1549975576463" duration="2000" />
+      <workItem from="1550040340141" duration="9155000" />
+      <workItem from="1550051476973" duration="3494000" />
+      <workItem from="1550057814269" duration="2783000" />
+      <workItem from="1550126654435" duration="2096000" />
+      <workItem from="1550233135276" duration="54000" />
+      <workItem from="1550233195829" duration="525000" />
+      <workItem from="1550233722210" duration="63000" />
+      <workItem from="1550233787016" duration="3169000" />
+      <workItem from="1550470840795" duration="696000" />
+      <workItem from="1550475918709" duration="35000" />
+      <workItem from="1550483343147" duration="53000" />
+      <workItem from="1550557153341" duration="829000" />
+      <workItem from="1550558053810" duration="44000" />
+      <workItem from="1550566826565" duration="1998000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82974000" />
+    <option name="totallyTimeSpent" value="122154000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1366" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.30833334" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24924242" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -349,7 +392,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32833335" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.31666666" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -386,22 +429,22 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/app/controllers/kt_tips_controller.rb</url>
-          <line>90</line>
+          <line>109</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/app/controllers/kt_tips_controller.rb</url>
-          <line>126</line>
+          <line>145</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/app/controllers/kt_tips_controller.rb</url>
-          <line>140</line>
+          <line>159</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/app/controllers/kt_tips_controller.rb</url>
-          <line>17</line>
+          <line>25</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
@@ -454,13 +497,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/application.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="15" column="60" selection-start-line="15" selection-start-column="60" selection-end-line="15" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/kt_tips/index.json.jbuilder">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -475,20 +511,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1978">
           <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/kt_tips/_form.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="11" lean-forward="true" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -531,24 +553,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/kt_tips/subscription.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="13" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/kt_tips.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="29">
           <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" column="52" lean-forward="true" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
         </state>
       </provider>
     </entry>
@@ -580,30 +588,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/kt_tips/pay.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="129" column="6" lean-forward="true" selection-start-line="2" selection-end-line="129" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/kt_tips/transfers.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1104">
-          <caret line="48" column="8" selection-start-line="48" selection-start-column="8" selection-end-line="63" selection-end-column="14" />
-          <folding>
-            <marker date="1549620135242" expanded="true" signature="420:513" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/beauty_secrets.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="26" lean-forward="true" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.rvm/gems/ruby-2.5.0/bundler/gems/k2-connect-ruby-7076d788f4ad/lib/k2-connect-ruby/k2_client.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-138" />
@@ -624,16 +608,38 @@
         <state relative-caret-position="-414" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/kt_tips/stk.html.erb">
+    <entry file="file://$USER_HOME$/.rvm/gems/ruby-2.5.0/bundler/gems/k2-connect-ruby-3b285c8aae65/lib/k2-connect-ruby/k2_errors.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1150">
-          <caret line="50" column="44" selection-start-line="50" selection-start-column="44" selection-end-line="50" selection-end-column="44" />
+        <state relative-caret-position="-345" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.rvm/gems/ruby-2.5.0/bundler/gems/k2-connect-ruby-3b285c8aae65/lib/k2-connect-ruby/k2_client.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-207" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tmp/pids/server.pid" />
+    <entry file="file://$USER_HOME$/.rvm/gems/ruby-2.5.0/bundler/gems/k2-connect-ruby-78a7f734f093/lib/k2-connect-ruby/k2_subscribe.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-345" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/kt_tips/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/kt_tips/_form.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="24" column="30" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="30" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/kt_tips/shows/show_webhook.html.erb">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/scaffolds.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2967">
+        <state relative-caret-position="-2133">
           <caret line="182" column="13" selection-start-line="182" selection-start-column="13" selection-end-line="182" selection-end-column="13" />
           <folding>
             <element signature="e#1179#1198#0" />
@@ -648,27 +654,95 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.rvm/gems/ruby-2.5.0/bundler/gems/k2-connect-ruby-3b285c8aae65/lib/k2-connect-ruby/k2_errors.rb">
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-345" />
+        <state relative-caret-position="368">
+          <caret line="16" column="31" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="31" />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.rvm/gems/ruby-2.5.0/bundler/gems/k2-connect-ruby-3b285c8aae65/lib/k2-connect-ruby/k2_client.rb">
+    <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-207" />
+        <state relative-caret-position="-276" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1098">
+          <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/environments/test.rb">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/environment.rb">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/application.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="23" column="35" lean-forward="true" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/kt_tips/pay.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="129" column="6" lean-forward="true" selection-start-line="129" selection-start-column="6" selection-end-line="129" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/kt_tips/transfers.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1064">
+          <caret line="95" column="71" selection-start-line="95" selection-start-column="71" selection-end-line="95" selection-end-column="71" />
+          <folding>
+            <marker date="1550234826772" expanded="true" signature="420:513" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/beauty_secrets.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17">
-          <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+        <state>
+          <caret line="32" column="58" selection-start-line="32" selection-start-column="58" selection-end-line="32" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.rvm/gems/ruby-2.5.0/bundler/gems/k2-connect-ruby-fd903545e14d/lib/k2-connect-ruby.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-868" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/kt_tips/subscription.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="14" column="61" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/kt_tips/stk.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="21" column="41" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/kt_tips_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        <state relative-caret-position="115">
+          <caret line="44" column="44" lean-forward="true" selection-start-line="44" selection-start-column="44" selection-end-line="44" selection-end-column="44" />
         </state>
       </provider>
     </entry>

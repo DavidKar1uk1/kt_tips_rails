@@ -30,7 +30,8 @@ gem 'jbuilder', '~> 2.5'
 # YAJl-ruby for parsing
 gem 'yajl-ruby', require: 'yajl'
 
-gem 'k2-connect-ruby', '~> 0.9.33', git: 'https://github.com/DavidKar1uk1/k2-connect-ruby.git', branch: 'k2-connect-ruby', submodules: true
+gem 'k2-connect-ruby', '~> 0.10.0', git: 'https://github.com/DavidKar1uk1/k2-connect-ruby.git', branch: 'k2-connect-ruby', submodules: true
+gem 'net-http-persistent'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
