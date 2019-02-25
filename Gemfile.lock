@@ -1,10 +1,10 @@
 GIT
   remote: https://github.com/DavidKar1uk1/k2-connect-ruby.git
-  revision: fd903545e14d089faaedc834a9e53399e4e15a2f
-  branch: k2-connect-ruby
+  revision: bbb81ac66274ca3958d4904f6a851cd93b7b341f
+  branch: development
   submodules: true
   specs:
-    k2-connect-ruby (0.10.0)
+    k2-connect-ruby (0.10.23)
 
 GEM
   remote: https://rubygems.org/
@@ -212,7 +212,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)
-  k2-connect-ruby (~> 0.10.0)!
+  k2-connect-ruby (~> 0.10.23)!
   listen (>= 3.0.5, < 3.2)
   net-http-persistent
   pg

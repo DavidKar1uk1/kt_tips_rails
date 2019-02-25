@@ -8,11 +8,14 @@ class KtTipsController < ApplicationController
 
   # POST /parse
   def receive
-    k2_test = K2ConnectRuby::K2Client.new(ENV["K2_SECRET_KEY"])
+    # puts "Scheme #{request.scheme}"
+    k2_test = K2Client.new(ENV["K2_SECRET_KEY"])
     k2_test.parse_request(request)
-    k2_truth_value = K2ConnectRuby::K2Authenticator.new.authenticate?(k2_test.hash_body, k2_test.api_secret_key, k2_test.k2_signature)
-    k2_components = K2ConnectRuby::K2SplitRequest.new(k2_truth_value)
-    k2_components.judge_truth(k2_test.hash_body)
+    k2_truth_value = K2Authenticator.authenticate?(k2_test.hash_body, k2_test.api_secret_key, k2_test.k2_signature)
+    test_hash = K2Split.judge_truth(k2_test.hash_body, k2_truth_value)
+    puts test_hash
+    # k2_components = K2ConnectRuby::K2SplitRequest.new(k2_truth_value)
+    # k2_components.judge_truth(k2_test.hash_body)
     # if true
     #   render 'kt_tips/shows/show_webhook', :object => { :k2_response => response, :k2_components => k2_components, :k2_test => k2_test }
     # end
