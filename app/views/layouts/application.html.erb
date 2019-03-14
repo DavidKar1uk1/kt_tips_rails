@@ -10,6 +10,19 @@
   </head>
 
   <body>
+  <header class="ze_header">
+    <div class="ze_row">
+      <nav class="home_nav">
+        <ul class="ze_ul">
+          <li class="i"> <%= link_to 'New Kt Tip', new_kt_tip_path, { id: 'new_tip', class: 'ze_links' } %> </li>
+          <li> <%= link_to 'Subscription', subscription_path, { id: 'subscription', class: 'ze_links' } %> </li>
+          <li> <%= link_to 'STK Push', stk_path, { id: 'stk', class: 'ze_links' } %> </li>
+          <li> <%= link_to 'Transfers', transfers_path, { id: 'transfers', class: 'ze_links' } %> </li>
+          <li> <%= link_to 'PAY', pay_path, { id: 'pay', class: 'ze_links' } %> </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
     <%= yield %>
   </body>
 </html>

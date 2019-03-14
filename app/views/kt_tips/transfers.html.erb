@@ -6,7 +6,6 @@
     <button class="ze_tab_links" onclick="selectPayType(event, 'verify_account')">VERIFY</button>
     <button class="ze_tab_links" onclick="selectPayType(event, 'create_transfer')">CREATE</button>
     <button class="ze_tab_links" onclick="selectPayType(event, 'query_transfer')">QUERY TRANSFER</button>
-<!--    <button class="ze_tab_links" onclick="selectPayType(event, 'create_pay')">CREATE PAY</button>-->
   </div>
   <!--  VERIFY SETTLEMENT ACCOUNT-->
   <div class="ze_tab_content" id="verify_account">
@@ -50,11 +49,11 @@
           <div class="currency_select_div">
             <%= select_tag(:currency,
                            options_for_select([
-                                                  ['CURRENCY', { 'selected' => 'true' }, { 'disabled' => 'disabled' }],
                                                   ['Kenyan Shilling', 'KES'],
                                                   ['Ugandan Shilling', 'USH'],
                                                   ['Tanzanian Shilling', 'TSH'],
-                                              ])
+                                              ]),
+                           :prompt =>"CURRENCY"
                 ) %>
           </div>
           <div class="amount_div">
@@ -98,3 +97,7 @@
     </div>
   </div>
 </div>
+
+<script>
+    ze_link = document.getElementById('transfers').style.display = 'none'
+</script>

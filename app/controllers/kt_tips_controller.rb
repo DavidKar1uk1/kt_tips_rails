@@ -1,21 +1,19 @@
 require 'k2-connect-ruby'
+require 'pp'
 
 class KtTipsController < ApplicationController
   attr_accessor :k2_subscription
   before_action :set_kt_tip, only: [:show, :edit, :update, :destroy]
   # skip_before_action :verify_authenticity_token, :only => [:receive, :subscribe, ]
   protect_from_forgery except: [ :receive, :subscribe, :stk_result, :pay_result ]
+  include K2Validation
 
   # POST /parse
   def receive
-    # puts "Scheme #{request.scheme}"
     k2_test = K2Client.new(ENV["K2_SECRET_KEY"])
     k2_test.parse_request(request)
-    k2_truth_value = K2Authenticator.authenticate?(k2_test.hash_body, k2_test.api_secret_key, k2_test.k2_signature)
-    test_hash = K2Split.judge_truth(k2_test.hash_body, k2_truth_value)
-    puts test_hash
-    # k2_components = K2ConnectRuby::K2SplitRequest.new(k2_truth_value)
-    # k2_components.judge_truth(k2_test.hash_body)
+    K2Authenticator.authenticate(k2_test.hash_body, k2_test.api_secret_key, k2_test.k2_signature)
+    test_hash = K2ProcessResult.process(k2_test.hash_body)
     # if true
     #   render 'kt_tips/shows/show_webhook', :object => { :k2_response => response, :k2_components => k2_components, :k2_test => k2_test }
     # end
@@ -27,11 +25,11 @@ class KtTipsController < ApplicationController
 
   # POST /subscription
   def subscribe
-    @k2_subscription = K2Subscribe.new("buygoods_transaction_received")
+    @k2_subscription = K2Subscribe.new(params[:subscription], ENV["K2_SECRET_KEY"])
     if @k2_subscription.token_request(ENV["CLIENT_ID"], ENV["CLIENT_SECRET"])
-      ENV["ACCESS_TOKEN"] = @k2_subscription.subscriber_access_token
+      ENV["ACCESS_TOKEN"] = @k2_subscription.access_token
       @k2_subscription.webhook_subscribe
-      @k1_test_token = K2ConnectRuby::K2Client.new(ENV["K2_SECRET_KEY"])
+      @k1_test_token = K2Client.new(ENV["K2_SECRET_KEY"])
       render 'kt_tips/shows/show_subscription', :object => { :k2_subscription => @k2_subscription , :k1_test_token => @k1_test_token }
     end
   end
@@ -45,9 +43,9 @@ class KtTipsController < ApplicationController
     @k2_stk = K2Stk.new(ENV["ACCESS_TOKEN"])
     case params[:decision]
     when "receive_stk"
-      @k2_stk.mpesa_receive_payments(params)
+      @k2_stk.receive_mpesa_payments(params)
     when "query_stk"
-      @k2_stk.mpesa_query_payments(params[:stk_id])
+      @k2_stk.query_status(params)
     else
       puts "No Other STK Option"
     end
@@ -70,9 +68,9 @@ class KtTipsController < ApplicationController
     when "pay_recipients_form"
       @k2_pay.pay_recipients(params)
     when "query_pay_form"
-      @k2_pay.query_pay(params[:payment_id])
+      @k2_pay.query_status(params)
     when "create_pay_form"
-      @k2_pay.pay_create(params)
+      @k2_pay.create_payment(params)
     else
       puts "No Other Pay Option."
     end
@@ -81,7 +79,6 @@ class KtTipsController < ApplicationController
 
   # POST /payment_result
   def pay_result
-
   end
 
   # GET /pay
@@ -95,9 +92,9 @@ class KtTipsController < ApplicationController
     when "verify_account_form"
       @k2_transfers.settlement_account(params)
     when "create_transfer_form"
-      @k2_transfers.transfer_funds("#{params[:target]}", params)
+      @k2_transfers.transfer_funds(params[:target], params)
     when "query_transfer_form"
-      @k2_transfers.query_transfer("#{params[:transfer_id]}")
+      @k2_transfers.query_status(params)
     else
       puts "No Other Transfer Option."
     end

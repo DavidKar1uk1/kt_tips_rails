@@ -1,0 +1,123 @@
+//Header Class
+.ze_header {
+  position: fixed;
+  top: 0;
+  max-height: 70px;
+  margin-left: 30%;
+  margin-top: 0;
+  width: 69.5%;
+  background: #111111;
+  background: rgba(17, 17, 17, 0.5);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  padding-bottom: 6px;
+  font-family: "Montserrat", sans-serif;// nav element
+  .home_nav {
+    float: right;
+    width: 100%;
+
+    .ze_ul {
+      list-style: none;
+      overflow: hidden;
+      text-align: right;
+      float: right;
+    }
+    @media only screen and (max-width: 766px) {
+      .ze_ul {
+        padding-top: 10px;
+        margin-bottom: 22px;
+        float: left;
+        text-align: center;
+      }
+    }
+    .ze_ul li {
+      display: inline-block;
+      margin-right: 15px;
+      line-height: 1.0;
+    }
+    @media only screen and (max-width: 766px) {
+      .ze_ul li {
+        width: 100%;
+        padding: 7px 0;
+        margin: 0;
+      }
+    }
+    .ze_ul a {
+      color: #ffffff;
+      background: none;
+      position:relative;
+      z-index: 1;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+    .ze_ul a, .ze_ul a:before, .ze_ul a:after  {
+      transition: all .5s;
+    }
+    .ze_ul a:hover {
+      color: #000000;
+      position:relative;
+      z-index: 1;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+    .ze_ul a:after {
+      background: #fde003;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      width: 100%;
+      height: 1px;
+      content: '.';
+      color: transparent;
+      opacity: 0;
+      z-index: -1;
+    }
+    .ze_ul a:hover:after {
+      opacity: 1;
+      visibility: visible;
+      height: 100%;
+    }
+
+    .ze_row {
+      max-width: 940px;
+      margin: 0 auto;
+      position: relative;
+      padding: 0 2%;
+    }
+  }
+  @media only screen and (max-width: 766px) {
+    .home_nav {
+      width: 100%;
+    }
+  }
+}
+@media only screen and (max-width: 766px) {
+
+}
+
+.home_table {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 1px;
+  background-color: #c2c2c2;
+
+  thead {
+    //background-color: #4c4c4c;
+  }
+}
+
+.ze_show {
+  margin-top: 6.5%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 1px;
+  background-color: #c2c2c2;
+
+  p {
+
+  }
+}

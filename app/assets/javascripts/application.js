@@ -13,5 +13,6 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require kt_tips
+//= require kt_tips.coffee
 //= require_tree .
+//= require kt_tips/hide.coffee

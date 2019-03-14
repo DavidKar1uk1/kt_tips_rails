@@ -5,14 +5,18 @@
     <%= label_tag(:subscription, "Select your Subscription service from the Following:") %>
     <%= select_tag(:subscription,
                    options_for_select([
-                                          ['Subscription Type', { 'selected' => 'true' }, { 'disabled' => 'disabled' }],
                                           ['Transaction Received', 'buygoods_transaction_received'],
                                           ['Transaction Reversed', 'buygoods_transaction_reversed'],
                                           ['Settlement Transfer', 'settlement_transfer_completed'],
                                           ['Customer Created', 'customer_created'],
-                                      ])
+                                      ]),
+                   :prompt =>"Subscription Type"
         ) %>
     <%= submit_tag("SUBMIT", data: { disable_with: "Creating Subscription." }) %>
   <% end %>
 </div>
+
+<script>
+    document.getElementById('subscription').style.display = 'none';
+</script>
 

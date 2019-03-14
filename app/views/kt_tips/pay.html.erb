@@ -110,11 +110,11 @@
           <div class="currency_select_div">
             <%= select_tag(:currency,
                            options_for_select([
-                                                  ['CURRENCY', { 'selected' => 'true' }, { 'disabled' => 'disabled' }],
                                                   ['Kenyan Shilling', 'KES'],
                                                   ['Ugandan Shilling', 'USH'],
                                                   ['Tanzanian Shilling', 'TSH'],
-                                              ])
+                                              ]),
+                           :prompt =>"CURRENCY"
                 ) %>
           </div>
           <div class="amount_div">
@@ -128,3 +128,7 @@
     </div>
   </div>
 </div>
+
+<script>
+    ze_link = document.getElementById('pay').style.display = 'none'
+</script>

@@ -46,7 +46,7 @@ a {
 
   &:hover {
     color: #000000;
-    background-color: #A5C9FF;
+    background-color: #fde003;
   }
 
   &:active {
@@ -138,6 +138,7 @@ label {
 
 .za_head {
   font-family: Thasadith, sans-serif;
+  margin-top: 4%;
 }
 
 //PAY
@@ -161,7 +162,8 @@ label {
   }
 
   button:hover {
-    background-color: #A5C9FF;
+    color: #000000;
+    background-color: rgba(203, 180, 2, 0.9);
   }
 
   button.active {
@@ -192,7 +194,8 @@ label {
   }
 
   button:hover {
-    background-color: #A5C9FF;
+    color: #000000;
+    background-color: rgba(203, 180, 2, 0.9);
   }
 
   button.active {
@@ -222,7 +225,8 @@ label {
   }
 
   button:hover {
-    background-color: #A5C9FF;
+    color: #000000;
+    background-color: rgba(203, 180, 2, 0.9);
   }
 
   button.active {
@@ -284,7 +288,7 @@ label {
   }
   input[type=submit]:hover{
     cursor: pointer;
-    background-color: #A5C9FF;
+    background-color: #fde003;
   }
   input[type=text]{
     border: none;
