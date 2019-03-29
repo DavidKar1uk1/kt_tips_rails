@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.2'
+gem 'rails', '~> 5.2.2.1'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # YAJl-ruby for parsing
 gem 'yajl-ruby', require: 'yajl'
 
-gem 'k2-connect-ruby', '~> 0.10.58', git: 'https://github.com/DavidKar1uk1/k2-connect-ruby.git', branch: 'development', submodules: true
+gem 'k2-connect-ruby', '~> 0.10.7', git: 'https://github.com/DavidKar1uk1/k2-connect-ruby.git', branch: 'development', submodules: true
 gem 'net-http-persistent'
 
 # Use ActiveStorage variant

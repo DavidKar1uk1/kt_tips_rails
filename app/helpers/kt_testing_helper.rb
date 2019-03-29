@@ -1,0 +1,2 @@
+module KtTestingHelper
+end

@@ -16,7 +16,7 @@ module KtTipsRails
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    # For the Secret Key
+    # For the Environment Variables
     config.before_configuration do
       env_file = File.join(Rails.root, 'config', 'beauty_secrets.yml')
       YAML.load(File.open(env_file)).each do |key, value|
