@@ -18,7 +18,6 @@ class KtTestingController < ApplicationController
   # POST /subscription
   def subscribe
     @k2_subscription = K2Subscribe.new(ENV["K2_SECRET_KEY"])
-    puts "Hello"
     if @k2_subscription.token_request(ENV["CLIENT_ID"], ENV["CLIENT_SECRET"])
       ENV["ACCESS_TOKEN"] = @k2_subscription.access_token
       @k2_subscription.webhook_subscribe(params[:subscription])

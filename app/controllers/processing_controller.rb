@@ -2,7 +2,6 @@ class ProcessingController < ApplicationController
   protect_from_forgery except: [ :bg_received, :bg_reversed, :b2b, :m2m, :settle, :customer, :stk_payment, :wrong_stk_payment, :pay_payment ]
   # POST Buy Goods Received
   def bg_received
-    # puts "Request:\t#{request.body.read}"
     bg_received_test = K2Client.new(ENV["K2_SECRET_KEY"])
     bg_received_test.parse_request(request)
     test_obj = K2ProcessResult.process(bg_received_test.hash_body)
