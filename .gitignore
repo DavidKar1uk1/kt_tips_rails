@@ -32,3 +32,6 @@
 
 # Ignore secret key for HMAC authentication and encryption.
 /config/beauty_secrets.yml
+
+# for intellij products
+.idea
