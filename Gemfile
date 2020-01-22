@@ -26,11 +26,15 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+#
+# Material Design Components
+gem 'materialize-sass'
+gem 'material_icons'
 
 # YAJl-ruby for parsing
 gem 'yajl-ruby', require: 'yajl'
 
-gem 'k2-connect-ruby', '~> 0.10.7', git: 'https://github.com/DavidKar1uk1/k2-connect-ruby.git', branch: 'development', submodules: true
+gem 'k2-connect-ruby', '~> 0.10.7', git: 'https://github.com/DavidKar1uk1/k2-connect-ruby.git', branch: 'development'
 gem 'net-http-persistent'
 
 # Use ActiveStorage variant

@@ -1,0 +1,3 @@
+class TransfersController < PaymentsCotroller
+
+end

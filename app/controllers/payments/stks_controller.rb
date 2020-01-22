@@ -1,0 +1,3 @@
+class StksController < PaymentsCotroller
+
+end

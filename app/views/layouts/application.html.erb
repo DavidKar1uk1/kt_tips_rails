@@ -3,26 +3,21 @@
   <head>
     <title>Kt Tips</title>
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <%#= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+<!--    Material Design Stylesheet Material -->
+
   </head>
 
   <body>
-  <header class="ze_header">
-    <div class="ze_row">
-      <nav class="home_nav">
-        <ul class="ze_ul">
-          <li class="i"> <%= link_to 'New Kt Tip', new_kt_tip_path, { id: 'new_tip', class: 'ze_links' } %> </li>
-          <li> <%= link_to 'Subscription', subscription_path, { id: 'subscription', class: 'ze_links' } %> </li>
-          <li> <%= link_to 'STK Push', stk_path, { id: 'stk', class: 'ze_links' } %> </li>
-          <li> <%= link_to 'Transfers', transfers_path, { id: 'transfers', class: 'ze_links' } %> </li>
-          <li> <%= link_to 'PAY', pay_path, { id: 'pay', class: 'ze_links' } %> </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-    <%= yield %>
+  <%= render "layouts/header" %>
+
+  <%= render "layouts/main" %>
+
+  <%= render "layouts/footer" %>
+
   </body>
 </html>

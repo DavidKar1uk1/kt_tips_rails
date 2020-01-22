@@ -10,9 +10,11 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require turbolinks
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
 //= require kt_tips.coffee
 //= require_tree .
-//= require kt_tips/hide.coffee
+//= require materialize-sprockets
+//= require materialize/extras/nouislider

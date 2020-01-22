@@ -12,5 +12,20 @@
  *
  *= require_tree .
  *= require_self
- *= require kt_tips/home_tips
+ *= require material_icons
  */
+
+@import "materialize/components/color-variables";
+$primary-color: #5BBCAE !default;
+@import 'materialize';
+@import "materialize/extras/nouislider";
+
+.header-nav-all-text {
+  margin-top: 20px;
+  padding: inherit;
+}
+
+.header-nav-text {
+  color: #f0f0f0;
+  font-size: 20px;
+}

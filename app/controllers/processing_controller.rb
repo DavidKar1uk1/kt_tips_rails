@@ -1,6 +1,20 @@
 class ProcessingController < ApplicationController
   protect_from_forgery except: [ :bg_received, :bg_reversed, :b2b, :m2m, :settle, :customer, :stk_payment, :wrong_stk_payment, :pay_payment ]
   # POST Buy Goods Received
+  def webhook
+    webhook = K2Client.new(ENV["K2_SECRET_KEY"])
+    webhook.parse_request(request)
+    test_obj = K2ProcessResult.process(webhook.hash_body)
+    puts "The Object:\t\t#{test_obj}"
+    puts "The Main ID:\t\t#{test_obj.id}"
+    puts "Resource ID:\t\t#{test_obj.resource_id}"
+    puts "The Topic:\t\t#{test_obj.topic}"
+    puts "The Type:\t\t#{test_obj.type}"
+    puts "The First Name:\t\t#{test_obj.first_name}"
+    puts "Middle Name:\t\t#{test_obj.middle_name}"
+    puts "The Last Name:\t\t#{test_obj.last_name}"
+  end
+
   def bg_received
     bg_received_test = K2Client.new(ENV["K2_SECRET_KEY"])
     bg_received_test.parse_request(request)

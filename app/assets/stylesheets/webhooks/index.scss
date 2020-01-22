@@ -1,0 +1,27 @@
+$table-header: color("blue", "lighten-2") !default;
+.webhooks {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.webhooks table {
+  width: 100%;
+}
+
+.webhooks td, .webhooks th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.webhooks tr:nth-child(even){background-color: #f2f2f2;}
+
+.webhooks tr:hover {background-color: #ddd;}
+
+.webhooks th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #808080;
+  color: white;
+}
