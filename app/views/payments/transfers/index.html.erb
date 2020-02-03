@@ -16,18 +16,16 @@
     </thead>
 
     <tbody>
-    <% @webhooks.each do |webhook| %>
-      <tr>
-        <td><%= webhook.webhook_secret %></td>
-        <td><%= webhook.event_type %></td>
-        <td><%= webhook.location_url %></td>
-        <td><%= webhook.access_token %></td>
-        <td><%= webhook.response %></td>
-        <td><%= link_to 'Show', webhook %></td>
-        <!--      <td><%#= link_to 'Edit', edit_trial_path(trial) %></td>-->
-        <!--      <td><%#= link_to 'Destroy', webhooks, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-      </tr>
-    <% end %>
+    <%# @webhooks.each do |webhook| %>
+<!--      <tr>-->
+<!--        <td><%#= webhook.webhook_secret %></td>-->
+<!--        <td><%#= webhook.event_type %></td>-->
+<!--        <td><%#= webhook.location_url %></td>-->
+<!--        <td><%#= webhook.access_token %></td>-->
+<!--        <td><%#= webhook.response %></td>-->
+<!--        <td><%#= link_to 'Show', webhook %></td>-->
+<!--      </tr>-->
+    <%# end %>
     </tbody>
   </table>
 </div>
@@ -36,3 +34,6 @@
 
 <%= link_to 'New Webhook Subscription', new_webhook_path, class: "waves-effect waves-light btn" %>
 
+<script>
+    document.getElementById('transfers').style.display = 'none'
+</script>

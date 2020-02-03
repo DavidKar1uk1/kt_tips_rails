@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Incoming Payments</h3>
+
+<div class="webhooks">
+  <table>
+    <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone Number</th>
+      <th>Email Address</th>
+      <th>Currency</th>
+      <th>Amount</th>
+      <th>Location URL</th>
+      <th>Show</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @stks.each do |stk| %>
+      <tr>
+        <td><%= stk.first_name %></td>
+        <td><%= stk.last_name %></td>
+        <td><%= stk.phone %></td>
+        <td><%= stk.email %></td>
+        <td><%= stk.currency %></td>
+        <td><%= stk.value %></td>
+        <td><%= stk.location_url %></td>
+        <td><%= link_to 'remove_red_eye', stk, class: 'material-icons' %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<%= link_to 'New Incoming Payment', new_payments_stk_path, class: "waves-effect waves-light btn" %>
+
+<script>
+    document.getElementById('stk').style.display = 'none'
+</script>

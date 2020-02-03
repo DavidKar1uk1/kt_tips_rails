@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<div class="show_subscription">
+  <p>
+    <strong>Incoming Payment ID:</strong>
+    <%= @stk.id %>
+  </p>
+
+  <p>
+    <strong>Sender's Name:</strong>
+    <%= @stk.first_name + " " + @stk.last_name %>
+  </p>
+
+  <p>
+    <strong>Sender's Phone Number:</strong>
+    <%= @stk.phone %>
+  </p>
+
+  <p>
+    <strong>Sender's Email Address:</strong>
+    <%= @stk.email %>
+  </p>
+
+  <p>
+    <strong>Money Sent:</strong>
+    <%= @stk.currency + " " + @stk.value %>
+  </p>
+
+  <p>
+    <strong>STK Resource Location URL:</strong>
+    <%= @stk.location_url %>
+  </p>
+
+  <p>
+    <strong>Incoming Payments Response:</strong>
+    <%= @stk.response %>
+  </p>
+
+  <p>
+    <strong>Incoming Payments Result:</strong>
+    <%= @stk.result %>
+  </p>
+</div>
+
+<br>
+
+<!--Query Status of location URL-->
+<%= form_tag(payments_query_stk_path(@stk.id)) do %>
+  <div class="actions">
+    <%= submit_tag('Query Status', data: { disable_with: "Querying Incoming Payment." }, class: "button btn btn-primary btn-lg") %>
+  </div>
+ <% end %>
+
+<hr>
+
+<%= link_to 'Back', payments_stks_path, class: "waves-effect waves-light btn" %>
+
+<script>
+    document.getElementById('stk').style.display = 'none'
+</script>

@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: 
+  last_name: 
+  phone: 
+  email: 
+  network_operator: 
+  bank_account_name: 
+  bank_id_no: 
+  bank_branch_id_no: 
+  amount: 
+  location_url: 
+  response: 
+  result: 
+  order_type: 1
+
+two:
+  first_name: 
+  last_name: 
+  phone: 
+  email: 
+  network_operator: 
+  bank_account_name: 
+  bank_id_no: 
+  bank_branch_id_no: 
+  amount: 
+  location_url: 
+  response: 
+  result: 
+  order_type: 1

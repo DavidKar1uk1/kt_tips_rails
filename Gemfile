@@ -34,7 +34,7 @@ gem 'material_icons'
 # YAJl-ruby for parsing
 gem 'yajl-ruby', require: 'yajl'
 
-gem 'k2-connect-ruby', '~> 0.10.7', git: 'https://github.com/DavidKar1uk1/k2-connect-ruby.git', branch: 'development'
+gem 'k2-connect-ruby', '~> 0.10.7', git: 'https://github.com/DavidKar1uk1/k2-connect-ruby.git', branch: 'refactor-payload'
 gem 'net-http-persistent'
 
 # Use ActiveStorage variant

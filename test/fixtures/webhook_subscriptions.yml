@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  secret: MyString
+  event: MyString
+  location_url: MyString
+  access_token: MyString
+  result: MyText
+
+two:
+  secret: MyString
+  event: MyString
+  location_url: MyString
+  access_token: MyString
+  result: MyText

@@ -1,0 +1,91 @@
+<p id="notice"><%= notice %></p>
+
+<div class="show_pay">
+  <p>
+    <strong>Pay ID:</strong>
+    <%= @pay.id %>
+  </p>
+
+  <div id="pay_recipient" class="pay_recipient">
+    <p>
+      <strong>Full Name:</strong>
+      <%= @pay.first_name + " " + @pay.last_name %>
+    </p>
+
+    <p>
+      <strong>Phone Number:</strong>
+      <%= @pay.phone %>
+    </p>
+
+    <p>
+      <strong>Email Address:</strong>
+      <%= @pay.email %>
+    </p>
+
+<!--    MPESA-->
+    <% if @pay.order_type.eql?(0) %>
+      <div id="mpesa" class="mpesa">
+        <p>
+          <strong>Network Operator:</strong>
+          <%= @pay.network %>
+        </p>
+      </div>
+
+<!--    BANK-->
+    <% elsif @pay.order_type.eql?(1) %>
+      <div id="bank" class="bank">
+        <p>
+          <strong>Bank Account Name:</strong>
+          <%= @pay.account_name %>
+        </p>
+
+        <p>
+          <strong>Bank Account Number:</strong>
+          <%= @pay.account_number %>
+        </p>
+
+        <p>
+          <strong>Bank ID Number:</strong>
+          <%= @pay.bank_id %>
+        </p>
+
+        <p>
+          <strong>Bank Branch ID Number:</strong>
+          <%= @pay.bank_branch_id %>
+        </p>
+      </div>
+  </div>
+
+    <% elsif @pay.order_type.eql?(2) %>
+      <div id="create_payment" class="create_payment">
+        <p>
+          <strong>Amount Paid:</strong>
+          <%= @pay.currency + " " + @pay.value %>
+        </p>
+      </div>
+    <% end %>
+
+  <p>
+    <strong>Payments Resource Location URL:</strong>
+    <%= @pay.location_url %>
+  </p>
+
+  <p>
+    <strong>Payments Response:</strong>
+    <%= @pay.response %>
+  </p>
+
+  <p>
+    <strong>Payments Result:</strong>
+    <%= @pay.result %>
+  </p>
+
+</div>
+<br>
+<%= form_tag(payments_query_pay_path(@pay.id)) do %>
+  <div class="actions">
+    <%= submit_tag('Query Status', data: { disable_with: "Querying Pay." }, class: "button btn btn-primary btn-lg") %>
+  </div>
+ <% end %>
+<hr>
+<%= link_to 'Back', payments_pays_path, class: "waves-effect waves-light btn" %>

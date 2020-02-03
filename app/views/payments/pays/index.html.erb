@@ -1,0 +1,88 @@
+<!--<td><%#= TODO: Better Way to present this page and differentiate between Add Pay Recipients and Create Payment (Maybe a tabbed pane, radio button, checkbox %></td>-->
+<p id="notice"><%= notice %></p>
+
+<h3>PAY</h3>
+
+<% form_tag '#' do %>
+
+<% end %>
+
+<!-- Switch -->
+<div class="switch left-aligned" onclick="shift_pay()">
+  <label>
+    Pay Recipients
+    <input id="pay_choice" type="checkbox">
+    <span class="lever"></span>
+    Payments
+  </label>
+</div>
+
+<div class="webhooks">
+  <div id="pay_recipients" class="pay_recipients">
+    <table>
+      <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <!--      <th>Network Operator</th>-->
+        <!--      <th>Bank Account Name</th>-->
+        <!--      <th>Bank ID Number</th>-->
+        <!--      <th>Bank Branch ID Number</th>-->
+        <!--      <th>Currency</th>-->
+        <!--      <th>Value</th>-->
+        <th>Location URL</th>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @pay_recipients.each do |pay| %>
+        <tr>
+          <td><%= pay.first_name + " " + pay.last_name %></td>
+          <td><%= pay.phone %></td>
+          <td><%= pay.email %></td>
+          <!--        <td><%#= pay.network %></td>-->
+          <!--        <td><%#= pay.bank_account_name %></td>-->
+          <!--        <td><%#= pay.bank_id_no %></td>-->
+          <!--        <td><%#= pay.bank_branch_id_no %></td>-->
+          <!--        <td><%#= pay.currency %></td>-->
+          <!--        <td><%#= pay.value %></td>-->
+          <td><%= pay.location_url %></td>
+          <td><%= link_to 'remove_red_eye', pay, class: 'material-icons' %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="payments" class="payments" style="display: none">
+    <table>
+      <thead>
+      <tr>
+        <th>Currency</th>
+        <th>Value</th>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @created_pays.each do |pay| %>
+        <tr>
+          <td><%= pay.currency %></td>
+          <td><%= pay.value %></td>
+          <td><%= link_to 'remove_red_eye', pay, class: 'material-icons' %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+
+<%= link_to 'New Pay', new_payments_pay_path, class: "waves-effect waves-light btn" %>
+
+<script>
+    document.getElementById('pay').style.display = 'none'
+</script>

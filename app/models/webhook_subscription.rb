@@ -1,0 +1,2 @@
+class WebhookSubscription < ApplicationRecord
+end

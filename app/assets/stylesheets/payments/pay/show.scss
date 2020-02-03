@@ -1,0 +1,27 @@
+.show_pay {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  width: 100%;
+  margin-top: 5%;
+  border-collapse: collapse;
+}
+
+.show_pay table {
+  width: 100%;
+}
+
+.show_pay td, .show_pay th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.show_pay tr:nth-child(even){background-color: #f2f2f2;}
+
+.show_pay tr:hover {background-color: #ddd;}
+
+.show_pay th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}

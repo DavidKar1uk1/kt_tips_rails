@@ -1,12 +1,12 @@
 <nav>
   <div class="nav-wrapper">
-    <a href="<%= webhooks_path %>" class="brand-logo center">KT Tips</a>
+    <a href="<%= webhook_subscriptions_path %>" class="brand-logo center">KT Tips</a>
     <ul class="left hide-on-med-and-down header-nav-all-text">
-      <li> <%= link_to 'New Kt Tip', new_kt_tip_path, { id: 'new_tip', class: "header-nav-text" } %> </li>
-<!--      <li> <%#= link_to 'Subscription', webhooks_path, { id: 'subscription', class: "header-nav-text" } %> </li>-->
-      <li> <%= link_to 'STK Push', stk_path, { id: 'stk', class: "header-nav-text" } %> </li>
-      <li> <%= link_to 'Transfers', transfers_path, { id: 'transfers', class: "header-nav-text" } %> </li>
-      <li> <%= link_to 'PAY', pay_path, { id: 'pay', class: "header-nav-text" } %> </li>
+<!--      <li> <%#= link_to 'New Kt Tip', new_kt_tip_path, { id: 'new_tip', class: "header-nav-text" } %> </li>-->
+      <li> <%= link_to 'Subscription', webhook_subscriptions_path, { id: 'subscription', class: "header-nav-text" } %> </li>
+      <li> <%= link_to 'STK Push', payments_stks_path, { id: 'stk', class: "header-nav-text" } %> </li>
+      <li> <%= link_to 'Transfers', payments_transfers_path, { id: 'transfers', class: "header-nav-text" } %> </li>
+      <li> <%= link_to 'PAY', payments_pays_path, { id: 'pay', class: "header-nav-text" } %> </li>
     </ul>
   </div>
 </nav>

@@ -1,0 +1,68 @@
+<%= form_with(model: stk, local: true) do |form| %>
+  <% if stk.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(webhook.errors.count, "error") %> prohibited this Incoming Payment from being saved:</h2>
+
+      <ul>
+        <% stk.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="hidden-tags">
+    <%= hidden_field(:decision, 'receive_stk') %>
+    <%= hidden_field(:pay_type, 'mobile_wallet') %>
+  </div>
+
+  <div>
+    <%= form.label(:first_name, "First Name:") %>
+    <%= form.text_field(:first_name) %>
+  </div>
+
+  <div>
+    <%= form.label(:last_name, "Last Name:") %>
+    <%= form.text_field(:last_name) %>
+  </div>
+
+  <div>
+    <%= form.label(:phone, "Phone Number:") %>
+    <%= form.text_field(:phone) %>
+  </div>
+
+  <div>
+    <%= form.label(:email, "Email Address:") %>
+    <%= form.text_field(:email) %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= form.select(:currency, options_for_select([ ['Kenyan Shilling', 'KES'], ['Ugandan Shilling', 'USH'], ['Tanzanian Shilling', 'TSH'], ]), { :prompt =>"CURRENCY" }, {:class => 'browser-default'}) %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= form.label(:value, "Amount:") %>
+    <%= form.text_field(:value) %>
+  </div>
+
+  <br>
+
+  <div class="actions">
+    <%= form.submit(data: { disable_with: "Creating Incoming Payment." }, class: "button btn btn-primary btn-lg") %>
+  </div>
+
+<% end %>
+
+<script>
+    document.getElementById('stk').style.display = 'none'
+</script>
+
+<style>
+  .browser-default {
+
+  }
+</style>

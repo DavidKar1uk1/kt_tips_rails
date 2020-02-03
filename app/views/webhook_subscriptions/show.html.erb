@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<div class="show_subscription">
+  <p>
+    <strong>Webhook ID:</strong>
+    <%= @webhook.id %>
+  </p>
+
+  <p>
+    <strong>Webhook Secret:</strong>
+    <%= @webhook.secret %>
+  </p>
+
+  <p>
+    <strong>Webhook Event Type:</strong>
+    <%= @webhook.event %>
+  </p>
+
+  <p>
+    <strong>Webhook Location Resource URL:</strong>
+    <%= @webhook.location_url %>
+  </p>
+
+  <p>
+    <strong>Webhook Access Token:</strong>
+    <%= @webhook.access_token %>
+  </p>
+
+  <p>
+    <strong>Webhook Response:</strong>
+    <%= @webhook.result %>
+  </p>
+</div>
+<br>
+<%= form_tag(query_webhook_path(@webhook.id)) do %>
+  <div class="actions">
+    <%= submit_tag('Query Status', data: { disable_with: "Querying Subscription." }, class: "button btn btn-primary btn-lg") %>
+  </div>
+ <% end %>
+<hr>
+<%= link_to 'Back', webhook_subscriptions_path, class: "waves-effect waves-light btn" %>

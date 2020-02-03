@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_22_075305) do
+ActiveRecord::Schema.define(version: 2020_02_03_124255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,17 +24,61 @@ ActiveRecord::Schema.define(version: 2020_01_22_075305) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "trials", force: :cascade do |t|
+  create_table "pays", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone"
+    t.string "email"
+    t.string "network"
+    t.string "account_name"
+    t.string "account_number"
+    t.string "bank_id"
+    t.string "bank_branch_id"
+    t.string "currency"
+    t.string "value"
+    t.string "location_url"
+    t.text "response"
+    t.text "result"
+    t.integer "order_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "webhooks", force: :cascade do |t|
-    t.string "webhook_secret"
-    t.string "event_type"
+  create_table "stks", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone"
+    t.string "email"
+    t.string "currency"
+    t.string "value"
+    t.string "location_url"
+    t.text "response"
+    t.text "result"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "transfers", force: :cascade do |t|
+    t.string "account_name"
+    t.string "account_number"
+    t.string "bank_ref_number"
+    t.string "bank_branch_ref_no"
+    t.string "target_destination"
+    t.string "amount"
+    t.string "location_url"
+    t.text "response"
+    t.text "result"
+    t.boolean "order_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "webhook_subscriptions", force: :cascade do |t|
+    t.string "secret"
+    t.string "event"
     t.string "location_url"
     t.string "access_token"
-    t.text "response"
+    t.text "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

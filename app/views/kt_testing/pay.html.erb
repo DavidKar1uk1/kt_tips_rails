@@ -36,7 +36,7 @@
     </div>
   </div>
   <!--BANK-->
-  <div class="ze_tab_content" id="bank_account">
+  <div class="ze_tab_content" id="bank_account" style="display: none">
     <div class="ze_form">
       <%= form_tag("/pay", method: :post) do %>
         <%= hidden_field_tag(:decision, 'pay_recipients_form') %>
@@ -86,7 +86,7 @@
     </div>
   </div>
   <!--  QUERY PAY-->
-  <div class="ze_tab_content" id="query_pay">
+  <div class="ze_tab_content" id="query_pay" style="display: none">
     <div class="ze_form">
       <%= form_tag("/pay", method: :post) do %>
         <%= hidden_field_tag(:decision, 'query_pay_form') %>
@@ -102,7 +102,7 @@
     </div>
   </div>
   <!--CREATE PAY-->
-  <div class="ze_tab_content" id="create_pay">
+  <div class="ze_tab_content" id="create_pay" style="display: none">
     <div class="ze_form">
       <%= form_tag("/pay", method: :post) do %>
         <%= hidden_field_tag(:decision, 'create_pay_form') %>

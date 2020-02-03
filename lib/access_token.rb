@@ -1,3 +1,4 @@
+# TODO: Set up Global Tokens that are used by every module
 module AccessToken
   def request_token
     ENV["ACCESS_TOKEN"] = K2AccessToken.new(ENV["CLIENT_ID"], ENV["CLIENT_SECRET"]).request_token
