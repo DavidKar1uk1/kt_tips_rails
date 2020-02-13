@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="s12">
+    <ul class="tabs">
+      <button class="tab col s3 active tab_link" type="button" onclick="settlementType(event, 'mobile')">MOBILE ACCOUNT</button>
+      <button class="tab col s3 tab_link" type="button" onclick="settlementType(event, 'bank')">BANK ACCOUNT</button>
+    </ul>
+  </div>
+
+  <br>
+
+  <div class="settlement_accounts">
+    <div id="mobile" class="col s12 settlement_content">
+      <%= form_with(model: settlement, local: true) do |form| %>
+        <% if settlement.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(settlement.errors.count, "error") %> prohibited this Settlement from being saved:</h2>
+
+            <ul>
+              <% settlement.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <%= form.hidden_field(:settlement_type, value: 'mobile_wallet') %>
+        <div>
+          <%= form.label(:msisdn, "Phone Number:") %>
+          <%= form.text_field(:msisdn) %>
+        </div>
+
+        <br>
+
+        <div>
+          <%= form.label(:network, "Mobile Network:") %>
+          <%= form.text_field(:network) %>
+        </div>
+
+        <br>
+
+        <div class="actions">
+          <%= form.submit(data: { disable_with: "Creating Verified Mobile Settlement Account." }, class: "button btn btn-primary btn-lg") %>
+        </div>
+
+      <% end %>
+    </div>
+
+    <div id="bank" class="col s12 settlement_content" style="display:none">
+      <%= form_with(model: settlement, local: true) do |form| %>
+        <% if settlement.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(settlement.errors.count, "error") %> prohibited this Settlement from being saved:</h2>
+
+            <ul>
+              <% settlement.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <%= form.hidden_field(:order_type, value: 'bank_account') %>
+        <div>
+          <%= form.label(:account_name, "Account Name:") %>
+          <%= form.text_field(:account_name) %>
+        </div>
+
+        <br>
+
+        <div>
+          <%= form.label(:account_number, "Account Number:") %>
+          <%= form.text_field(:account_number) %>
+        </div>
+
+        <br>
+
+        <div>
+          <%= form.label(:bank_id, "Bank ID:") %>
+          <%= form.text_field(:bank_id) %>
+        </div>
+
+        <br>
+
+        <div>
+          <%= form.label(:bank_branch_id, "Bank Branch ID:") %>
+          <%= form.text_field(:bank_branch_id) %>
+        </div>
+
+        <br>
+
+        <div class="actions">
+          <%= form.submit(data: { disable_with: "Creating Verified Bank Settlement Account." }, class: "button btn btn-primary btn-lg") %>
+        </div>
+
+      <% end %>
+    </div>
+
+  </div>
+
+</div>

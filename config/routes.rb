@@ -19,10 +19,22 @@ Rails.application.routes.draw do
       post '/results', to: "pays#process_results", as: :process_pay
     end
 
+    resources :pay_recipients, only: [:index, :create, :new, :show]
+    scope :pay_recipients do
+      post '/:id/query', to: "pay_recipients#query_resource", as: :query_pay_recipient
+      post '/results', to: "pay_recipients#process_results", as: :process_pay_recipient
+    end
+
     resources :transfers, only: [:index, :create, :new, :show]
     scope :transfers do
       post '/:id/query', to: "transfers#query_resource", as: :query_transfer
-      post ' results', to: "transfers#process_results", as: :process_transfer
+      post '/results', to: "transfers#process_results", as: :process_transfer
+    end
+
+    resources :settlements, only: [:index, :create, :new, :show]
+    scope :settlements do
+      post '/:id/query', to: "settlements#query_resource", as: :query_settlement
+      post '/results', to: "settlements#process_results", as: :process_settlement
     end
   end
 

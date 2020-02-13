@@ -1,1 +1,1 @@
-json.array! @webhooks, partial: "webhooks/webhooks", as: :webhook
+json.array! @transfers, partial: "transfers/transfers", as: :transfers

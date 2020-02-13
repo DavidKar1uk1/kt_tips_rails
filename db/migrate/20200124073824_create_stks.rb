@@ -8,8 +8,8 @@ class CreateStks < ActiveRecord::Migration[5.2]
       t.string :currency
       t.string :value
       t.string :location_url
-      t.text :response
-      t.text :result
+      t.jsonb :response
+      t.jsonb :result
 
       t.timestamps
     end

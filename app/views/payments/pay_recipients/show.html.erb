@@ -1,0 +1,83 @@
+<p id="notice"><%= notice %></p>
+
+<div class="show_pay">
+  <p>
+    <strong>Pay ID:</strong>
+    <%= @pay_recipient.id %>
+  </p>
+
+  <div id="pay_recipient" class="pay_recipient">
+    <p>
+      <strong>Full Name:</strong>
+      <%= @pay_recipient.first_name + " " + @pay_recipient.last_name %>
+    </p>
+
+    <p>
+      <strong>Phone Number:</strong>
+      <%= @pay_recipient.phone %>
+    </p>
+
+    <p>
+      <strong>Email Address:</strong>
+      <%= @pay_recipient.email %>
+    </p>
+
+<!--    MPESA-->
+    <% if @pay_recipient.recipient_type.eql?('mobile_wallet') %>
+      <div id="mpesa" class="mpesa">
+        <p>
+          <strong>Network Operator:</strong>
+          <%= @pay_recipient.network %>
+        </p>
+      </div>
+
+<!--    BANK-->
+    <% elsif @pay_recipient.recipient_type.eql?('bank_account') %>
+      <div id="bank" class="bank">
+        <p>
+          <strong>Bank Account Name:</strong>
+          <%= @pay_recipient.account_name %>
+        </p>
+
+        <p>
+          <strong>Bank Account Number:</strong>
+          <%= @pay_recipient.account_number %>
+        </p>
+
+        <p>
+          <strong>Bank ID Number:</strong>
+          <%= @pay_recipient.bank_id %>
+        </p>
+
+        <p>
+          <strong>Bank Branch ID Number:</strong>
+          <%= @pay_recipient.bank_branch_id %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+
+  <p>
+    <strong>Payments Resource Location URL:</strong>
+    <%= @pay_recipient.location_url %>
+  </p>
+
+  <p>
+    <strong>Payments Response:</strong>
+    <%= @pay_recipient.response %>
+  </p>
+
+  <p>
+    <strong>Payments Result:</strong>
+    <%= @pay_recipient.result %>
+  </p>
+
+</div>
+<br>
+<%= form_tag(payments_query_pay_path(@pay_recipient.id)) do %>
+  <div class="actions">
+    <%= submit_tag('Query Status', data: { disable_with: "Querying Pay Recipient." }, class: "button btn btn-primary btn-lg") %>
+  </div>
+ <% end %>
+<hr>
+<%= link_to 'Back', payments_pays_path, class: "waves-effect waves-light btn" %>

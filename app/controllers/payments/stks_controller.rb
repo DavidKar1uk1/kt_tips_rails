@@ -1,7 +1,7 @@
 module Payments
   class StksController < PaymentsController
     before_action :set_stk, only: [:show, :query_resource]
-    #before_action :stk_push, only: [:create]
+
 # Landing Page
 # GET /payments/stks
     def index
@@ -17,8 +17,7 @@ module Payments
     def stk_push
       set_stk_push
       if @k2_stk
-        @k2_stk.receive_mpesa_payments(stk_params.to_hash)
-        # @k2_stk.receive_mpesa_payments(stk_params.to_hash.merge({ callback_url: payments_stks_path }))
+        @k2_stk.receive_mpesa_payments(stk_params.to_hash.merge({ callback_url: payments_process_stk_url }))
         @stk_test_token = K2Client.new(ENV["K2_SECRET_KEY"])
       end
     end
@@ -59,7 +58,7 @@ module Payments
     end
 
     # Process Results
-    def process_results
+    def process_stk
       bg_received_test = K2Client.new(ENV["CLIENT_SECRET"])
       bg_received_test.parse_request(request)
       test_obj = K2ProcessResult.process(bg_received_test.hash_body)
@@ -79,7 +78,7 @@ module Payments
     end
 
     def stk_params
-      params.require(:payments_stk).permit(:first_name, :last_name, :phone, :email, :currency, :value, callback_url: payments_stks_path)
+      params.require(:payments_stk).permit(:first_name, :last_name, :phone, :email, :currency, :value)
     end
   end
 end

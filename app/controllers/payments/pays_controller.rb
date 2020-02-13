@@ -4,8 +4,7 @@ module Payments
     # Landing Page
     # GET /payments/pays
     def index
-      @pay_recipients = Pay.where.not(order_type: 2)
-      @created_pays = Pay.where(order_type: 2)
+      @created_pays = Pay.all
     end
 
     def show;  end
@@ -14,38 +13,24 @@ module Payments
       @pay = Pay.new
     end
 
-    def add_pay_recipient(params)
-      set_pay_object
-      if @k2_pay
-        @k2_pay.pay_recipients(params.to_hash)
-        @pay_test_token = K2Client.new(ENV["K2_SECRET_KEY"])
-        puts "Location URL: #{@k2_pay.recipients_location_url}"
-        @resource_location = @k2_pay.recipients_location_url
-      end
-    end
-
     def create_pay(params)
       set_pay_object
       if @k2_pay
-        @k2_pay.create_payment(params.to_hash.merge({ callback_url: payments_pays_path }))
+        @k2_pay.create_payment(params.to_hash.merge({ callback_url: payments_process_pay_url }))
         @pay_test_token = K2Client.new(ENV["K2_SECRET_KEY"])
-        puts "Location URL: #{@k2_pay.payments_location_url}"
-        @resource_location = @k2_pay.payments_location_url
+        puts "Location URL: #{@k2_pay.location_url}"
+        @resource_location = @k2_pay.location_url
       end
     end
 
     def create
-      puts "Order Type: #{pay_params[:order_type]}"
-      # Create Check to see the intent and then select between adding pay recipient or creating pay
       # Hidden field token to know, or tab pressed, or button used to indicate?
-      # TODO: In the Form, have a Tabbed pane to choose between Add Pay or Create Pay, and then a checked button or radio button fro Mpesa or Bank
-      puts "Pay Params: #{pay_params}"
       if pay_params[:order_type].eql?('0')
-        add_pay_recipient pay_params.merge(type: 'mobile_wallet').except(:order_type)
+        add_pay_recipient pay_params
       elsif pay_params[:order_type].eql?('1')
-        add_pay_recipient pay_params.merge(type: 'bank_account').except(:order_type)
+        add_pay_recipient pay_params
       elsif pay_params[:order_type].eql?('2')
-        create_pay pay_params.except(:order_type)
+        create_pay pay_params
       else
         return ArgumentError 'Invalid Order Type Parameter'
       end
@@ -74,7 +59,7 @@ module Payments
       respond_to do |format|
         if @pay.save
           @pay.reload
-          format.html { redirect_to @pay, notice: 'Incoming Payment was successfully Queried.' }
+          format.html { redirect_to @pay, notice: 'Pay Object was successfully Queried.' }
           format.json { render :show, status: :created, location: @pay }
         else
           format.html { render :new }
@@ -84,7 +69,7 @@ module Payments
     end
 
     # Process Results
-    def process_results
+    def process_pay
       bg_received_test = K2Client.new(ENV["CLIENT_SECRET"])
       bg_received_test.parse_request(request)
       test_obj = K2ProcessResult.process(bg_received_test.hash_body)
@@ -104,7 +89,7 @@ module Payments
     end
 
     def pay_params
-      params.require(:payments_pay).permit(:first_name, :last_name, :phone, :email, :currency, :value, :network, :account_name, :account_number, :bank_id, :bank_branch_id, :type, :currency, :value, :order_type)
+      params.require(:payments_pay).permit(:destination, :currency, :value)
     end
   end
 end

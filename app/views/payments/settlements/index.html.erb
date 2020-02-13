@@ -1,0 +1,72 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Settlements</h3>
+
+<!-- Switch -->
+<div class="switch left-aligned" onclick="shift_settlement_account()">
+  <label>
+    Mobile Wallets
+    <input id="account_choice" type="checkbox">
+    <span class="lever"></span>
+    Bank Accounts
+  </label>
+</div>
+
+<div class="webhooks">
+  <div id="mobile_wallets" class="mobile_wallets">
+    <table>
+      <thead>
+      <tr>
+        <th>Phone Number</th>
+        <th>Mobile Network</th>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @mobile_accounts.each do |mobile_account| %>
+        <tr>
+          <td><%= mobile_account.msisdn %></td>
+          <td><%= mobile_account.network %></td>
+          <td><%= link_to 'remove_red_eye', mobile_account, class: 'material-icons' %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="bank_accounts" class="bank_accounts" style="display: none">
+    <table>
+      <thead>
+      <tr>
+        <th>Account Name</th>
+        <th>Account Number</th>
+        <th>Bank ID</th>
+        <th>Bank Branch ID</th>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @bank_accounts.each do |bank_account| %>
+            <tr>
+              <td><%= bank_account.account_name %></td>
+              <td><%= bank_account.account_number %></td>
+              <td><%= bank_account.bank_id %></td>
+              <td><%= bank_account.bank_branch_id %></td>
+              <td><%= link_to 'remove_red_eye', bank_account, class: 'material-icons' %></td>
+            </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<br>
+
+<%= link_to 'New Settlement', new_payments_settlement_path, class: "waves-effect waves-light btn" %>
+
+<script>
+    document.getElementById('settlements').style.display = 'none'
+</script>

@@ -1,0 +1,62 @@
+<p id="notice"><%= notice %></p>
+
+<div class="show_subscription">
+  <p>
+    <strong>Settlement Account ID:</strong>
+    <%= @settlement.id %>
+  </p>
+
+  <% if @settlement.settlement_type.eql?('mobile_wallet') %>
+<!--    Mobile Settlement Account-->
+    <p>
+      <strong>Phone Number:</strong>
+      <%= @settlement.msisdn %>
+    </p>
+
+    <p>
+      <strong>Mobile Network:</strong>
+      <%= @settlement.network %>
+    </p>
+
+  <% elsif @settlement.settlement_type.eql?('bank_account') %>
+<!--  Bank Settlement Account-->
+    <p>
+      <strong>Account Name:</strong>
+      <%= @settlement.account_name %>
+    </p>
+
+    <p>
+      <strong>Account Number:</strong>
+      <%= @settlement.account_number %>
+    </p>
+
+    <p>
+      <strong>Bank ID:</strong>
+      <%= @settlement.bank_id %>
+    </p>
+
+    <p>
+      <strong>Bank Branch ID:</strong>
+      <%= @settlement.bank_branch_id %>
+    </p>
+
+  <% end %>
+
+  <p>
+    <strong>Location Resource URL:</strong>
+    <%= @settlement.location_url %>
+  </p>
+
+  <p>
+    <strong>Transfer Response:</strong>
+    <%= @settlement.response %>
+  </p>
+</div>
+<br>
+<%= form_tag(payments_query_settlement_path(@settlement.id)) do %>
+  <div class="actions">
+    <%= submit_tag('Query Status', data: { disable_with: "Querying Settlement." }, class: "button btn btn-primary btn-lg") %>
+  </div>
+ <% end %>
+<hr>
+<%= link_to 'Back', payments_settlements_path, class: "waves-effect waves-light btn" %>

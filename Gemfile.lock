@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DavidKar1uk1/k2-connect-ruby.git
-  revision: c86a6038e0083ca7c4553daaeec10f006ad9ef42
+  revision: 8c25828ddb6720592d76ace3037a06c1d8ca8147
   branch: refactor-payload
   specs:
     k2-connect-ruby (0.10.7)

@@ -1,41 +1,36 @@
 <p id="notice"><%= notice %></p>
 
 <div class="show_subscription">
+
   <p>
-    <strong>Webhook ID:</strong>
-    <%= @webhook.id %>
+    <strong>Destination:</strong>
+    <% if @transfer.destination.blank? %>
+      <%= "Blind Transfer" %>
+    <% else %>
+      <%= @transfer.destination %>
+    <% end %>
   </p>
 
   <p>
-    <strong>Webhook Secret:</strong>
-    <%= @webhook.webhook_secret %>
+    <strong>Amount:</strong>
+    <%= @transfer.currency + " " + @transfer.value  %>
   </p>
 
   <p>
-    <strong>Webhook Event Type:</strong>
-    <%= @webhook.event_type %>
+    <strong>Location Resource URL:</strong>
+    <%= @transfer.location_url %>
   </p>
 
   <p>
-    <strong>Webhook Location Resource URL:</strong>
-    <%= @webhook.location_url %>
-  </p>
-
-  <p>
-    <strong>Webhook Access Token:</strong>
-    <%= @webhook.access_token %>
-  </p>
-
-  <p>
-    <strong>Webhook Response:</strong>
-    <%= @webhook.response %>
+    <strong>Transfer Response:</strong>
+    <%= @transfer.response %>
   </p>
 </div>
 <br>
-<%= form_tag(query_webhook_path(@webhook.id)) do %>
+<%= form_tag(payments_query_transfer_path(@transfer.id)) do %>
   <div class="actions">
-    <%= submit_tag('Query Status', data: { disable_with: "Creating Subscription." }, class: "button btn btn-primary btn-lg") %>
+    <%= submit_tag('Query Status', data: { disable_with: "Querying Transfer." }, class: "button btn btn-primary btn-lg") %>
   </div>
  <% end %>
 <hr>
-<%= link_to 'Back', webhooks_path, class: "waves-effect waves-light btn" %>
+<%= link_to 'Back', payments_transfers_path, class: "waves-effect waves-light btn" %>

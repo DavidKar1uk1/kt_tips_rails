@@ -1,25 +1,44 @@
-<%= form_with(model: webhook, local: true) do |form| %>
-  <% if webhook.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(webhook.errors.count, "error") %> prohibited this Webhook from being saved:</h2>
+<div class="row">
+  <div class="transfer_account">
+<!--    Make Transfer-->
+    <%= form_with(model: transfer, local: true) do |form| %>
+      <% if transfer.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(transfer.errors.count, "error") %> prohibited this Transfer from being saved:</h2>
 
-      <ul>
-        <% webhook.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% transfer.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div>
-    <%= form.label(:subscription, "Select your Subscription service from the Following:") %>
-    <%= select_tag(:subscription, options_for_select([ ['Transaction Received', 'buygoods_transaction_received'], ['Transaction Reversed', 'buygoods_transaction_reversed'], ['Settlement Transfer', 'settlement_transfer_completed'], ['Customer Created', 'customer_created'], ['External Till to Till', 'external_till_to_till'], ['Merchant to Merchant', 'k2_merchant_to_merchant'], ]), :prompt =>"Subscription Type", class: "browser-default") %>
+      <div>
+        <%= form.label(:target_destination, "Destination:") %>
+        <%= form.text_field(:target_destination) %>
+      </div>
+
+      <br>
+
+      <div>
+        <%= form.select(:currency, options_for_select([ ['Kenyan Shilling', 'KES'], ['Ugandan Shilling', 'USH'], ['Tanzanian Shilling', 'TSH'], ]), { :prompt =>"CURRENCY" }, {:class => 'browser-default'}) %>
+      </div>
+
+      <br>
+
+      <div>
+        <%= form.label(:value, "Amount:") %>
+        <%= form.text_field(:value) %>
+      </div>
+
+      <br>
+
+      <div class="actions">
+        <%= form.submit(data: { disable_with: "Making Transfer." }, class: "button btn btn-primary btn-lg") %>
+      </div>
+
+    <% end %>
   </div>
 
-  <br>
-
-  <div class="actions">
-    <%= form.submit(data: { disable_with: "Creating Subscription." }, class: "button btn btn-primary btn-lg") %>
-  </div>
-
-<% end %>
+</div>

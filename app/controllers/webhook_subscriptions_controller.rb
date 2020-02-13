@@ -56,13 +56,19 @@ class WebhookSubscriptionsController < ApplicationController
     end
   end
 
-  # Process Results
-  def process_results
+  # Process Request
+  def process_webhook
     bg_received_test = K2Client.new(ENV["CLIENT_SECRET"])
     bg_received_test.parse_request(request)
     test_obj = K2ProcessWebhook.process(bg_received_test.hash_body)
-    puts "The Object:\t\t#{test_obj}"
-    puts "The Main ID:\t\t#{test_obj.id}"
+    puts "The Object:\t\t#{test_obj.id}"
+    puts "The Webhook ID:\t\t#{test_obj.id}"
+    response = K2ProcessWebhook.return_obj_hash(test_obj)
+    unless test_obj.id.nil?
+      respond_to do |format|
+        format.json { render json: response }
+      end
+    end
   end
 
   private

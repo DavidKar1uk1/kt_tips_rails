@@ -13,7 +13,7 @@
 
   <div>
     <%= form.label(:subscription, "Select your Subscription service from the Following:") %>
-    <%= select_tag(:subscription, options_for_select([ ['Transaction Received', 'buygoods_transaction_received'], ['Transaction Reversed', 'buygoods_transaction_reversed'], ['Settlement Transfer', 'settlement_transfer_completed'], ['Customer Created', 'customer_created'], ['External Till to Till', 'external_till_to_till'], ['Merchant to Merchant', 'k2_merchant_to_merchant'], ]), :prompt =>"Subscription Type", class: "browser-default") %>
+    <%= select_tag(:subscription, options_for_select([ ['Transaction Received', 'buygoods_transaction_received'], ['Transaction Reversed', 'buygoods_transaction_reversed'], ['Settlement Transfer', 'settlement_transfer_completed'], ['Customer Created', 'customer_created'], ['External Till to Till', 'b2b_transaction_received'], ['Merchant to Merchant', 'merchant_to_merchant'], ]), :prompt =>"Subscription Type", class: "browser-default") %>
   </div>
 
   <br>

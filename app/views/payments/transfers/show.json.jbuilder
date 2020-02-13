@@ -1,1 +1,1 @@
-json.partial! "webhooks/webhooks", webhook: @webhook
+json.partial! "transfers/transfers", transfer: @transfer

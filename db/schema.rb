@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_03_124255) do
+ActiveRecord::Schema.define(version: 2020_02_12_112240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,8 @@ ActiveRecord::Schema.define(version: 2020_02_03_124255) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pays", force: :cascade do |t|
+  create_table "pay_recipients", force: :cascade do |t|
+    t.string "recipient_type"
     t.string "first_name"
     t.string "last_name"
     t.string "phone"
@@ -34,12 +35,35 @@ ActiveRecord::Schema.define(version: 2020_02_03_124255) do
     t.string "account_number"
     t.string "bank_id"
     t.string "bank_branch_id"
+    t.string "location_url"
+    t.jsonb "response"
+    t.jsonb "result"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pays", force: :cascade do |t|
+    t.string "destination"
     t.string "currency"
     t.string "value"
     t.string "location_url"
-    t.text "response"
-    t.text "result"
-    t.integer "order_type"
+    t.jsonb "response"
+    t.jsonb "result"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "settlements", force: :cascade do |t|
+    t.string "settlement_type"
+    t.string "account_name"
+    t.string "account_number"
+    t.string "bank_id"
+    t.string "bank_branch_id"
+    t.string "msisdn"
+    t.string "network"
+    t.string "location_url"
+    t.jsonb "response"
+    t.jsonb "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -52,23 +76,19 @@ ActiveRecord::Schema.define(version: 2020_02_03_124255) do
     t.string "currency"
     t.string "value"
     t.string "location_url"
-    t.text "response"
-    t.text "result"
+    t.jsonb "response"
+    t.jsonb "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "transfers", force: :cascade do |t|
-    t.string "account_name"
-    t.string "account_number"
-    t.string "bank_ref_number"
-    t.string "bank_branch_ref_no"
-    t.string "target_destination"
-    t.string "amount"
+    t.string "destination"
+    t.string "currency"
+    t.string "value"
     t.string "location_url"
-    t.text "response"
-    t.text "result"
-    t.boolean "order_type"
+    t.jsonb "response"
+    t.jsonb "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
