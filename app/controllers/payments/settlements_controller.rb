@@ -5,8 +5,8 @@ module Payments
     # GET /payments/settlements
     def index
       @settlements = Settlement.all
-      @mobile_accounts = Settlement.where(settlement_type: 'mobile_wallet')
-      @bank_accounts = Settlement.where(settlement_type: 'bank_account')
+      @mobile_accounts = Settlement.where(settlement_type: 'merchant_wallet')
+      @bank_accounts = Settlement.where(settlement_type: 'merchant_bank_account')
     end
 
     def show;  end
@@ -15,10 +15,10 @@ module Payments
       @settlement = Settlement.new
     end
 
-    def create_settlement_account(params)
+    def create_settlement_account
       set_k2settlement_object
       if @k2_settlement
-        @k2_settlement.add_settlement_account(params.to_hash)
+        @k2_settlement.add_settlement_account(k2_settlement_params.to_hash)
         puts "Location URL: #{@k2_settlement.location_url}"
         @resource_location = @k2_settlement.location_url
       end
@@ -27,7 +27,7 @@ module Payments
     def create
       puts "Settlement Type: #{settlement_params[:settlement_type]}"
       puts "Settlement Params: #{settlement_params}"
-      create_settlement_account(k2_settlement_params)
+      create_settlement_account
 
       @settlement = Settlement.create(settlement_params.merge({ location_url: @resource_location }))
       respond_to do |format|
@@ -65,8 +65,13 @@ module Payments
       settlement_test = K2Client.new(ENV["CLIENT_SECRET"])
       settlement_test.parse_request(request)
       test_obj = K2ProcessResult.process(settlement_test.hash_body)
-      puts "The Object:\t#{test_obj}"
       puts "The Object ID:\t#{test_obj.id}"
+      response = K2ProcessWebhook.return_obj_hash(test_obj)
+      unless test_obj.id.nil?
+        respond_to do |format|
+          format.json { render json: response }
+        end
+      end
     end
 
     private

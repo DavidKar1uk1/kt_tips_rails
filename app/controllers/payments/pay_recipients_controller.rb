@@ -14,10 +14,10 @@ module Payments
       @pay_recipient = PayRecipient.new
     end
 
-    def add_pay_recipient(params)
+    def add_pay_recipient
       set_pay_recipient_object
       if @k2_pay_recipient
-        @k2_pay_recipient.pay_recipients(params.to_hash)
+        @k2_pay_recipient.pay_recipients(pay_recipient_params.to_hash)
         @pay_test_token = K2Client.new(ENV["K2_SECRET_KEY"])
         puts "Location URL: #{@k2_pay_recipient.recipients_location_url}"
         @resource_location = @k2_pay_recipient.recipients_location_url
@@ -26,7 +26,7 @@ module Payments
 
     def create
       # Hidden field token to know, or tab pressed, or button used to indicate?
-      add_pay_recipient(pay_recipient_params)
+      add_pay_recipient
       @pay_recipient = PayRecipient.create(pay_recipient_params.merge({location_url: @resource_location }))
       respond_to do |format|
         if @pay_recipient.save
@@ -60,11 +60,16 @@ module Payments
 
     # Process Results
     def process_pay_recipient
-      bg_received_test = K2Client.new(ENV["CLIENT_SECRET"])
-      bg_received_test.parse_request(request)
-      test_obj = K2ProcessResult.process(bg_received_test.hash_body)
-      puts "The Object:\t#{test_obj}"
+      pay_recipient_test = K2Client.new(ENV["CLIENT_SECRET"])
+      pay_recipient_test.parse_request(request)
+      test_obj = K2ProcessResult.process(pay_recipient_test.hash_body)
       puts "The Object ID:\t#{test_obj.id}"
+      response = K2ProcessWebhook.return_obj_hash(test_obj)
+      unless test_obj.id.nil?
+        respond_to do |format|
+          format.json { render json: response }
+        end
+      end
     end
 
     private

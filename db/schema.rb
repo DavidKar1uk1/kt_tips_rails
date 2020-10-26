@@ -83,7 +83,8 @@ ActiveRecord::Schema.define(version: 2020_02_12_112240) do
   end
 
   create_table "transfers", force: :cascade do |t|
-    t.string "destination"
+    t.string "destination_type"
+    t.string "destination_reference"
     t.string "currency"
     t.string "value"
     t.string "location_url"

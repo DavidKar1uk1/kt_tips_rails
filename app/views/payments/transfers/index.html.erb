@@ -6,7 +6,8 @@
     <table id="transfers_index" class="transfers_index">
       <thead>
       <tr>
-        <th>Destination</th>
+        <th>Destination Type</th>
+        <th>Destination Reference</th>
         <th>Currency</th>
         <th>Value</th>
         <th colspan="3"></th>
@@ -15,12 +16,8 @@
 
       <tbody>
       <% @transfers.each do |transfer| %>
-            <tr>
-              <% if transfer.destination.eql?(nil) %>
-                <td><%= "Blind" %></td>
-               <% else %>
-                <td><%= transfer.destination %></td>
-              <% end %>
+              <td><%= transfer.destination_type %></td>
+              <td><%= transfer.destination_reference %></td>
               <td><%= transfer.currency %></td>
               <td><%= transfer.value %></td>
               <td><%= link_to 'remove_red_eye', transfer, class: 'material-icons' %></td>

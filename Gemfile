@@ -31,12 +31,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'materialize-sass'
 gem 'material_icons'
 
-# YAJl-ruby for parsing
-gem 'yajl-ruby', require: 'yajl'
-
-gem 'k2-connect-ruby', '~> 0.10.7', git: 'https://github.com/DavidKar1uk1/k2-connect-ruby.git', branch: 'refactor-payload'
-gem 'net-http-persistent'
-
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -58,6 +52,14 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :production do
+  # YAJl-ruby for parsing
+  gem 'yajl-ruby', require: 'yajl'
+  gem 'net-http-persistent'
+
+  gem 'k2-connect-ruby', '~> 0.10.7', git: 'https://github.com/DavidKar1uk1/k2-connect-ruby.git', branch: 'refactor-payload'
 end
 
 group :test do

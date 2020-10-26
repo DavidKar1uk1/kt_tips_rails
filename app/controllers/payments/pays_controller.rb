@@ -13,10 +13,10 @@ module Payments
       @pay = Pay.new
     end
 
-    def create_pay(params)
+    def create_pay
       set_pay_object
       if @k2_pay
-        @k2_pay.create_payment(params.to_hash.merge({ callback_url: payments_process_pay_url }))
+        @k2_pay.create_payment(pay_params.to_hash.merge({ callback_url: payments_process_pay_url }))
         @pay_test_token = K2Client.new(ENV["K2_SECRET_KEY"])
         puts "Location URL: #{@k2_pay.location_url}"
         @resource_location = @k2_pay.location_url
@@ -25,17 +25,7 @@ module Payments
 
     def create
       # Hidden field token to know, or tab pressed, or button used to indicate?
-      if pay_params[:order_type].eql?('0')
-        add_pay_recipient pay_params
-      elsif pay_params[:order_type].eql?('1')
-        add_pay_recipient pay_params
-      elsif pay_params[:order_type].eql?('2')
-        create_pay pay_params
-      else
-        return ArgumentError 'Invalid Order Type Parameter'
-      end
-
-
+      create_pay
 
       @pay = Pay.create(pay_params.merge({location_url: @resource_location }))
       respond_to do |format|
@@ -70,11 +60,16 @@ module Payments
 
     # Process Results
     def process_pay
-      bg_received_test = K2Client.new(ENV["CLIENT_SECRET"])
-      bg_received_test.parse_request(request)
-      test_obj = K2ProcessResult.process(bg_received_test.hash_body)
-      puts "The Object:\t#{test_obj}"
+      pay_test = K2Client.new(ENV["CLIENT_SECRET"])
+      pay_test.parse_request(request)
+      test_obj = K2ProcessResult.process(pay_test.hash_body)
       puts "The Object ID:\t#{test_obj.id}"
+      response = K2ProcessWebhook.return_obj_hash(test_obj)
+      unless test_obj.id.nil?
+        respond_to do |format|
+          format.json { render json: response }
+        end
+      end
     end
 
     private

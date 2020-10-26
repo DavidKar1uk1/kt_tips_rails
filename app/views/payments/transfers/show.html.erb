@@ -3,12 +3,13 @@
 <div class="show_subscription">
 
   <p>
-    <strong>Destination:</strong>
-    <% if @transfer.destination.blank? %>
-      <%= "Blind Transfer" %>
-    <% else %>
-      <%= @transfer.destination %>
-    <% end %>
+    <strong>Destination Type:</strong>
+    <%= @transfer.destination_type  %>
+  </p>
+
+  <p>
+    <strong>Destination Type:</strong>
+    <%= @transfer.destination_reference  %>
   </p>
 
   <p>

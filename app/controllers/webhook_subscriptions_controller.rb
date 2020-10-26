@@ -1,4 +1,7 @@
 require 'access_token'
+require 'openssl'
+require 'active_support/security_utils'
+
 class WebhookSubscriptionsController < ApplicationController
   include AccessToken
   before_action :set_webhook, only: [:show, :query_resource]
@@ -20,7 +23,7 @@ class WebhookSubscriptionsController < ApplicationController
   def subscribe
     set_subscriber
     if @k2_subscription
-      @k2_subscription.webhook_subscribe(ENV["K2_SECRET_KEY"], params[:subscription], webhook_result_url)
+      @k2_subscription.webhook_subscribe(webhook_params, ENV["K2_SECRET_KEY"])
       @sub_test_token = K2Client.new(ENV["K2_SECRET_KEY"])
     end
   end
@@ -58,10 +61,9 @@ class WebhookSubscriptionsController < ApplicationController
 
   # Process Request
   def process_webhook
-    bg_received_test = K2Client.new(ENV["CLIENT_SECRET"])
-    bg_received_test.parse_request(request)
-    test_obj = K2ProcessWebhook.process(bg_received_test.hash_body)
-    puts "The Object:\t\t#{test_obj.id}"
+    webhook_test = K2Client.new(ENV["K2_SECRET_KEY"])
+    webhook_test.parse_request(request)
+    test_obj = K2ProcessWebhook.process(webhook_test.hash_body)
     puts "The Webhook ID:\t\t#{test_obj.id}"
     response = K2ProcessWebhook.return_obj_hash(test_obj)
     unless test_obj.id.nil?
@@ -85,7 +87,7 @@ class WebhookSubscriptionsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def webhook_params
     #params.require(:webhook).permit(:webhook_secret, :event_type, :location_url, :access_token, :response)
-    #params.require(:webhook).permit(:subscription)
+    params.require(:webhook).permit(:subscription).to_hash.merge({ url: webhook_result_url, scope: 'Till', scope_reference: 5555 } )
   end
 
   def subscribe_params

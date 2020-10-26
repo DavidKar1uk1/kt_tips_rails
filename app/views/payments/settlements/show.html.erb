@@ -6,7 +6,7 @@
     <%= @settlement.id %>
   </p>
 
-  <% if @settlement.settlement_type.eql?('mobile_wallet') %>
+  <% if @settlement.settlement_type.eql?('merchant_wallet') %>
 <!--    Mobile Settlement Account-->
     <p>
       <strong>Phone Number:</strong>
@@ -18,7 +18,7 @@
       <%= @settlement.network %>
     </p>
 
-  <% elsif @settlement.settlement_type.eql?('bank_account') %>
+  <% elsif @settlement.settlement_type.eql?('merchant_bank_account') %>
 <!--  Bank Settlement Account-->
     <p>
       <strong>Account Name:</strong>

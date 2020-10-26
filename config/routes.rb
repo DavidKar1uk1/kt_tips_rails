@@ -3,38 +3,38 @@ Rails.application.routes.draw do
   resources :webhook_subscriptions, only: [:index, :create, :new, :show]
   scope 'webhook_subscriptions' do
     post '/query/:id', to: "webhook_subscriptions#query_resource", as: :query_webhook
-    post '/results', to: "webhook_subscriptions#process_results", as: :webhook_result
+    post '/results', to: "webhook_subscriptions#process_webhook", as: :webhook_result
   end
   resources :payments, only: [:index]
   namespace :payments do
     resources :stks, only: [:index, :create, :new, :show]
     scope :stks do
       post '/:id/query', to: "stks#query_resource", as: :query_stk
-      post '/results', to: "stks#process_results", as: :process_stk
+      post '/results', to: "stks#process_stk", as: :process_stk
     end
 
     resources :pays, only: [:index, :create, :new, :show]
     scope :pays do
       post '/:id/query', to: "pays#query_resource", as: :query_pay
-      post '/results', to: "pays#process_results", as: :process_pay
+      post '/results', to: "pays#process_pay", as: :process_pay
     end
 
     resources :pay_recipients, only: [:index, :create, :new, :show]
     scope :pay_recipients do
       post '/:id/query', to: "pay_recipients#query_resource", as: :query_pay_recipient
-      post '/results', to: "pay_recipients#process_results", as: :process_pay_recipient
+      post '/results', to: "pay_recipients#process_pay_recipient", as: :process_pay_recipient
     end
 
     resources :transfers, only: [:index, :create, :new, :show]
     scope :transfers do
       post '/:id/query', to: "transfers#query_resource", as: :query_transfer
-      post '/results', to: "transfers#process_results", as: :process_transfer
+      post '/results', to: "transfers#process_transfer", as: :process_transfer
     end
 
     resources :settlements, only: [:index, :create, :new, :show]
     scope :settlements do
       post '/:id/query', to: "settlements#query_resource", as: :query_settlement
-      post '/results', to: "settlements#process_results", as: :process_settlement
+      post '/results', to: "settlements#process_settlement", as: :process_settlement
     end
   end
 

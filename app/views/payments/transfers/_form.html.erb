@@ -15,8 +15,13 @@
       <% end %>
 
       <div>
-        <%= form.label(:target_destination, "Destination:") %>
-        <%= form.text_field(:target_destination) %>
+        <%= form.label(:destination_type, "Destination Type:") %>
+        <%= form.text_field(:destination_type) %>
+      </div>
+
+      <div>
+        <%= form.label(:destination_reference, "Destination Reference:") %>
+        <%= form.text_field(:destination_reference) %>
       </div>
 
       <br>

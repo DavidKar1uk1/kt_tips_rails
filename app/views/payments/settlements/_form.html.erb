@@ -23,7 +23,7 @@
           </div>
         <% end %>
 
-        <%= form.hidden_field(:settlement_type, value: 'mobile_wallet') %>
+        <%= form.hidden_field(:settlement_type, value: 'merchant_wallet') %>
         <div>
           <%= form.label(:msisdn, "Phone Number:") %>
           <%= form.text_field(:msisdn) %>
@@ -59,7 +59,7 @@
           </div>
         <% end %>
 
-        <%= form.hidden_field(:order_type, value: 'bank_account') %>
+        <%= form.hidden_field(:settlement_type, value: 'merchant_bank_account') %>
         <div>
           <%= form.label(:account_name, "Account Name:") %>
           <%= form.text_field(:account_name) %>

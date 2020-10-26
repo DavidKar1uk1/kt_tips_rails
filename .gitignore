@@ -30,6 +30,8 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+/config/secrets.yml
+
 # Ignore secret key for HMAC authentication and encryption.
 /config/beauty_secrets.yml
 

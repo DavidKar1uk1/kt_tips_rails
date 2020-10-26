@@ -59,11 +59,16 @@ module Payments
 
     # Process Results
     def process_stk
-      bg_received_test = K2Client.new(ENV["CLIENT_SECRET"])
-      bg_received_test.parse_request(request)
-      test_obj = K2ProcessResult.process(bg_received_test.hash_body)
-      puts "The Object:\t\t#{test_obj}"
+      stk_test = K2Client.new(ENV["CLIENT_SECRET"])
+      stk_test.parse_request(request)
+      test_obj = K2ProcessResult.process(stk_test.hash_body)
       puts "The Main ID:\t\t#{test_obj.id}"
+      response = K2ProcessWebhook.return_obj_hash(test_obj)
+      unless test_obj.id.nil?
+        respond_to do |format|
+          format.json { render json: response }
+        end
+      end
     end
 
     private
