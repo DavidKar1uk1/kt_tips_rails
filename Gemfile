@@ -59,7 +59,7 @@ group :production do
   gem 'yajl-ruby', require: 'yajl'
   gem 'net-http-persistent'
 
-  gem 'k2-connect-ruby', '~> 0.10.7', git: 'https://github.com/DavidKar1uk1/k2-connect-ruby.git', branch: 'refactor-payload'
+  gem 'k2-connect-ruby', '~> 0.10.7', git: 'https://github.com/DavidKar1uk1/k2-connect-ruby.git', branch: 'development'
 end
 
 group :test do

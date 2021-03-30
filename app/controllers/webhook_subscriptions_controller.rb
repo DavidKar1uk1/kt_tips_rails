@@ -5,8 +5,8 @@ require 'active_support/security_utils'
 class WebhookSubscriptionsController < ApplicationController
   include AccessToken
   before_action :set_webhook, only: [:show, :query_resource]
-  #before_action :set_subscriber, only: [:subscribe, :query_resource]
   include AccessToken
+
   # Landing Page
   # GET /webhooks
   def index
