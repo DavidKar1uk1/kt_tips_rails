@@ -1,5 +1,3 @@
-require 'k2-connect-ruby'
-
 class KtTipsController < ApplicationController
   before_action :set_kt_tip, only: [:show, :edit, :update, :destroy]
 
