@@ -1,9 +1,10 @@
 GIT
-  remote: https://github.com/DavidKar1uk1/k2-connect-ruby.git
-  revision: 73f0d59f2449156764c72f28286b01705dcb132c
+  remote: https://github.com/kopokopo/k2-connect-ruby.git
+  revision: 7b4c56c66f5fd7007b1eac1f491b5d639a1a581b
   branch: development
   specs:
     k2-connect-ruby (0.10.7)
+      activemodel
       activesupport
       rest-client
       yajl-ruby
@@ -83,7 +84,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.7)
+    concurrent-ruby (1.1.8)
     connection_pool (2.2.2)
     crass (1.0.6)
     domain_name (0.5.20190701)
@@ -96,7 +97,7 @@ GEM
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
-    i18n (1.8.5)
+    i18n (1.8.9)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
     jbuilder (2.9.1)
@@ -208,7 +209,7 @@ GEM
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
-    tzinfo (1.2.7)
+    tzinfo (1.2.9)
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
