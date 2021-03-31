@@ -1,6 +1,9 @@
 module Payments
   class SettlementsController < PaymentsController
     before_action :set_settlement, only: [:show, :query_resource]
+    before_action :set_k2settlement_object, only: [:query_resource]
+    before_action :create_settlement_account, only: [:create]
+
     # Landing Page
     # GET /payments/settlements
     def index
@@ -15,20 +18,7 @@ module Payments
       @settlement = Settlement.new
     end
 
-    def create_settlement_account
-      set_k2settlement_object
-      if @k2_settlement
-        @k2_settlement.add_settlement_account(k2_settlement_params.to_hash)
-        puts "Location URL: #{@k2_settlement.location_url}"
-        @resource_location = @k2_settlement.location_url
-      end
-    end
-
     def create
-      puts "Settlement Type: #{settlement_params[:settlement_type]}"
-      puts "Settlement Params: #{settlement_params}"
-      create_settlement_account
-
       @settlement = Settlement.create(settlement_params.merge({ location_url: @resource_location }))
       respond_to do |format|
         if @settlement.save
@@ -44,9 +34,7 @@ module Payments
 
     # POST
     def query_resource
-      set_settlement
-      set_k2settlement_object
-      @k2_settlement.query_resource_url(@settlement.location_url)
+      @k2_settlement.query_resource(@settlement.location_url)
       @settlement.response = @k2_settlement.k2_response_body
       respond_to do |format|
         if @settlement.save
@@ -89,8 +77,39 @@ module Payments
       params.require(:payments_settlement).permit(:msisdn, :network, :account_name, :account_number, :bank_id, :bank_branch_id, :settlement_type)
     end
 
-    def k2_settlement_params
-      params.require(:payments_settlement).permit(:msisdn, :network, :account_name, :account_number, :bank_id, :bank_branch_id).merge(type: settlement_params[:settlement_type])
+    def mobile_settlement_account
+      {
+        type: settlement_params[:settlement_type],
+        first_name: params[:payments_settlement][:first_name],
+        last_name: params[:payments_settlement][:last_name],
+        phone_number: settlement_params[:msisdn],
+        network: settlement_params[:network]
+      }
+    end
+
+    def bank_settlement_account
+      {
+        type: settlement_params[:settlement_type],
+        account_name: settlement_params[:account_name],
+        account_number: settlement_params[:account_number],
+        bank_branch_ref: settlement_params[:bank_branch_id],
+        settlement_method: 'EFT'
+      }
+    end
+
+    def create_settlement_account
+      set_k2settlement_object
+      if @k2_settlement
+        case settlement_params[:settlement_type]
+        when 'merchant_wallet'
+          @k2_settlement.add_settlement_account(mobile_settlement_account)
+        when 'merchant_bank_account'
+          @k2_settlement.add_settlement_account(bank_settlement_account)
+        else
+          "Nothing"
+        end
+        @resource_location = @k2_settlement.location_url
+      end
     end
   end
 end

@@ -5,7 +5,7 @@ class KtTestingController < ApplicationController
   #protect_from_forgery except: [ :receive, :subscribe, :stk_result, :pay_result ]
   # POST /parse
   def receive
-    k2_test = K2Client.new(ENV["K2_SECRET_KEY"])
+    k2_test = K2Client.new(ENV["API_KEY"])
     k2_test.parse_request(request)
     K2Authenticator.authenticate(k2_test.hash_body, k2_test.api_secret_key, k2_test.k2_signature)
   end
@@ -20,8 +20,8 @@ class KtTestingController < ApplicationController
     @k2_subscription = K2Subscribe.new(ENV["ACCESS_TOKEN"])
     #if @k2_subscription.token_request(ENV["CLIENT_ID"], ENV["CLIENT_SECRET"])
     if @k2_subscription
-      @k2_subscription.webhook_subscribe(ENV["K2_SECRET_KEY"], params[:subscription], webhook_process_path)
-      @k1_test_token = K2Client.new(ENV["K2_SECRET_KEY"])
+      @k2_subscription.webhook_subscribe(ENV["API_KEY"], params[:subscription], webhook_process_path)
+      @k1_test_token = K2Client.new(ENV["API_KEY"])
       render 'kt_testing/shows/show_subscription', :object => { :k2_subscription => @k2_subscription , :k1_test_token => @k1_test_token }
     end
   end

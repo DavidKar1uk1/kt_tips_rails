@@ -15,6 +15,13 @@
       <% end %>
 
       <div>
+        <%= form.label(:destination_type, "Destination Type:") %>
+        <%= form.text_field(:destination_type) %>
+      </div>
+
+      <br>
+
+      <div>
         <%= form.label(:destination, "Destination:") %>
         <%= form.text_field(:destination) %>
       </div>

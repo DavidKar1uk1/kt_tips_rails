@@ -1,6 +1,8 @@
 module Payments
   class StksController < PaymentsController
     before_action :set_stk, only: [:show, :query_resource]
+    before_action :set_stk_push, only: [:query_resource]
+    before_action :stk_push, only: [:create]
 
 # Landing Page
 # GET /payments/stks
@@ -14,19 +16,7 @@ module Payments
       @stk = Stk.new
     end
 
-    def stk_push
-      set_stk_push
-      if @k2_stk
-        @k2_stk.receive_mpesa_payments(stk_params.to_hash.merge({ callback_url: payments_process_stk_url }))
-        @stk_test_token = K2Client.new(ENV["K2_SECRET_KEY"])
-      end
-    end
-
     def create
-      stk_push
-      #puts "Incoming Payment Object Created"
-      #puts "STK Object: #{@k2_stk}"
-      puts "STK Parameters: #{stk_params}"
       @stk = Stk.create(stk_params.merge({ location_url: @k2_stk.location_url }))
       respond_to do |format|
         if @stk.save
@@ -41,9 +31,7 @@ module Payments
 
     # POST
     def query_resource
-      set_stk
-      set_stk_push
-      @k2_stk.query_resource_url(@stk.location_url)
+      @k2_stk.query_resource(@stk.location_url)
       @stk.response = @k2_stk.k2_response_body
       respond_to do |format|
         if @stk.save
@@ -84,6 +72,28 @@ module Payments
 
     def stk_params
       params.require(:payments_stk).permit(:first_name, :last_name, :phone, :email, :currency, :value)
+    end
+
+    def stk_request
+      {
+        payment_channel: 'M-PESA',
+        till_number: 'K112233',
+        first_name: stk_params[:first_name],
+        last_name: stk_params[:last_name],
+        phone_number: stk_params[:phone],
+        email: stk_params[:email],
+        currency: stk_params[:currency],
+        value: stk_params[:value],
+        callback_url: payments_process_stk_url
+      }
+    end
+
+    def stk_push
+      set_stk_push
+      if @k2_stk
+        @k2_stk.receive_mpesa_payments(stk_request)
+        @stk_test_token = K2Client.new(ENV["API_KEY"])
+      end
     end
   end
 end
