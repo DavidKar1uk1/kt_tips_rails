@@ -25,6 +25,20 @@
 
         <%= form.hidden_field(:settlement_type, value: 'merchant_wallet') %>
         <div>
+          <%= form.label(:first_name, "First Name:") %>
+          <%= form.text_field(:first_name) %>
+        </div>
+
+        <br>
+
+        <div>
+          <%= form.label(:last_name, "Last Name:") %>
+          <%= form.text_field(:last_name) %>
+        </div>
+
+        <br>
+
+        <div>
           <%= form.label(:msisdn, "Phone Number:") %>
           <%= form.text_field(:msisdn) %>
         </div>
