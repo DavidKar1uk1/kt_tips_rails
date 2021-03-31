@@ -1,6 +1,9 @@
 module Payments
   class PayRecipientsController < PaymentsController
     before_action :set_pay_recipient, only: [:show, :query_resource]
+    before_action :set_pay_recipient_object, only: [:query_resource]
+    before_action :add_pay_recipient, only: [:create]
+
     # Landing Page
     # GET /payments/pays
     def index
@@ -14,19 +17,8 @@ module Payments
       @pay_recipient = PayRecipient.new
     end
 
-    def add_pay_recipient
-      set_pay_recipient_object
-      if @k2_pay_recipient
-        @k2_pay_recipient.pay_recipients(pay_recipient_params.to_hash)
-        @pay_test_token = K2Client.new(ENV["K2_SECRET_KEY"])
-        puts "Location URL: #{@k2_pay_recipient.recipients_location_url}"
-        @resource_location = @k2_pay_recipient.recipients_location_url
-      end
-    end
-
     def create
-      # Hidden field token to know, or tab pressed, or button used to indicate?
-      add_pay_recipient
+      # Hidden field token to know, or tab pressed, or button used to indicate
       @pay_recipient = PayRecipient.create(pay_recipient_params.merge({location_url: @resource_location }))
       respond_to do |format|
         if @pay_recipient.save
@@ -42,9 +34,7 @@ module Payments
 
     # POST
     def query_resource
-      set_pay_recipient
-      set_pay_recipient_object
-      @k2_pay_recipient.query_resource_url(@pay_recipient.location_url)
+      @k2_pay_recipient.query_resource(@pay_recipient.location_url)
       @pay_recipient.response = @k2_pay_recipient.k2_response_body
       respond_to do |format|
         if @pay_recipient.save
@@ -84,7 +74,46 @@ module Payments
     end
 
     def pay_recipient_params
-      params.require(:payments_pay_recipient).permit(:first_name, :last_name, :phone, :email, :currency, :value, :network, :account_name, :account_number, :bank_id, :bank_branch_id, :recipient_type)
+      params.require(:payments_pay_recipient).permit(:first_name, :last_name, :phone, :email, :currency, :value, :network, :account_name, :account_number, :bank_branch_id, :recipient_type)
+    end
+
+    def mpesa_recipient_params
+      {
+        type: 'mobile_wallet',
+        first_name: pay_recipient_params[:first_name],
+        last_name: pay_recipient_params[:last_name],
+        phone_number: pay_recipient_params[:phone],
+        email: pay_recipient_params[:email],
+        network: pay_recipient_params[:network],
+      }
+    end
+
+    def bank_recipient_params
+      {
+        type: 'bank_account',
+        account_name: pay_recipient_params[:account_name],
+        account_number: pay_recipient_params[:account_number],
+        bank_branch_ref: pay_recipient_params[:bank_branch_id],
+        settlement_method: 'EFT'
+      }
+    end
+
+    def add_pay_recipient
+      set_pay_recipient_object
+      if @k2_pay_recipient
+        case params[:payments_pay_recipient][:order_type]
+        when "mobile_wallet"
+          puts("Params: #{mpesa_recipient_params}")
+          @k2_pay_recipient.add_recipient(mpesa_recipient_params)
+        when "bank_account"
+          puts("Params: #{bank_recipient_params}")
+          @k2_pay_recipient.add_recipient(bank_recipient_params)
+        else
+          puts("Nothing")
+        end
+        @pay_test_token = K2Client.new(ENV["API_KEY"])
+        @resource_location = @k2_pay_recipient.recipients_location_url
+      end
     end
   end
 end

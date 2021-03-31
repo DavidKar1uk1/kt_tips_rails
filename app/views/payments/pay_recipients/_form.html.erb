@@ -55,7 +55,7 @@
       <% end %>
 
       <%= render "common", form: form %>
-      <%= form.hidden_field(:order_type, value: 1) %>
+      <%= form.hidden_field(:order_type, value: "bank_account") %>
       <p><%= label_tag(:bank_account_details, "Account Details:") %></p>
 
       <div>
@@ -69,12 +69,7 @@
       </div>
 
       <div>
-        <%= form.label(:bank_id, "Bank ID Number:") %>
-        <%= form.text_field(:bank_id) %>
-      </div>
-
-      <div>
-        <%= form.label(:bank_branch_id, "Bank Branch ID Number:") %>
+        <%= form.label(:bank_branch_id, "Bank Branch Reference:") %>
         <%= form.text_field(:bank_branch_id) %>
       </div>
 

@@ -74,10 +74,10 @@
 
 </div>
 <br>
-<%= form_tag(payments_query_pay_path(@pay_recipient.id)) do %>
+<%= form_tag(payments_query_pay_recipient_path(@pay_recipient.id)) do %>
   <div class="actions">
     <%= submit_tag('Query Status', data: { disable_with: "Querying Pay Recipient." }, class: "button btn btn-primary btn-lg") %>
   </div>
  <% end %>
 <hr>
-<%= link_to 'Back', payments_pays_path, class: "waves-effect waves-light btn" %>
+<%= link_to 'Back', payments_pay_recipients_path, class: "waves-effect waves-light btn" %>
