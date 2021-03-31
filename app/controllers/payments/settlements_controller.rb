@@ -46,7 +46,7 @@ module Payments
     def query_resource
       set_settlement
       set_k2settlement_object
-      @k2_settlement.query_resource_url(@settlement.location_url)
+      @k2_settlement.query_resource(@settlement.location_url)
       @settlement.response = @k2_settlement.k2_response_body
       respond_to do |format|
         if @settlement.save

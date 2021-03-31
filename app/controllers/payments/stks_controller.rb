@@ -18,7 +18,7 @@ module Payments
       set_stk_push
       if @k2_stk
         @k2_stk.receive_mpesa_payments(stk_params.to_hash.merge({ callback_url: payments_process_stk_url }))
-        @stk_test_token = K2Client.new(ENV["K2_SECRET_KEY"])
+        @stk_test_token = K2Client.new(ENV["API_KEY"])
       end
     end
 
@@ -43,7 +43,7 @@ module Payments
     def query_resource
       set_stk
       set_stk_push
-      @k2_stk.query_resource_url(@stk.location_url)
+      @k2_stk.query_resource(@stk.location_url)
       @stk.response = @k2_stk.k2_response_body
       respond_to do |format|
         if @stk.save

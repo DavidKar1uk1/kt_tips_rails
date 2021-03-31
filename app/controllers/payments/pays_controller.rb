@@ -1,6 +1,9 @@
 module Payments
   class PaysController < PaymentsController
     before_action :set_pay, only: [:show, :query_resource]
+    before_action :set_pay_object, only: [:query_resource]
+    before_action :create_pay, only: [:create]
+
     # Landing Page
     # GET /payments/pays
     def index
@@ -13,20 +16,7 @@ module Payments
       @pay = Pay.new
     end
 
-    def create_pay
-      set_pay_object
-      if @k2_pay
-        @k2_pay.create_payment(pay_params.to_hash.merge({ callback_url: payments_process_pay_url }))
-        @pay_test_token = K2Client.new(ENV["K2_SECRET_KEY"])
-        puts "Location URL: #{@k2_pay.location_url}"
-        @resource_location = @k2_pay.location_url
-      end
-    end
-
     def create
-      # Hidden field token to know, or tab pressed, or button used to indicate?
-      create_pay
-
       @pay = Pay.create(pay_params.merge({location_url: @resource_location }))
       respond_to do |format|
         if @pay.save
@@ -42,9 +32,7 @@ module Payments
 
     # POST
     def query_resource
-      set_pay
-      set_pay_object
-      @k2_pay.query_resource_url(@pay.location_url)
+      @k2_pay.query_resource(@pay.location_url)
       @pay.response = @k2_pay.k2_response_body
       respond_to do |format|
         if @pay.save
@@ -73,7 +61,6 @@ module Payments
     end
 
     private
-    # Use callbacks to share common setup or constraints between actions.
     def set_pay
       @pay = Pay.find(params[:id])
     end
@@ -85,6 +72,26 @@ module Payments
 
     def pay_params
       params.require(:payments_pay).permit(:destination, :currency, :value)
+    end
+
+    def pay_request
+      {
+        destination_type: params[:payments_pay][:destination_type],
+        destination_reference: pay_params[:destination],
+        currency: pay_params[:currency],
+        value: pay_params[:value],
+        callback_url: payments_process_pay_url
+      }
+    end
+
+    def create_pay
+      set_pay_object
+      if @k2_pay
+        puts("Params: #{pay_request}")
+        @k2_pay.create_payment(pay_request)
+        @pay_test_token = K2Client.new(ENV["API_KEY"])
+        @resource_location = @k2_pay.payments_location_url
+      end
     end
   end
 end

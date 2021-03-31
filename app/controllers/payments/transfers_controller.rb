@@ -42,7 +42,7 @@ module Payments
     def query_resource
       set_transfer
       set_k2transfer_object
-      @k2_transfer.query_resource_url(@transfer.location_url)
+      @k2_transfer.query_resource(@transfer.location_url)
       @transfer.response = @k2_transfer.k2_response_body
       respond_to do |format|
         if @transfer.save
