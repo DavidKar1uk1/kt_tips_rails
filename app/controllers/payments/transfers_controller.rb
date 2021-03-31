@@ -1,6 +1,9 @@
 module Payments
   class TransfersController < PaymentsController
     before_action :set_transfer, only: [:show, :query_resource]
+    before_action :set_k2transfer_object, only: [:query_resource]
+    before_action :create_transfer, only: [:create]
+
     # Landing Page
     # GET /payments/transfers
     def index
@@ -13,19 +16,7 @@ module Payments
       @transfer = Payments::Transfer.new
     end
 
-    def create_transfer
-      set_k2transfer_object
-      if @k2_transfer
-        @k2_transfer.transfer_funds(transfer_params.to_hash.merge({ callback_url: payments_process_transfer_url }))
-        puts "Location URL: #{@k2_transfer.location_url}"
-        @resource_location = @k2_transfer.location_url
-      end
-    end
-
     def create
-      puts "Transfer Params: #{transfer_params}"
-      create_transfer
-
       @transfer = Payments::Transfer.create(transfer_params.merge({ location_url: @resource_location }))
       respond_to do |format|
         if @transfer.save
@@ -40,8 +31,6 @@ module Payments
 
     # POST
     def query_resource
-      set_transfer
-      set_k2transfer_object
       @k2_transfer.query_resource(@transfer.location_url)
       @transfer.response = @k2_transfer.k2_response_body
       respond_to do |format|
@@ -83,6 +72,24 @@ module Payments
 
     def transfer_params
       params.require(:payments_transfer).permit(:destination_type, :destination_reference, :currency, :value)
+    end
+
+    def k2_transfer_request
+      {
+        destination_type: transfer_params[:destination_type],
+        destination_reference: transfer_params[:destination_reference],
+        currency: transfer_params[:currency],
+        value: transfer_params[:value],
+        callback_url: payments_process_transfer_url
+      }
+    end
+
+    def create_transfer
+      set_k2transfer_object
+      if @k2_transfer
+        @k2_transfer.transfer_funds(k2_transfer_request)
+        @resource_location = @k2_transfer.location_url
+      end
     end
   end
 end
