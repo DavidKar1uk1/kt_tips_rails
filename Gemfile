@@ -1,16 +1,16 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.0'
+ruby '3.3.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.2.1'
+gem 'rails', '~> 7.2.2'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
-gem 'puma', '~> 3.12'
+gem "puma", ">= 5.0"
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -59,15 +59,10 @@ group :production do
   gem 'yajl-ruby', require: 'yajl'
   gem 'net-http-persistent'
 
-  gem 'k2-connect-ruby', '~> 0.10.7', git: 'https://github.com/kopokopo/k2-connect-ruby.git', branch: 'development'
+  gem 'k2-connect-ruby', git: 'https://github.com/kopokopo/k2-connect-ruby.git', branch: 'upgrade_k2_connect_ruby'
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
