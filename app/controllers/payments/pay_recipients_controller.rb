@@ -50,11 +50,11 @@ module Payments
 
     # Process Results
     def process_pay_recipient
-      pay_recipient_test = K2Client.new(ENV["CLIENT_SECRET"])
+      pay_recipient_test = K2ConnectRuby::K2Services::K2Client.new(ENV["CLIENT_SECRET"])
       pay_recipient_test.parse_request(request)
-      test_obj = K2ProcessResult.process(pay_recipient_test.hash_body)
+      test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(pay_recipient_test.hash_body, @api_key, pay_recipient_test.k2_signature)
       puts "The Object ID:\t#{test_obj.id}"
-      response = K2ProcessWebhook.return_obj_hash(test_obj)
+      response =  K2ConnectRuby::K2Utilities::K2ProcessWebhook.return_obj_hash(test_obj)
       unless test_obj.id.nil?
         respond_to do |format|
           format.json { render json: response }
@@ -70,7 +70,7 @@ module Payments
 
     def set_pay_recipient_object
       request_token
-      @k2_pay_recipient = K2Pay.new(ENV["ACCESS_TOKEN"])
+      @k2_pay_recipient = K2ConnectRuby::K2Entity::K2Pay.new(@access_token)
     end
 
     def pay_recipient_params
@@ -111,7 +111,7 @@ module Payments
         else
           puts("Nothing")
         end
-        @pay_test_token = K2Client.new(ENV["API_KEY"])
+        @pay_test_token = K2ConnectRuby::K2Services::K2Client.new(@api_key)
         @resource_location = @k2_pay_recipient.recipients_location_url
       end
     end

@@ -37,3 +37,4 @@
 
 # for intellij products
 .idea
+/config/credentials/development.key

@@ -2,9 +2,9 @@ class ProcessingController < ApplicationController
   protect_from_forgery except: [ :bg_received, :bg_reversed, :b2b, :m2m, :settle, :customer, :stk_payment, :wrong_stk_payment, :pay_payment ]
   # POST Buy Goods Received
   def webhook
-    webhook = K2Client.new(ENV["API_KEY"])
+    webhook = K2ConnectRuby::K2Services::K2Client.new(@api_key)
     webhook.parse_request(request)
-    test_obj = K2ProcessResult.process(webhook.hash_body)
+    test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(webhook.hash_body, @api_key, webhook.k2_signature)
     puts "The Object:\t\t#{test_obj}"
     puts "The Main ID:\t\t#{test_obj.id}"
     puts "Resource ID:\t\t#{test_obj.resource_id}"
@@ -16,9 +16,9 @@ class ProcessingController < ApplicationController
   end
 
   def bg_received
-    bg_received_test = K2Client.new(ENV["API_KEY"])
+    bg_received_test = K2ConnectRuby::K2Services::K2Client.new(@api_key)
     bg_received_test.parse_request(request)
-    test_obj = K2ProcessResult.process(bg_received_test.hash_body)
+    test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(bg_received_test.hash_body, @api_key, bg_received_test.k2_signature)
     puts "The Object:\t\t#{test_obj}"
     puts "The Main ID:\t\t#{test_obj.id}"
     puts "Resource ID:\t\t#{test_obj.resource_id}"
@@ -31,9 +31,9 @@ class ProcessingController < ApplicationController
 
   # POST Buy Goods Reversed
   def bg_reversed
-    bg_received_test = K2Client.new(ENV["API_KEY"])
-    bg_received_test.parse_request(request)
-    test_obj = K2ProcessResult.process(bg_received_test.hash_body)
+    bg_reversed_test = K2ConnectRuby::K2Services::K2Client.new(@api_key)
+    bg_reversed_test.parse_request(request)
+    test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(bg_reversed_test.hash_body, @api_key, bg_reversed_test.k2_signature)
     puts "The Object:\t\t#{test_obj}"
     puts "The Main ID:\t\t#{test_obj.id}"
     puts "Resource ID:\t\t#{test_obj.resource_id}"
@@ -46,9 +46,9 @@ class ProcessingController < ApplicationController
 
   # POST B2B
   def b2b
-    bg_received_test = K2Client.new(ENV["API_KEY"])
-    bg_received_test.parse_request(request)
-    test_obj = K2ProcessResult.process(bg_received_test.hash_body)
+    b2b_test = K2ConnectRuby::K2Services::K2Client.new(@api_key)
+    b2b_test.parse_request(request)
+    test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(b2b_test.hash_body, @api_key, b2b_test.k2_signature)
     puts "The Object:\t\t#{test_obj}"
     puts "The Main ID:\t\t#{test_obj.id}"
     puts "Resource ID:\t\t#{test_obj.resource_id}"
@@ -58,9 +58,9 @@ class ProcessingController < ApplicationController
 
   # POST M2M
   def m2m
-    bg_received_test = K2Client.new(ENV["API_KEY"])
-    bg_received_test.parse_request(request)
-    test_obj = K2ProcessResult.process(bg_received_test.hash_body)
+    m2m_test = K2ConnectRuby::K2Services::K2Client.new(@api_key)
+    m2m_test.parse_request(request)
+    test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(m2m_test.hash_body, @api_key, m2m_test.k2_signature)
     puts "The Object:\t\t#{test_obj}"
     puts "The Main ID:\t\t#{test_obj.id}"
     puts "Resource ID:\t\t#{test_obj.resource_id}"
@@ -70,9 +70,9 @@ class ProcessingController < ApplicationController
 
   # POST settlement
   def settle
-    bg_received_test = K2Client.new(ENV["API_KEY"])
-    bg_received_test.parse_request(request)
-    test_obj = K2ProcessResult.process(bg_received_test.hash_body)
+    settle_test = K2ConnectRuby::K2Services::K2Client.new(@api_key)
+    settle_test.parse_request(request)
+    test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(settle_test.hash_body, @api_key, settle_test.k2_signature)
     puts "The Object:\t\t#{test_obj}"
     puts "The Main ID:\t\t#{test_obj.id}"
     puts "Resource ID:\t\t#{test_obj.resource_id}"
@@ -82,9 +82,9 @@ class ProcessingController < ApplicationController
 
   # POST customer
   def customer
-    bg_received_test = K2Client.new(ENV["API_KEY"])
-    bg_received_test.parse_request(request)
-    test_obj = K2ProcessResult.process(bg_received_test.hash_body)
+    customer_test = K2ConnectRuby::K2Services::K2Client.new(@api_key)
+    customer_test.parse_request(request)
+    test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(customer_test.hash_body, @api_key, customer_test.k2_signature)
     puts "The Object:\t\t#{test_obj}"
     puts "The Main ID:\t\t#{test_obj.id}"
     puts "Resource ID:\t\t#{test_obj.resource_id}"
@@ -97,9 +97,9 @@ class ProcessingController < ApplicationController
 
   # POST stk
   def stk_payment
-    bg_received_test = K2Client.new(ENV["API_KEY"])
-    bg_received_test.parse_request(request)
-    test_obj = K2ProcessResult.process(bg_received_test.hash_body)
+    stk_payment_test = K2ConnectRuby::K2Services::K2Client.new(@api_key)
+    stk_payment_test.parse_request(request)
+    test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(stk_payment_test.hash_body, @api_key, stk_payment_test.k2_signature)
     puts "The Object:\t\t#{test_obj}"
     puts "The Main ID:\t\t#{test_obj.id}"
     puts "Resource ID:\t\t#{test_obj.resource_id}"
@@ -112,9 +112,9 @@ class ProcessingController < ApplicationController
 
   # POST stk
   def wrong_stk_payment
-    bg_received_test = K2Client.new(ENV["API_KEY"])
-    bg_received_test.parse_request(request)
-    test_obj = K2ProcessResult.process(bg_received_test.hash_body)
+    stk_payment_test = K2ConnectRuby::K2Services::K2Client.new(@api_key)
+    stk_payment_test.parse_request(request)
+    test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(stk_payment_test.hash_body, @api_key, stk_payment_test.k2_signature)
     puts "The Object:\t\t#{test_obj}"
     puts "The Main ID:\t\t#{test_obj.id}"
     puts "The Topic:\t\t#{test_obj.topic}"
@@ -125,10 +125,9 @@ class ProcessingController < ApplicationController
 
   # POST pay
   def pay_payment
-    bg_received_test = K2Client.new(ENV["API_KEY"])
-    bg_received_test.parse_request(request)
-    puts "Body\t#{bg_received_test.hash_body.dig('amount')}"
-    test_obj = K2ProcessResult.process(bg_received_test.hash_body)
+    pay_payment_test = K2ConnectRuby::K2Services::K2Client.new(@api_key)
+    pay_payment_test.parse_request(request)
+    test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(pay_payment_test.hash_body, @api_key, pay_payment_test.k2_signature)
     puts "The Object:\t\t#{test_obj}"
     puts "The Main ID:\t\t#{test_obj.id}"
     puts "The Topic:\t\t#{test_obj.topic}"

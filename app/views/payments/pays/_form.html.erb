@@ -41,6 +41,20 @@
 
       <br>
 
+      <div>
+        <%= form.label(:value, "Description:") %>
+        <%= form.text_field(:description) %>
+      </div>
+
+      <br>
+
+      <div>
+        <%= form.label(:value, "Category:") %>
+        <%= form.text_field(:category) %>
+      </div>
+
+      <br>
+
       <div class="actions">
         <%= form.submit(data: { disable_with: "Creating Outgoing Payment Object." }, class: "button btn btn-primary btn-lg") %>
       </div>

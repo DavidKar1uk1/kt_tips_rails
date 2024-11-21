@@ -47,11 +47,12 @@ module Payments
 
     # Process Results
     def process_transfer
-      transfer_test = K2Client.new(ENV["CLIENT_SECRET"])
+      request_token
+      transfer_test = K2ConnectRuby::K2Services::K2Client.new(@api_key)
       transfer_test.parse_request(request)
-      test_obj = K2ProcessResult.process(transfer_test.hash_body)
-      puts "The Object ID:\t#{test_obj.id}"
-      response = K2ProcessWebhook.return_obj_hash(test_obj)
+      test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(transfer_test.hash_body, @api_key, transfer_test.k2_signature)
+      puts("The Object ID:\t#{test_obj.id}")
+      response =  K2ConnectRuby::K2Utilities::K2ProcessWebhook.return_obj_hash(test_obj)
       unless test_obj.id.nil?
         respond_to do |format|
           format.json { render json: response }
@@ -67,7 +68,7 @@ module Payments
 
     def set_k2transfer_object
       request_token
-      @k2_transfer = K2Transfer.new(ENV["ACCESS_TOKEN"])
+      @k2_transfer = K2ConnectRuby::K2Entity::K2Transfer.new(@access_token)
     end
 
     def transfer_params
@@ -80,7 +81,7 @@ module Payments
         destination_reference: transfer_params[:destination_reference],
         currency: transfer_params[:currency],
         value: transfer_params[:value],
-        callback_url: payments_process_transfer_url
+        callback_url: "https://021c-197-248-175-34.ngrok-free.app/payments/transfers/results"
       }
     end
 

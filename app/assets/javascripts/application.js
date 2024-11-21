@@ -14,7 +14,6 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require kt_tips.coffee
 //= require_tree .
 //= require materialize-sprockets
 //= require materialize/extras/nouislider
