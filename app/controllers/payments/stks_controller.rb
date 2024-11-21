@@ -47,11 +47,12 @@ module Payments
 
     # Process Results
     def process_stk
-      stk_test = K2Client.new(ENV["CLIENT_SECRET"])
+      request_token
+      stk_test = K2ConnectRuby::K2Services::K2Client.new(@api_key)
       stk_test.parse_request(request)
-      test_obj = K2ProcessResult.process(stk_test.hash_body)
+      test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(stk_test.hash_body, @api_key, stk_test.k2_signature)
       puts "The Main ID:\t\t#{test_obj.id}"
-      response = K2ProcessWebhook.return_obj_hash(test_obj)
+      response =  K2ConnectRuby::K2Utilities::K2ProcessWebhook.return_obj_hash(test_obj)
       unless test_obj.id.nil?
         respond_to do |format|
           format.json { render json: response }
@@ -67,7 +68,7 @@ module Payments
 
     def set_stk_push
       request_token
-      @k2_stk = K2Stk.new(ENV["ACCESS_TOKEN"])
+      @k2_stk = K2ConnectRuby::K2Entity::K2Stk.new(@access_token)
     end
 
     def stk_params
@@ -84,7 +85,7 @@ module Payments
         email: stk_params[:email],
         currency: stk_params[:currency],
         value: stk_params[:value],
-        callback_url: payments_process_stk_url
+        callback_url: "https://021c-197-248-175-34.ngrok-free.app/payments/stks/results"
       }
     end
 
@@ -92,7 +93,7 @@ module Payments
       set_stk_push
       if @k2_stk
         @k2_stk.receive_mpesa_payments(stk_request)
-        @stk_test_token = K2Client.new(ENV["API_KEY"])
+        @stk_test_token = K2ConnectRuby::K2Services::K2Client.new(@api_key)
       end
     end
   end

@@ -1,5 +1,3 @@
-require 'access_token'
-
 class WebhookSubscriptionsController < ApplicationController
   include AccessToken
 
@@ -54,11 +52,15 @@ class WebhookSubscriptionsController < ApplicationController
 
   # Process Request
   def process_webhook
-    webhook_test = K2Client.new(ENV["API_KEY"])
+    request_token
+    webhook_test = K2ConnectRuby::K2Services::K2Client.new(@api_key)
+    puts("Request: #{request.inspect}")
     webhook_test.parse_request(request)
-    test_obj = K2ProcessWebhook.process(webhook_test.hash_body, ENV["API_KEY"], webhook_test.k2_signature)
+    puts("Hash body: #{webhook_test.hash_body}")
+    puts("K2 Signature: #{webhook_test.k2_signature}")
+    test_obj =  K2ConnectRuby::K2Utilities::K2ProcessWebhook.process(webhook_test.hash_body, @api_key, webhook_test.k2_signature)
     puts "The Webhook ID:\t\t#{test_obj.id}"
-    response = K2ProcessWebhook.return_obj_hash(test_obj)
+    response =  K2ConnectRuby::K2Utilities::K2ProcessWebhook.return_obj_hash(test_obj)
     unless test_obj.id.nil?
       respond_to do |format|
         format.json { render json: response }
@@ -74,14 +76,14 @@ class WebhookSubscriptionsController < ApplicationController
 
   def set_subscriber
     request_token
-    @k2_subscription = K2Subscribe.new(ENV["ACCESS_TOKEN"])
+    @k2_subscription = K2ConnectRuby::K2Entity::K2Subscribe.new(@access_token)
   end
 
   def subscribe
     set_subscriber
     if @k2_subscription
       @k2_subscription.webhook_subscribe(webhook_params)
-      @sub_test_token = K2Client.new(ENV["API_KEY"])
+      @sub_test_token = K2ConnectRuby::K2Services::K2Client.new(@api_key)
     end
   end
 
@@ -89,14 +91,25 @@ class WebhookSubscriptionsController < ApplicationController
   def webhook_params
     {
       event_type: params[:subscription],
-      url: webhook_result_url,
-      scope: 'till',
-      scope_reference: 112233
-    }
+      url: "https://021c-197-248-175-34.ngrok-free.app/webhook_subscriptions/results",
+    }.merge(scope_params)
+  end
+
+  def scope_params
+    if params[:subscription].in?(["buygoods_transaction_received", "buygoods_transaction_reversed", "b2b_transaction_received"])
+      {
+        scope: 'till',
+        scope_reference: 112233
+      }
+    else
+      {
+        scope: 'company',
+      }
+    end
   end
 
   def subscribe_params
-    { event: params[:subscription], location_url: @k2_subscription.location_url, access_token: ENV["ACCESS_TOKEN"], result: @k2_subscription.k2_response_body }
+    { event: params[:subscription], location_url: @k2_subscription.location_url, access_token: @access_token, result: @k2_subscription.k2_response_body }
   end
 
 end
