@@ -43,6 +43,8 @@ gem 'bootsnap', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rubocop', require: false
+  gem 'rubocop-shopify', require: false
 end
 
 group :development do
@@ -57,7 +59,7 @@ end
 group :production do
   gem 'net-http-persistent'
 
-  gem 'k2-connect-ruby', git: 'https://github.com/kopokopo/k2-connect-ruby.git', branch: 'KK-7921_upgrade_k2_connect_ruby'
+  gem 'k2-connect-ruby', git: 'https://github.com/kopokopo/k2-connect-ruby.git', branch: 'k2_connect_v2'
 end
 
 group :test do

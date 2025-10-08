@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Payments
   class PaysController < PaymentsController
     before_action :set_pay, only: [:show, :query_resource]
@@ -10,22 +12,22 @@ module Payments
       @created_pays = Pay.all
     end
 
-    def show;  end
+    def show; end
 
     def new
       @pay = Pay.new
     end
 
     def create
-      @pay = Pay.create(pay_params.merge({location_url: @resource_location }))
+      @pay = Pay.create(pay_params.merge({ location_url: @resource_location }))
       respond_to do |format|
         if @pay.save
           # Message Also changes as well.
-          format.html { redirect_to @pay, notice: 'Pay Object was successfully created.' }
-          format.json { render :show, status: :created, location: @pay }
+          format.html { redirect_to(@pay, notice: "Pay Object was successfully created.") }
+          format.json { render(:show, status: :created, location: @pay) }
         else
-          format.html { render :new }
-          format.json { render json: @pay.errors, status: :unprocessable_entity }
+          format.html { render(:new) }
+          format.json { render(json: @pay.errors, status: :unprocessable_entity) }
         end
       end
     end
@@ -37,11 +39,11 @@ module Payments
       respond_to do |format|
         if @pay.save
           @pay.reload
-          format.html { redirect_to @pay, notice: 'Pay Object was successfully Queried.' }
-          format.json { render :show, status: :created, location: @pay }
+          format.html { redirect_to(@pay, notice: "Pay Object was successfully Queried.") }
+          format.json { render(:show, status: :created, location: @pay) }
         else
-          format.html { render :new }
-          format.json { render json: @pay.errors, status: :unprocessable_entity }
+          format.html { render(:new) }
+          format.json { render(json: @pay.errors, status: :unprocessable_entity) }
         end
       end
     end
@@ -52,38 +54,39 @@ module Payments
       pay_test = K2ConnectRuby::K2Services::K2Client.new(@api_key)
       pay_test.parse_request(request)
       test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(pay_test.hash_body, @api_key, pay_test.k2_signature)
-      puts "The Object ID:\t#{test_obj.id}"
-      response =  K2ConnectRuby::K2Utilities::K2ProcessWebhook.return_obj_hash(test_obj)
+      puts "The Object: \t#{test_obj.inspect}"
+      response = K2ConnectRuby::K2Utilities::K2ProcessWebhook.return_obj_hash(test_obj)
       unless test_obj.id.nil?
         respond_to do |format|
-          format.json { render json: response }
+          format.json { render(json: response) }
         end
       end
     end
 
     private
+
+    def pay_params
+      params.require(:payments_pay).permit(:destination_type, :destination, :currency, :value, :description, :category, :callback_url)
+    end
+
     def set_pay
       @pay = Pay.find(params[:id])
     end
 
     def set_pay_object
       request_token
-      @k2_pay = K2ConnectRuby::K2Entity::K2Pay.new(@access_token)
-    end
-
-    def pay_params
-      params.require(:payments_pay).permit(:destination, :currency, :value)
+      @k2_pay = K2ConnectRuby::K2Entity::SendMoney.new(@access_token)
     end
 
     def pay_request
       {
-        destination_type: params[:payments_pay][:destination_type],
+        destination_type: pay_params[:destination_type],
         destination_reference: pay_params[:destination],
         currency: pay_params[:currency],
         value: pay_params[:value],
-        description: params[:payments_pay][:description],
-        category: params[:payments_pay][:category],
-        callback_url: "https://021c-197-248-175-34.ngrok-free.app/payments/pays/results"
+        description: pay_params[:description],
+        category: pay_params[:category],
+        callback_url: pay_params[:callback_url],
       }
     end
 
