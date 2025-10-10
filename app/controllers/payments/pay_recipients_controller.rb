@@ -99,7 +99,6 @@ module Payments
         account_name: pay_recipient_params[:account_name],
         account_number: pay_recipient_params[:account_number],
         bank_branch_ref: pay_recipient_params[:bank_branch_id],
-        settlement_method: "EFT",
       }
     end
 
@@ -126,16 +125,16 @@ module Payments
         case params[:payments_pay_recipient][:order_type]
         when "mobile_wallet"
           puts("Params: #{mpesa_recipient_params}")
-          @k2_pay_recipient.add_recipient(mpesa_recipient_params)
+          @k2_pay_recipient.add_external_recipient(mpesa_recipient_params)
         when "bank_account"
           puts("Params: #{bank_recipient_params}")
-          @k2_pay_recipient.add_recipient(bank_recipient_params)
+          @k2_pay_recipient.add_external_recipient(bank_recipient_params)
         when "till"
           puts("Params: #{till_recipient_params}")
-          @k2_pay_recipient.add_recipient(bank_recipient_params)
+          @k2_pay_recipient.add_external_recipient(bank_recipient_params)
         when "paybill"
           puts("Params: #{paybill_recipient_params}")
-          @k2_pay_recipient.add_recipient(bank_recipient_params)
+          @k2_pay_recipient.add_external_recipient(bank_recipient_params)
         else
           puts("Nothing")
         end

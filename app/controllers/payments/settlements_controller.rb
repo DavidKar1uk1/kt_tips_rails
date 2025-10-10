@@ -73,12 +73,12 @@ module Payments
 
     def set_k2settlement_object
       request_token
-      @k2_settlement = K2ConnectRuby::K2Entity::SettlementAccount.new(@access_token)
+      @k2_settlement = K2ConnectRuby::K2Entity::TransferAccount.new(@access_token)
     end
 
     def settlement_params
       params.require(:payments_settlement).permit(:msisdn, :network, :account_name, :account_number, :bank_id,
-        :bank_branch_id, :settlement_type, :settlement_method)
+        :bank_branch_id, :settlement_type, :transfer_method)
     end
 
     def mobile_settlement_account
@@ -97,7 +97,7 @@ module Payments
         account_name: settlement_params[:account_name],
         account_number: settlement_params[:account_number],
         bank_branch_ref: settlement_params[:bank_branch_id],
-        settlement_method: settlement_params[:settlement_method],
+        transfer_method: settlement_params[:settlement_method],
       }
     end
 
@@ -106,9 +106,9 @@ module Payments
       if @k2_settlement
         case settlement_params[:settlement_type]
         when "merchant_wallet"
-          @k2_settlement.add_settlement_account(mobile_settlement_account)
+          @k2_settlement.add_transfer_account(mobile_settlement_account)
         when "merchant_bank_account"
-          @k2_settlement.add_settlement_account(bank_settlement_account)
+          @k2_settlement.add_transfer_account(bank_settlement_account)
         else
           "Nothing"
         end
