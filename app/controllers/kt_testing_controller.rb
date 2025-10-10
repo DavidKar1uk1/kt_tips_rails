@@ -129,7 +129,6 @@ class KtTestingController < ApplicationController
       account_name: params[:account_name],
       account_number: params[:account_number],
       bank_branch_ref: params[:bank_branch_ref],
-      settlement_method: params[:settlement_method],
       till_name: params[:till_name],
       till_number: params[:till_number],
       paybill_name: params[:paybill_name],
