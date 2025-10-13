@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Payments
   class SettlementsController < PaymentsController
     before_action :set_settlement, only: [:show, :query_resource]
@@ -8,11 +10,11 @@ module Payments
     # GET /payments/settlements
     def index
       @settlements = Settlement.all
-      @mobile_accounts = Settlement.where(settlement_type: 'merchant_wallet')
-      @bank_accounts = Settlement.where(settlement_type: 'merchant_bank_account')
+      @mobile_accounts = Settlement.where(settlement_type: "merchant_wallet")
+      @bank_accounts = Settlement.where(settlement_type: "merchant_bank_account")
     end
 
-    def show;  end
+    def show; end
 
     def new
       @settlement = Settlement.new
@@ -23,11 +25,11 @@ module Payments
       respond_to do |format|
         if @settlement.save
           # Message Also changes as well.
-          format.html { redirect_to @settlement, notice: 'Settlement was successfully created.' }
-          format.json { render :show, status: :created, location: @settlement }
+          format.html { redirect_to(@settlement, notice: "Settlement was successfully created.") }
+          format.json { render(:show, status: :created, location: @settlement) }
         else
-          format.html { render :new }
-          format.json { render json: @settlement.errors, status: :unprocessable_entity }
+          format.html { render(:new) }
+          format.json { render(json: @settlement.errors, status: :unprocessable_entity) }
         end
       end
     end
@@ -39,11 +41,11 @@ module Payments
       respond_to do |format|
         if @settlement.save
           @settlement.reload
-          format.html { redirect_to @settlement, notice: 'Object was successfully Queried.' }
-          format.json { render :show, status: :created, location: @settlement }
+          format.html { redirect_to(@settlement, notice: "Object was successfully Queried.") }
+          format.json { render(:show, status: :created, location: @settlement) }
         else
-          format.html { render :new }
-          format.json { render json: @settlement.errors, status: :unprocessable_entity }
+          format.html { render(:new) }
+          format.json { render(json: @settlement.errors, status: :unprocessable_entity) }
         end
       end
     end
@@ -53,16 +55,17 @@ module Payments
       settlement_test = K2ConnectRuby::K2Services::K2Client.new(ENV["CLIENT_SECRET"])
       settlement_test.parse_request(request)
       test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(settlement_test.hash_body, @api_key, settlement_test.k2_signature)
-      puts "The Object ID:\t#{test_obj.id}"
-      response =  K2ConnectRuby::K2Utilities::K2ProcessWebhook.return_obj_hash(test_obj)
+      puts "The Object: \t#{test_obj.inspect}"
+      response = K2ConnectRuby::K2Utilities::K2ProcessWebhook.return_obj_hash(test_obj)
       unless test_obj.id.nil?
         respond_to do |format|
-          format.json { render json: response }
+          format.json { render(json: response) }
         end
       end
     end
 
     private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_settlement
       @settlement = Settlement.find(params[:id])
@@ -70,11 +73,12 @@ module Payments
 
     def set_k2settlement_object
       request_token
-      @k2_settlement = K2ConnectRuby::K2Entity::K2Settlement.new(@access_token)
+      @k2_settlement = K2ConnectRuby::K2Entity::TransferAccount.new(@access_token)
     end
 
     def settlement_params
-      params.require(:payments_settlement).permit(:msisdn, :network, :account_name, :account_number, :bank_id, :bank_branch_id, :settlement_type)
+      params.require(:payments_settlement).permit(:msisdn, :network, :account_name, :account_number, :bank_id,
+        :bank_branch_id, :settlement_type, :transfer_method)
     end
 
     def mobile_settlement_account
@@ -83,7 +87,7 @@ module Payments
         first_name: params[:payments_settlement][:first_name],
         last_name: params[:payments_settlement][:last_name],
         phone_number: settlement_params[:msisdn],
-        network: settlement_params[:network]
+        network: settlement_params[:network],
       }
     end
 
@@ -93,7 +97,7 @@ module Payments
         account_name: settlement_params[:account_name],
         account_number: settlement_params[:account_number],
         bank_branch_ref: settlement_params[:bank_branch_id],
-        settlement_method: 'EFT'
+        transfer_method: settlement_params[:settlement_method],
       }
     end
 
@@ -101,10 +105,10 @@ module Payments
       set_k2settlement_object
       if @k2_settlement
         case settlement_params[:settlement_type]
-        when 'merchant_wallet'
-          @k2_settlement.add_settlement_account(mobile_settlement_account)
-        when 'merchant_bank_account'
-          @k2_settlement.add_settlement_account(bank_settlement_account)
+        when "merchant_wallet"
+          @k2_settlement.add_transfer_account(mobile_settlement_account)
+        when "merchant_bank_account"
+          @k2_settlement.add_transfer_account(bank_settlement_account)
         else
           "Nothing"
         end
