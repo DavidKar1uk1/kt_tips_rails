@@ -57,7 +57,7 @@ end
 group :production do
   gem 'net-http-persistent'
 
-  gem 'k2-connect-ruby', git: 'https://github.com/kopokopo/k2-connect-ruby.git', branch: 'KK-7921_upgrade_k2_connect_ruby'
+  gem 'k2-connect-ruby', git: 'https://github.com/kopokopo/k2-connect-ruby.git', branch: 'master'
 end
 
 group :test do

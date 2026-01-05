@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/kopokopo/k2-connect-ruby.git
-  revision: 62343b14cee0962d0973a065c2b034bc9daa6543
-  branch: KK-7921_upgrade_k2_connect_ruby
+  revision: cb39debe3af7e5f7c78b551b1651d83cdda00013
+  branch: master
   specs:
     k2-connect-ruby (3.0.0)
       activemodel (~> 7.2.2)
@@ -112,7 +112,7 @@ GEM
     globalid (1.2.1)
       activesupport (>= 6.1)
     http-accept (1.7.0)
-    http-cookie (1.0.7)
+    http-cookie (1.1.0)
       domain_name (~> 0.5)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
@@ -141,10 +141,10 @@ GEM
       railties (>= 3.2)
     materialize-sass (1.0.0.1)
       autoprefixer-rails (>= 6.0.3)
-    mime-types (3.6.0)
+    mime-types (3.7.0)
       logger
-      mime-types-data (~> 3.2015)
-    mime-types-data (3.2024.1105)
+      mime-types-data (~> 3.2025, >= 3.2025.0507)
+    mime-types-data (3.2025.0924)
     mini_mime (1.1.5)
     mini_portile2 (2.8.8)
     minitest (5.25.2)
