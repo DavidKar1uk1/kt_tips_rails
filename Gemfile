@@ -52,12 +52,12 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen'
-end
-
-group :production do
   gem 'net-http-persistent'
 
   gem 'k2-connect-ruby', git: 'https://github.com/kopokopo/k2-connect-ruby.git', branch: 'master'
+end
+
+group :production do
 end
 
 group :test do

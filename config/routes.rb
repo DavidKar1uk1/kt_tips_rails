@@ -19,7 +19,15 @@ Rails.application.routes.draw do
       post '/results', to: "pays#process_pay", as: :process_pay
     end
 
-    resources :pay_recipients, only: [:index, :create, :new, :show]
+    resources :pay_recipients, only: [:index, :create, :show] do
+      collection do
+        get 'new_mobile_recipient', to: "pay_recipients#new_mobile_recipient", as: :new_mobile
+        get 'new_bank_recipient', to: "pay_recipients#new_bank_recipient", as: :new_bank
+        get 'new_till_recipient', to: "pay_recipients#new_till_recipient", as: :new_till
+        get 'new_paybill_recipient', to: "pay_recipients#new_paybill_recipient", as: :new_paybill
+      end
+    end
+
     scope :pay_recipients do
       post '/:id/query', to: "pay_recipients#query_resource", as: :query_pay_recipient
       post '/results', to: "pay_recipients#process_pay_recipient", as: :process_pay_recipient
