@@ -19,7 +19,7 @@ module Payments
     end
 
     def create
-      @settlement = Settlement.create(settlement_params.merge({ location_url: @resource_location }))
+      @settlement = Settlement.new(settlement_params.merge({ location_url: @resource_location }))
       respond_to do |format|
         if @settlement.save
           # Message Also changes as well.
