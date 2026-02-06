@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 class KtTestingController < ApplicationController
   include AccessToken
   attr_accessor :k2_subscription
-  #protect_from_forgery except: [ :receive, :subscribe, :stk_result, :pay_result ]
+
+  # protect_from_forgery except: [ :receive, :subscribe, :stk_result, :pay_result ]
   # POST /parse
   def receive
     k2_test = K2ConnectRuby::K2Services::K2Client.new(@api_key)
@@ -17,11 +20,10 @@ class KtTestingController < ApplicationController
   def subscribe
     request_token
     @k2_subscription = K2ConnectRuby::K2Entity::K2Subscribe.new(@access_token)
-    #if @k2_subscription.token_request(ENV["CLIENT_ID"], ENV["CLIENT_SECRET"])
     if @k2_subscription
       @k2_subscription.webhook_subscribe(webhook_params)
       @k1_test_token = K2ConnectRuby::K2Services::K2Client.new(@api_key)
-      render 'kt_testing/shows/show_subscription', :object => { :k2_subscription => @k2_subscription , :k1_test_token => @k1_test_token }
+      render("kt_testing/shows/show_subscription", object: { k2_subscription: @k2_subscription , k1_test_token: @k1_test_token })
     end
   end
 
@@ -34,13 +36,13 @@ class KtTestingController < ApplicationController
     @k2_stk = K2ConnectRuby::K2Entity::K2Stk.new(@access_token)
     case params[:decision]
     when "receive_stk"
-      @k2_stk.receive_mpesa_payments(params)
+      @k2_stk.send_stk_request(params)
     when "query_stk"
       @k2_stk.query_resource(params)
     else
       puts "No Other STK Option"
     end
-    render 'kt_testing/shows/show_stk'
+    render("kt_testing/shows/show_stk")
   end
 
   # POST /payment_request_result
@@ -54,18 +56,18 @@ class KtTestingController < ApplicationController
 
   # POST /pay
   def pay_process
-    @k2_pay = K2ConnectRuby::K2Entity::K2Pay.new(@access_token)
-    case params[:decision]
-    when "pay_recipients_form"
-      @k2_pay.pay_recipients(params)
-    when "query_pay_form"
-      @k2_pay.query_resource(params)
-    when "create_pay_form"
-      @k2_pay.create_payment(params)
-    else
-      puts "No Other Pay Option."
-    end
-    render 'kt_testing/shows/show_pay'
+    # @send_money = K2ConnectRuby::K2Entity::SendMoney.new(@access_token)
+    # case params[:decision]
+    # when "pay_recipients_form"
+    #   @send_money.pay_recipients(params)
+    # when "query_pay_form"
+    #   @send_money.query_resource(params)
+    # when "create_pay_form"
+    #   @send_money.create_payment(params)
+    # else
+    #   puts "No Other Pay Option."
+    # end
+    render("kt_testing/shows/show_pay")
   end
 
   # POST /payment_result
@@ -78,16 +80,16 @@ class KtTestingController < ApplicationController
 
   # POST /transfers
   def transfers_process
-    @k2_transfers = K2ConnectRuby::K2Entity::K2Transfer.new(@access_token)
+    @send_money = K2ConnectRuby::K2Entity::SendMoney.new(@access_token)
     case params[:decision]
     when "create_transfer_form"
-      @k2_transfers.transfer_funds(transfer_params)
+      @send_money.create_payment(transfer_params)
     when "query_transfer_form"
-      @k2_transfers.query_resource(params)
+      @send_money.query_resource(params)
     else
       puts "No Other Transfer Option."
     end
-    render 'kt_testing/shows/show_transfers'
+    render("kt_testing/shows/show_transfers")
   end
 
   # GET /transfers
@@ -112,7 +114,7 @@ class KtTestingController < ApplicationController
       currency: params[:currency],
       value: params[:value],
       metadata: params[:metadata],
-      callback_url: "https://021c-197-248-175-34.ngrok-free.app/payments/transfers/results",
+      callback_url: params[:callback_url],
     }
   end
 
@@ -127,7 +129,6 @@ class KtTestingController < ApplicationController
       account_name: params[:account_name],
       account_number: params[:account_number],
       bank_branch_ref: params[:bank_branch_ref],
-      settlement_method: params[:settlement_method],
       till_name: params[:till_name],
       till_number: params[:till_number],
       paybill_name: params[:paybill_name],
@@ -145,7 +146,7 @@ class KtTestingController < ApplicationController
       tags: params[:tags],
       currency: params[:currency],
       value: params[:value],
-      callback_url: "https://021c-197-248-175-34.ngrok-free.app/payments/pays/results",
+      callback_url: params[:callback_url],
       metadata: params[:metadata],
     }
   end

@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.3.5'
+ruby '3.4.7'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.2.2'
+gem 'rails', '~> 8.1.1'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
@@ -43,6 +43,8 @@ gem 'bootsnap', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rubocop', require: false
+  gem 'rubocop-shopify', require: false
 end
 
 group :development do
@@ -54,7 +56,7 @@ group :development do
   gem 'spring-watcher-listen'
   gem 'net-http-persistent'
 
-  gem 'k2-connect-ruby', git: 'https://github.com/kopokopo/k2-connect-ruby.git', branch: 'master'
+  gem 'k2-connect-ruby', git: 'https://github.com/kopokopo/k2-connect-ruby.git', branch: 'k2_connect_v2'
 end
 
 group :production do
