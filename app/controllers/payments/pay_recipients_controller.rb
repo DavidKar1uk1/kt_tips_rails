@@ -8,10 +8,7 @@ module Payments
 
     # Landing Page
     def index
-      @mobile_accounts = PayRecipient.where(recipient_type: "mobile_wallet")
-      @bank_accounts = PayRecipient.where(recipient_type: "bank_account")
-      @tills = PayRecipient.where(recipient_type: "till")
-      @paybill = PayRecipient.where(recipient_type: "paybill")
+      @pay_recipients = PayRecipient.all
     end
 
     def show; end
