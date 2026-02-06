@@ -1,72 +1,25 @@
 <p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
 
 <h3>Pay Recipients</h3>
 
-<!-- Switch -->
-<div class="switch left-aligned" onclick="shift_pay_recipient()">
-  <label>
-    Mobile Recipient
-    <input id="recipient_choice" type="checkbox">
-    <span class="lever"></span>
-    Bank Recipient
-  </label>
-</div>
-
 <div class="webhooks">
-  <div id="mobile_recipient" class="mobile_recipient">
+  <div id="pay_recipients" class="pay_recipients">
     <table>
       <thead>
       <tr>
-        <th>Full Name</th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>Network Operator</th>
-        <th>Location URL</th>
-        <th colspan="3"></th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <% @mobile_accounts.each do |pay_recipient| %>
-        <tr>
-          <td><%= pay_recipient.first_name + " " + pay_recipient.last_name %></td>
-          <td><%= pay_recipient.phone %></td>
-          <td><%= pay_recipient.email %></td>
-          <td><%= pay_recipient.network %></td>
-          <td><%= pay_recipient.location_url %></td>
-          <td><%= link_to 'remove_red_eye', pay_recipient, class: 'material-icons' %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
-
-  <div id="bank_recipient" class="bank_recipient" style="display: none">
-    <table>
-      <thead>
-      <tr>
-        <th>Full Name</th>
-        <th>Phone</th>
-        <th>Email</th>
         <th>Account Name</th>
-        <th>Account Number</th>
-        <th>Bank ID Number</th>
-        <th>Bank Branch ID Number</th>
+        <th>Account Identifier</th>
         <th>Location URL</th>
         <th colspan="3"></th>
       </tr>
       </thead>
 
       <tbody>
-      <% @bank_accounts.each do |pay_recipient| %>
+      <% @pay_recipients.each do |pay_recipient| %>
         <tr>
-          <td><%= pay_recipient.first_name + " " + pay_recipient.last_name %></td>
-          <td><%= pay_recipient.phone %></td>
-          <td><%= pay_recipient.email %></td>
-          <td><%= pay_recipient.account_name %></td>
-          <td><%= pay_recipient.account_number %></td>
-          <td><%= pay_recipient.bank_id %></td>
-          <td><%= pay_recipient.bank_branch_id %></td>
+          <td><%= pay_recipient.recipient_name %></td>
+          <td><%= pay_recipient.account_identifier %></td>
           <td><%= pay_recipient.location_url %></td>
           <td><%= link_to 'remove_red_eye', pay_recipient, class: 'material-icons' %></td>
         </tr>
@@ -78,8 +31,7 @@
 
 <br>
 
-<%= link_to 'New Pay Recipient', new_payments_pay_recipient_path, class: "waves-effect waves-light btn" %>
-
-<script>
-    document.getElementById('pay_recipients').style.display = 'none'
-</script>
+<%= link_to 'New Mobile Recipient', new_mobile_payments_pay_recipients_path, class: "waves-effect waves-light btn" %>
+<%= link_to 'New Bank Recipient', new_bank_payments_pay_recipients_path, class: "waves-effect waves-light btn" %>
+<%= link_to 'New Till Recipient', new_till_payments_pay_recipients_path, class: "waves-effect waves-light btn" %>
+<%= link_to 'New Paybill Recipient', new_paybill_payments_pay_recipients_path, class: "waves-effect waves-light btn" %>

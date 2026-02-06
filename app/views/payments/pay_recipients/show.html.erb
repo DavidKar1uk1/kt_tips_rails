@@ -7,24 +7,25 @@
   </p>
 
   <div id="pay_recipient" class="pay_recipient">
-    <p>
-      <strong>Full Name:</strong>
-      <%= @pay_recipient.first_name + " " + @pay_recipient.last_name %>
-    </p>
-
-    <p>
-      <strong>Phone Number:</strong>
-      <%= @pay_recipient.phone %>
-    </p>
-
-    <p>
-      <strong>Email Address:</strong>
-      <%= @pay_recipient.email %>
-    </p>
 
 <!--    MPESA-->
     <% if @pay_recipient.recipient_type.eql?('mobile_wallet') %>
       <div id="mpesa" class="mpesa">
+        <p>
+          <strong>Full Name:</strong>
+          <%= "#{@pay_recipient.first_name} #{@pay_recipient.last_name}".squish %>
+        </p>
+
+        <p>
+          <strong>Phone Number:</strong>
+          <%= @pay_recipient.phone %>
+        </p>
+
+        <p>
+          <strong>Email Address:</strong>
+          <%= @pay_recipient.email %>
+        </p>
+
         <p>
           <strong>Network Operator:</strong>
           <%= @pay_recipient.network %>
@@ -52,6 +53,44 @@
         <p>
           <strong>Bank Branch ID Number:</strong>
           <%= @pay_recipient.bank_branch_id %>
+        </p>
+
+        <p>
+          <strong>Bank Branch ID Number:</strong>
+          <%= @pay_recipient.bank_branch_id %>
+        </p>
+      </div>
+
+      <!--    TILL-->
+    <% elsif @pay_recipient.recipient_type.eql?('till') %>
+      <div id="till" class="till">
+        <p>
+          <strong>Till Name:</strong>
+          <%= @pay_recipient.account_name %>
+        </p>
+
+        <p>
+          <strong>Till Number:</strong>
+          <%= @pay_recipient.account_number %>
+        </p>
+      </div>
+
+      <!--    PAYBILL-->
+    <% elsif @pay_recipient.recipient_type.eql?('paybill') %>
+      <div id="paybill" class="paybill">
+        <p>
+          <strong>Paybill Name:</strong>
+          <%= @pay_recipient.account_name %>
+        </p>
+
+        <p>
+          <strong>Paybill Number:</strong>
+          <%= @pay_recipient.account_number %>
+        </p>
+
+        <p>
+          <strong>Paybill Account Number:</strong>
+          <%= @pay_recipient.paybill_account_number %>
         </p>
       </div>
     <% end %>
