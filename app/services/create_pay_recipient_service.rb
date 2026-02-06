@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePayRecipientService < BaseService
   include AccessToken
   attr_reader :pay_recipient_params, :resource_location
@@ -26,17 +28,17 @@ class CreatePayRecipientService < BaseService
 
   def send_pay_recipient_request
     request_token
-    k2_pay_recipient = K2ConnectRuby::K2Entity::K2Pay.new(@access_token)
+    k2_pay_recipient = K2ConnectRuby::K2Entity::ExternalRecipient.new(@access_token)
     if k2_pay_recipient.present?
       case pay_recipient_params[:recipient_type]
       when "mobile_wallet"
-        k2_pay_recipient.add_recipient(mpesa_recipient_params)
+        k2_pay_recipient.add_external_recipient(mpesa_recipient_params)
       when "bank_account"
-        k2_pay_recipient.add_recipient(bank_recipient_params)
+        k2_pay_recipient.add_external_recipient(bank_recipient_params)
       when "till"
-        k2_pay_recipient.add_recipient(till_recipient_params)
+        k2_pay_recipient.add_external_recipient(till_recipient_params)
       when "paybill"
-        k2_pay_recipient.add_recipient(paybill_recipient_params)
+        k2_pay_recipient.add_external_recipient(paybill_recipient_params)
       else
         raise("Invalid recipient type")
       end
