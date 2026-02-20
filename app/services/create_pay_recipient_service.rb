@@ -19,6 +19,18 @@ class CreatePayRecipientService < BaseService
     else
       CallResult.new(false, pay_recipient, pay_recipient.errors.full_messages)
     end
+  rescue K2ConnectRuby::K2Errors::TimeoutError => ex
+    logger.error("Timeout error when creating pay recipient: #{[ex.message, ex.backtrace].join("\n\t")}")
+    CallResult.new(false, nil, ex.message.to_s)
+  rescue K2ConnectRuby::K2Errors::UnauthorizedError => ex
+    logger.error("Unauthorized error when creating pay recipient: #{[ex.message, ex.backtrace].join("\n\t")}")
+    CallResult.new(false, nil, ex.message.to_s)
+  rescue K2ConnectRuby::K2Errors::ConnectionError => ex
+    logger.error("Connection error when creating pay recipient: #{[ex.message, ex.backtrace].join("\n\t")}")
+    CallResult.new(false, nil, ex.message.to_s)
+  rescue K2ConnectRuby::K2Errors::ApiError => ex
+    logger.error("API error when creating pay recipient: #{[ex.message, ex.code, ex.details, ex.backtrace].join("\n\t")}")
+    CallResult.new(false, nil, "API error: #{ex.message}, Code: #{ex.code}, Details: #{ex.details}")
   rescue StandardError => ex
     logger.error("Unexpected error when creating pay recipient: #{[ex.message, ex.backtrace].join("\n\t")}")
     CallResult.new(false, nil, "Unexpected error when creating pay recipient.")
