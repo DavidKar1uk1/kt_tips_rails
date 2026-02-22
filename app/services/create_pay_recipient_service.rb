@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePayRecipientService < BaseService
   include AccessToken
   attr_reader :pay_recipient_params, :resource_location
@@ -17,6 +19,18 @@ class CreatePayRecipientService < BaseService
     else
       CallResult.new(false, pay_recipient, pay_recipient.errors.full_messages)
     end
+  rescue K2ConnectRuby::K2Errors::TimeoutError => ex
+    logger.error("Timeout error when creating pay recipient: #{[ex.message, ex.backtrace].join("\n\t")}")
+    CallResult.new(false, nil, ex.message.to_s)
+  rescue K2ConnectRuby::K2Errors::UnauthorizedError => ex
+    logger.error("Unauthorized error when creating pay recipient: #{[ex.message, ex.backtrace].join("\n\t")}")
+    CallResult.new(false, nil, ex.message.to_s)
+  rescue K2ConnectRuby::K2Errors::ConnectionError => ex
+    logger.error("Connection error when creating pay recipient: #{[ex.message, ex.backtrace].join("\n\t")}")
+    CallResult.new(false, nil, ex.message.to_s)
+  rescue K2ConnectRuby::K2Errors::ApiError => ex
+    logger.error("API error when creating pay recipient: #{[ex.message, ex.code, ex.details, ex.backtrace].join("\n\t")}")
+    CallResult.new(false, nil, "API error: #{ex.message}, Code: #{ex.code}, Details: #{ex.details}")
   rescue StandardError => ex
     logger.error("Unexpected error when creating pay recipient: #{[ex.message, ex.backtrace].join("\n\t")}")
     CallResult.new(false, nil, "Unexpected error when creating pay recipient.")
@@ -26,17 +40,17 @@ class CreatePayRecipientService < BaseService
 
   def send_pay_recipient_request
     request_token
-    k2_pay_recipient = K2ConnectRuby::K2Entity::K2Pay.new(@access_token)
+    k2_pay_recipient = K2ConnectRuby::K2Entity::ExternalRecipient.new(@access_token)
     if k2_pay_recipient.present?
       case pay_recipient_params[:recipient_type]
       when "mobile_wallet"
-        k2_pay_recipient.add_recipient(mpesa_recipient_params)
+        k2_pay_recipient.add_external_recipient(mpesa_recipient_params)
       when "bank_account"
-        k2_pay_recipient.add_recipient(bank_recipient_params)
+        k2_pay_recipient.add_external_recipient(bank_recipient_params)
       when "till"
-        k2_pay_recipient.add_recipient(till_recipient_params)
+        k2_pay_recipient.add_external_recipient(till_recipient_params)
       when "paybill"
-        k2_pay_recipient.add_recipient(paybill_recipient_params)
+        k2_pay_recipient.add_external_recipient(paybill_recipient_params)
       else
         raise("Invalid recipient type")
       end
