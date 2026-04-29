@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProcessingController < ApplicationController
   protect_from_forgery except: [ :bg_received, :bg_reversed, :b2b, :m2m, :settle, :customer, :stk_payment, :wrong_stk_payment, :pay_payment ]
   # POST Buy Goods Received
@@ -56,16 +58,49 @@ class ProcessingController < ApplicationController
     puts "The Type:\t\t#{test_obj.type}"
   end
 
-  # POST M2M
-  def m2m
-    m2m_test = K2ConnectRuby::K2Services::K2Client.new(@api_key)
-    m2m_test.parse_request(request)
-    test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(m2m_test.hash_body, @api_key, m2m_test.k2_signature)
+  # POST card transaction received
+  def card_transaction
+    ct_received = K2ConnectRuby::K2Services::K2Client.new(@api_key)
+    ct_received.parse_request(request)
+    test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(ct_received.hash_body, @api_key, ct_received.k2_signature)
     puts "The Object:\t\t#{test_obj}"
     puts "The Main ID:\t\t#{test_obj.id}"
     puts "Resource ID:\t\t#{test_obj.resource_id}"
     puts "The Topic:\t\t#{test_obj.topic}"
     puts "The Type:\t\t#{test_obj.type}"
+    puts "The First Name:\t\t#{test_obj.first_name}"
+    puts "Middle Name:\t\t#{test_obj.middle_name}"
+    puts "The Last Name:\t\t#{test_obj.last_name}"
+  end
+
+  # POST card transaction voided
+  def card_transaction_voided
+    ct_voided = K2ConnectRuby::K2Services::K2Client.new(@api_key)
+    ct_voided.parse_request(request)
+    test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(ct_voided.hash_body, @api_key, ct_voided.k2_signature)
+    puts "The Object:\t\t#{test_obj}"
+    puts "The Main ID:\t\t#{test_obj.id}"
+    puts "Resource ID:\t\t#{test_obj.resource_id}"
+    puts "The Topic:\t\t#{test_obj.topic}"
+    puts "The Type:\t\t#{test_obj.type}"
+    puts "The First Name:\t\t#{test_obj.first_name}"
+    puts "Middle Name:\t\t#{test_obj.middle_name}"
+    puts "The Last Name:\t\t#{test_obj.last_name}"
+  end
+
+  # POST card transaction reversed
+  def card_transaction_reversed
+    ct_reversed = K2ConnectRuby::K2Services::K2Client.new(@api_key)
+    ct_reversed.parse_request(request)
+    test_obj = K2ConnectRuby::K2Utilities::K2ProcessResult.process(ct_reversed.hash_body, @api_key, ct_reversed.k2_signature)
+    puts "The Object:\t\t#{test_obj}"
+    puts "The Main ID:\t\t#{test_obj.id}"
+    puts "Resource ID:\t\t#{test_obj.resource_id}"
+    puts "The Topic:\t\t#{test_obj.topic}"
+    puts "The Type:\t\t#{test_obj.type}"
+    puts "The First Name:\t\t#{test_obj.first_name}"
+    puts "Middle Name:\t\t#{test_obj.middle_name}"
+    puts "The Last Name:\t\t#{test_obj.last_name}"
   end
 
   # POST settlement

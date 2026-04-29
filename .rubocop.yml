@@ -1,0 +1,23 @@
+inherit_gem:
+  rubocop-shopify: rubocop.yml
+
+AllCops:
+  TargetRubyVersion: 3.3.5
+  Exclude:
+    - bin/**/*
+    - contrib/**/*
+    - config/**/*
+    - db/**/*
+    - tmp/**/*
+    - Capfile
+    - Gemfile
+    - Rakefile   
+
+Layout/LineLength:
+  Max: 140      
+
+Metrics/MethodLength:
+  Max: 40 # or any number that suits your requirement
+Metrics/ClassLength:
+  Max: 40 # or any number that suits your requirement
+

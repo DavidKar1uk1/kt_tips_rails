@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AccessToken
   def request_token
     @client_id = Rails.application.credentials.kt_tips_rails[:client_id]
